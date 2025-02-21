@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机网络 | 网络安全学习</title><meta name="author" content="J-Guardian"><meta name="copyright" content="J-Guardian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介应用层：应用层协议分布在多个端系统，端系统中的应用程序使用该协议与另一个端系统中的应用程序通信。处于应用层的分组称为报文。 传输层：传输层在应用程序端点之间传输应用层报文，因特网中有两个传输层协议：TCP和UDP。处于传输层的分组称为报文段。TCP提供确保传递、流量控制、拥塞控制机制。UDP提供无连接服务，即不提供不必要服务的服务。没有可靠性、没有流量和拥塞控制。（端到端） 网络层：网络层将称">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机网络 | 网络安全学习</title><meta name="author" content="J-Guardian"><meta name="copyright" content="J-Guardian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介1.计算机网络和因特网端系统：与因特网相连的计算机和其它设备，往往处于网络的边缘。端系统通过通信链路和分组交换机连接到一起。端系统分类：客户和服务器 接入网：是指将端系统连入到边缘路由器的物理链路 边缘路由器：是指端系统到任何其他远程端系统路径上的第一台路由器 分组交换机：最为有名的是路由器和链路层交换机；两者的的不同之处在于，链路层交换机主要用在接入网中，路由器主要用在网络核心。 ISP:端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络">
 <meta property="og:url" content="http://example.com/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="网络安全学习">
-<meta property="og:description" content="简介应用层：应用层协议分布在多个端系统，端系统中的应用程序使用该协议与另一个端系统中的应用程序通信。处于应用层的分组称为报文。 传输层：传输层在应用程序端点之间传输应用层报文，因特网中有两个传输层协议：TCP和UDP。处于传输层的分组称为报文段。TCP提供确保传递、流量控制、拥塞控制机制。UDP提供无连接服务，即不提供不必要服务的服务。没有可靠性、没有流量和拥塞控制。（端到端） 网络层：网络层将称">
+<meta property="og:description" content="简介1.计算机网络和因特网端系统：与因特网相连的计算机和其它设备，往往处于网络的边缘。端系统通过通信链路和分组交换机连接到一起。端系统分类：客户和服务器 接入网：是指将端系统连入到边缘路由器的物理链路 边缘路由器：是指端系统到任何其他远程端系统路径上的第一台路由器 分组交换机：最为有名的是路由器和链路层交换机；两者的的不同之处在于，链路层交换机主要用在接入网中，路由器主要用在网络核心。 ISP:端">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2025-02-20T09:23:41.000Z">
-<meta property="article:modified_time" content="2025-02-20T09:29:46.487Z">
+<meta property="article:modified_time" content="2025-02-21T07:07:48.523Z">
 <meta property="article:author" content="J-Guardian">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><script type="application/ld+json">{
@@ -17,7 +17,7 @@
   "url": "http://example.com/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/",
   "image": "https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png",
   "datePublished": "2025-02-20T09:23:41.000Z",
-  "dateModified": "2025-02-20T09:29:46.487Z",
+  "dateModified": "2025-02-21T07:07:48.523Z",
   "author": [
     {
       "@type": "Person",
@@ -158,10 +158,678 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">网络安全学习</span></a><a class="nav-page-title" href="/"><span class="site-name">计算机网络</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">计算机网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-20T09:23:41.000Z" title="发表于 2025-02-20 17:23:41">2025-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-20T09:29:46.487Z" title="更新于 2025-02-20 17:29:46">2025-02-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>应用层：应用层协议分布在多个端系统，端系统中的应用程序使用该协议与另一个端系统中的应用程序通信。处于应用层的分组称为<strong>报文</strong>。</p>
-<p>传输层：传输层在应用程序端点之间传输应用层报文，因特网中有两个传输层协议：TCP和UDP。处于传输层的分组称为<strong>报文段</strong>。TCP提供确保传递、流量控制、拥塞控制机制。UDP提供无连接服务，即不提供不必要服务的服务。没有可靠性、没有流量和拥塞控制。（端到端）</p>
-<p>网络层：网络层将称为数据报的网络层分组从一台主机移动到另一台主机。网络层协议包含著名IP协议以及其他一些路由选择协议。</p>
-<p>链路层：链路层将称为帧的链路层分组从一个结点移动到路径上的另一个端点。一个帧可能被沿途不同链路上的不同链路层协议处理。<strong>帧</strong></p>
-<p>物理层：物理层的任务是将帧中的比特从一个结点移动到下一个节点，它提供了传输信息的实际物理通道；</p>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">网络安全学习</span></a><a class="nav-page-title" href="/"><span class="site-name">计算机网络</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">计算机网络</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-20T09:23:41.000Z" title="发表于 2025-02-20 17:23:41">2025-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-21T07:07:48.523Z" title="更新于 2025-02-21 15:07:48">2025-02-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="1-计算机网络和因特网"><a href="#1-计算机网络和因特网" class="headerlink" title="1.计算机网络和因特网"></a>1.计算机网络和因特网</h2><p>端系统：与因特网相连的计算机和其它设备，往往处于网络的边缘。端系统通过通信链路和分组交换机连接到一起。端系统分类：客户和服务器</p>
+<p>接入网：是指将端系统连入到边缘路由器的物理链路</p>
+<p>边缘路由器：是指端系统到任何其他远程端系统路径上的第一台路由器</p>
+<p>分组交换机：最为有名的是路由器和链路层交换机；两者的的不同之处在于，链路层交换机主要用在接入网中，路由器主要用在网络核心。</p>
+<p>ISP:端系统是通过ISP接入因特网的，为了实现端系统的互联，ISP也必须互联，其实网络模型就是用来表达ISP和端系统以及ISP之间的结构的抽象；今天的因特网是一个“网络的网络”，其结构复杂，由十多个顶层ISP和数十万个较低层ISP构成。</p>
+<h2 id="2-五层分类"><a href="#2-五层分类" class="headerlink" title="2.五层分类"></a>2.五层分类</h2><ol>
+<li><p>应用层：应用层协议分布在多个端系统，端系统中的应用程序使用该协议与另一个端系统中的应用程序通信。处于应用层的分组称为<strong>报文</strong>。</p>
+</li>
+<li><p>传输层：传输层在应用程序端点之间传输应用层报文，因特网中有两个传输层协议：TCP和UDP。处于传输层的分组称为<strong>报文段</strong>。TCP提供确保传递、流量控制、拥塞控制机制。UDP提供无连接服务，即不提供不必要服务的服务。没有可靠性、没有流量和拥塞控制。（端到端）</p>
+</li>
+<li><p>网络层：网络层将称为数据报的网络层分组从一台主机移动到另一台主机。网络层协议包含著名IP协议以及其他一些路由选择协议。</p>
+</li>
+<li><p>链路层：链路层将称为帧的链路层分组从一个结点移动到路径上的另一个端点。一个帧可能被沿途不同链路上的不同链路层协议处理。<strong>帧</strong></p>
+</li>
+<li><p>物理层：物理层的任务是将帧中的比特从一个结点移动到下一个节点，它提供了传输信息的实际物理通道；</p>
+</li>
+</ol>
 <p>注意：会话层，表示层由开发者自行实现</p>
-<h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">J-Guardian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">http://example.com/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">网络安全学习</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/02/20/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">J-Guardian</div><div class="author-info-description">计算机网络、web安全、组件漏洞、SRC</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">应用层</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">计算机网络</a><time datetime="2025-02-20T09:23:41.000Z" title="发表于 2025-02-20 17:23:41">2025-02-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/20/hello-world/" title="Hello World">Hello World</a><time datetime="2025-02-20T03:31:58.482Z" title="发表于 2025-02-20 11:31:58">2025-02-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By J-Guardian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+<h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1><h3 id="1-网络应用程序体系结构"><a href="#1-网络应用程序体系结构" class="headerlink" title="1.网络应用程序体系结构"></a>1.网络应用程序体系结构</h3><p>网络应用程序所采用的体系结构为：客户-服务器体系、对等体系P2P。</p>
+<ul>
+<li>客户-服务器体系结构：在该体系结构中，有一个总是打开的主机，即服务器，它接收和服务来自其他许多被称为客户的主机请求；值得注意的是，在该体系结构中，客户之间是不直接通信的；该服务器具有固定的、周知的地址。<strong>Web、FTP、Telnet和电子邮件</strong></li>
+<li>lP2P体系结构：在P2P体系结构中，对位于数据中心的专用服务器有着最小（或者没有）依赖。应用程序在间断连接的主机对之间使用直接通信，这些主机被称为对等方。对等方并不为服务提供商所拥有，因为这种对等方通信不需要通过专门的服务器，所以该体系结构也被称为对等方到对等方结构。<strong>文件共享（例如BitTorrent）、协助下载（例如迅雷）、因特网电话（例如Skype）和IPTV(例如迅雷看看)。</strong></li>
+</ul>
+<h2 id="2-进程通信"><a href="#2-进程通信" class="headerlink" title="2.进程通信"></a>2.进程通信</h2><ul>
+<li>进程通信：实际进行通信的是<strong>进程</strong>而不是应用程序；当进程运行在同一个端系统上时，它们使用进程间通信机制相互通信；而进程间通信的规则是由端系统上的操作系统确定的。当进程运行在不同的端系统上时，它们通过跨越计算机网络的报文相互通信；发送进程产生报文并且向网络中发送，接收进程接收报文并对此作出响应.</li>
+<li>进程与计算机网络之间的接口：多数应用程序是由通信进程对组成的，运行在不同端系统上的进程对之间通过计算机网络来实现通信。所以，在应用程序进程和计算机网络之间存在一个接口，该接口被称为套接字。更为准确的说，套接字是同一台主机内应用层和运输层之间的接口。由于该套接字是建立网络应用程序的可编程接口，因此套接字也被称为应用程序和网络之间的应用编程接口（ApplicationProgrammingInterface）。</li>
+<li>应用程序开发者：可以控制套接字在应用层的一切内容，但是对于运输层的相关部分，几乎没有控制权，可以做的有：选择传输层协议和设定几个传输层参数，比如最大缓存和最长传输层报文长度、进程寻址。</li>
+</ul>
+<p>为了向特定目的进程发送报文，发送机进程需要知道接收进程（更为准确的说是，接收进程对应的套接字）的标记。该标记由两部分组成：IP地址标、端口号。</p>
+<h2 id="3-应用层协议"><a href="#3-应用层协议" class="headerlink" title="3. 应用层协议"></a>3. 应用层协议</h2><p>应用层协议定义运行在不同端系统上的应用程序进程如何相互传递信息。涉及的内容包括：交换的报文类型（请求或者响应）、报文中包含哪些字段、字段如何被解释、一个进程何时收发报文并如何对报文进行响应等内容。应用包括：Web、文件传输、电子邮件、目录服务和P2P。</p>
+<p>Web:HTTP协议</p>
+<p>文件传输:FTP协议</p>
+<p>电子邮件：</p>
+<p>DNS:</p>
+<p>P2P：应用的简单介绍了。</p>
+<h3 id="3-1-Web"><a href="#3-1-Web" class="headerlink" title="3.1 Web"></a>3.1 Web</h3><h4 id="3-1-1-HTTP简介"><a href="#3-1-1-HTTP简介" class="headerlink" title="3.1.1 HTTP简介"></a>3.1.1 HTTP简介</h4><p><strong>HTTP的无状态</strong>：HTTP使用TCP作为它的传输层协议；HTTP客户首先发起一个与服务器的TCP连接，需要注意的是，服务器根据请求作出响应，但是<strong>不存储任何关于该客户的状态信息</strong>；也正因为这样，HTTP被称为无状态协议。同时，Web使用了客户端-服务器的应用体系结构；其中web服务器总是开着的。</p>
+<p><strong>持续链接和非持续链接</strong>：当通信是使用TCP协议时，服务器端需要做出一个决定：这些请求是使用一个TCP连接完成（持续连接）还是通过独立的TCP连接（非持续&#x2F;短连接）完成。HTTP既可使用持续连接也可以使用非持续连接。在HTTP&#x2F;1.0中默认使用短连接。也就是说，客户端和服务器每进行一次HTTP操作，就建立一次连接，任务结束就中断连接。而从HTTP&#x2F;1.1起，默认使用长连接，一般来说，如果一条连接<strong>在一定的时间间隔后没被使用的话，就会被关闭</strong>。</p>
+<p>持续连接和非持续连接的特点：为了描述持续连接和非持续连接的特点，我们引入RTT(Round-TripTime)。RTT指的是，一个短分组从客户端到服务器，然后再返回客户端所用的时间。RTT包括分组的传播时延、排队时延、处理时延（因为是短分组，所以其传输时延可不计）；因为客户端和服务器建立TCP连接的时候，会通过一个三次握手的过程来交换传输控制信息。三次握手的前两次占用了一个RTT，客户结合第三次握手通行会通过该连接发送一个HTTP请求报文，一旦该分组到达服务器，服务器便开始使用TCP传输HTML对象。因此，粗略地说，响应时间是两个RTT加上传输HTML的时间（不是传播）。从上面可以看出，非持续连接必须为每个请求新建一个TCP连接，而每个TCP连接将占用系统资源，包括缓冲区和变量等，这样服务器的负担就很重了。第二，一个对象将通过两个RTT的时延才能交付。如果使用持续连接，那么服务器在发送响应报文后将保持该TCP打开，后续客户端可以使用该连接来向服务器发出请求。不但一个完整的页面可以通过同一个连接传送，同一台服务器上的多个页面也可以通过同一个连接发送。这就提高了效率；一般来说，如果一条连接在一定的时间间隔后没被使用的话，就会被关闭。HTTP默认使用的是带流水线的持续连接。</p>
+<p>HTTP报文格式：请求报文和响应报文</p>
+<h4 id="3-1-2-请求报文"><a href="#3-1-2-请求报文" class="headerlink" title="3.1.2 请求报文"></a>3.1.2 请求报文</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps1.jpg" alt="img"></td>
+</tr>
+</tbody></table>
+<p>请求报文的第一行称为<strong>请求行</strong>，下面的各行被称为<strong>首部行</strong>。在首部行之后一个<strong>空行</strong>，之后便是<strong>请求实体</strong>。</p>
+<h5 id="1-请求行"><a href="#1-请求行" class="headerlink" title="1.请求行"></a>1.请求行</h5><ul>
+<li>​	方法字段：HEAD&#x2F;GET&#x2F;POST&#x2F;PUT&#x2F;DELETE&#x2F;PATCH&#x2F;OPTIONS&#x2F;TRACE;扩展方法：LOCK&#x2F;MKCOL&#x2F;COPY&#x2F;MOVE</li>
+<li>​	URL字段：由两部分组成：存放对象的服务器主机名和对象的路径名</li>
+<li>​	HTTP版本：HTTP&#x2F;1.0:HTTP&#x2F;1.1</li>
+</ul>
+<h5 id="2-首部行"><a href="#2-首部行" class="headerlink" title="2.首部行"></a>2.首部行</h5><ul>
+<li>Host：服务器的域名和端口号</li>
+<li>Connection：表示是否需要持久连接&#x2F;&#x2F;HTTP1.1默认进行持久连接Connection:close</li>
+<li>User-Agent：发出请求的浏览器信息User-Agent:Mozilla&#x2F;5.0(Linux;X11)</li>
+<li>Accept-Language：浏览器可接受的语言Accept-Language:en,zh</li>
+<li>Accept：指定客户端能够接收的内容类型Accept:text&#x2F;plain,text&#x2F;html</li>
+<li>Accept-Charset：浏览器可以接受的字符编码集Accept-Charset:iso-8859-5</li>
+<li>Accept-Encoding：浏览器可以支持的压缩编码类型Accept-Encoding:compress,gzip</li>
+<li>Accept-Ranges：可以请求网页实体的一个或者多个子范围字段Accept-Ranges:bytes</li>
+<li>Authorization：授权证书Authorization:BasicQWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;</li>
+<li>Cache-Control：缓存机制Cache-Control:no-cache</li>
+<li><strong>Cookie：HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器</strong></li>
+<li>Content-Length：请求的内容长度</li>
+<li>Content-Type：请求的与实体对应的MIME信息Content-Type:application&#x2F;x-www-form-urlencoded</li>
+<li>Date：请求发送的日期和时间Date:Tue,15Nov201008:12:31GMT</li>
+<li>Expect：请求的特定的服务器行为Expect:100-continue</li>
+<li>From：发出请求的用户的EmailFrom:<a href="mailto:&#x75;&#x73;&#x65;&#x72;&#x40;&#x65;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#109;">&#x75;&#x73;&#x65;&#x72;&#x40;&#x65;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#109;</a></li>
+<li>If-Match：只有请求内容与实体相匹配才有效If-Match:”737060cd8c284d8af7ad3082f209582d”</li>
+<li>If-Modified-Since：如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码If-Modified-Since:Sat,29Oct201819:43:31GMT</li>
+<li>If-None-Match：如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变If-None-Match:”737060cd8c284d8af7ad3082f209582d”</li>
+<li>If-Range：如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为EtagIf-Range:“737060cd8c284d8af7ad3082f209582d”</li>
+<li>If-Unmodified-Since：只在实体在指定时间之后未被修改才请求成功If-Unmodified-Since:Sat,29Oct201019:43:31GMT</li>
+<li>Max-Forwards：限制信息通过代理和网关传送的时间Max-Forwards:10</li>
+<li>Pragma：用来包含实现特定的指令Pragma:no-cache</li>
+<li>Proxy-Authorization：连接到代理的授权证书Proxy-Authorization:BasicQWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;</li>
+<li>Range：只请求实体的一部分，指定范围Range:bytes&#x3D;500-999</li>
+<li><strong>Referer：先前网页的地址，当前请求网页紧随其后</strong>。</li>
+<li>TE：客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息TE:trailers,deflate;q&#x3D;0.5</li>
+<li>Upgrade：向服务器指定某种传输协议以便服务器进行转换（如果支持）Upgrade:HTTP&#x2F;2.0,SHTTP&#x2F;1.3,IRC&#x2F;6.9,RTA&#x2F;x11</li>
+<li>Via：通知中间网关或代理服务器地址，通信协议Via:1.0fred,1.1nowhere.com(Apache&#x2F;1.1)</li>
+<li>Warning：关于消息实体的警告信息Warn:199Miscellaneouswarning</li>
+</ul>
+<h5 id="3-请求实体"><a href="#3-请求实体" class="headerlink" title="3.请求实体"></a>3.请求实体</h5><p>在首部行之后一个空行，之后便是请求的“实体体”。该实体体可以在POST方法里传递Form表单内容或者传递其它一些二进制流数据等。值得注意的是，表单也不一定必须使用POST方法。如果使用get,实体体为空，会显示在url中。</p>
+<h4 id="3-1-3-响应报文"><a href="#3-1-3-响应报文" class="headerlink" title="3.1.3 响应报文"></a>3.1.3 响应报文</h4><p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps3.jpg" alt="img"> </p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps4.jpg" alt="img"> </p>
+<p>第一行被称为是<strong>状态行</strong>，下面是<strong>首部行</strong>，<strong>空行</strong>隔开之后的第三部分是<strong>实体</strong>。。</p>
+<h5 id="1-状态行"><a href="#1-状态行" class="headerlink" title="1.状态行"></a>1.状态行</h5><p>包含<strong>HTTP版本、状态码以及状态信息</strong>等内容；</p>
+<p>2xx表示成功处理了请求的状态代码。</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>成功</td>
+<td>服务器已成功处理了请求。通常，这表示服务器提供了请求的网页</td>
+</tr>
+<tr>
+<td>201</td>
+<td>已创建</td>
+<td>请求成功并且服务器创建了新的资源</td>
+</tr>
+<tr>
+<td>202</td>
+<td>已接受</td>
+<td>服务器已接受请求，但尚未处理</td>
+</tr>
+<tr>
+<td>203</td>
+<td>非授权信息</td>
+<td>服务器已成功处理了请求，但返回的信息可能来自另一来源</td>
+</tr>
+<tr>
+<td>204</td>
+<td>无内容</td>
+<td>服务器成功处理了请求，但没有返回任何内容</td>
+</tr>
+<tr>
+<td>205</td>
+<td>重置内容</td>
+<td>服务器成功处理了请求，但没有返回任何内容</td>
+</tr>
+<tr>
+<td>206</td>
+<td>部分内容</td>
+<td>服务器成功处理了部分GET请求</td>
+</tr>
+</tbody></table>
+<p>3xx表示要完成请求，需要进一步操作。通常，这些状态代码用来重定向。</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>300</td>
+<td>多种选择</td>
+<td>针对请求，服务器可执行多种操作。服务器可根据请求者(useragent)选择一项操作，或提供操作列表供请求者选择。</td>
+</tr>
+<tr>
+<td>301</td>
+<td>永久移动</td>
+<td>请求的网页已永久移动到新位置。服务器返回此响应（对GET或HEAD请求的响应）时，会自动将请求者转到新位置。</td>
+</tr>
+<tr>
+<td>302</td>
+<td>临时移动</td>
+<td>服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</td>
+</tr>
+<tr>
+<td>303</td>
+<td>查看其他位置</td>
+<td>请求者应当对不同的位置使用单独的GET请求来检索响应时，服务器返回此代码。</td>
+</tr>
+<tr>
+<td>304</td>
+<td>未修改</td>
+<td>自从上次请求后，请求的网页未修改过。服务器返回此响应时，不会返回网页内容。</td>
+</tr>
+<tr>
+<td>305</td>
+<td>使用代理</td>
+<td>请求者只能使用代理访问请求的网页。如果服务器返回此响应，还表示请求者应使用代理。</td>
+</tr>
+<tr>
+<td>307</td>
+<td>临时重定向</td>
+<td>服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</td>
+</tr>
+</tbody></table>
+<p>4xx这些状态代码表示请求可能出错，妨碍了服务器的处理。</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td>错误请求</td>
+<td>服务器不理解请求的语法。</td>
+</tr>
+<tr>
+<td>401</td>
+<td>未授权</td>
+<td>请求要求身份验证。对于需要登录的网页，服务器可能返回此响应。</td>
+</tr>
+<tr>
+<td>403</td>
+<td>禁止</td>
+<td>服务器拒绝请求。</td>
+</tr>
+<tr>
+<td>404</td>
+<td>未找到</td>
+<td>服务器找不到请求的网页。</td>
+</tr>
+<tr>
+<td>405</td>
+<td>方法禁用</td>
+<td>禁用请求中指定的方法。</td>
+</tr>
+<tr>
+<td>406</td>
+<td>不接受</td>
+<td>无法使用请求的内容特性响应请求的网页。</td>
+</tr>
+<tr>
+<td>407</td>
+<td>需要代理授权</td>
+<td>此状态代码与401（未授权）类似，但指定请求者应当授权使用代理。</td>
+</tr>
+<tr>
+<td>408</td>
+<td>请求超时</td>
+<td>服务器等候请求时发生超时。</td>
+</tr>
+<tr>
+<td>409</td>
+<td>冲突</td>
+<td>服务器在完成请求时发生冲突。服务器必须在响应中包含有关冲突的信息。</td>
+</tr>
+<tr>
+<td>410</td>
+<td>已删除</td>
+<td>如果请求的资源已永久删除，服务器就会返回此响应。</td>
+</tr>
+<tr>
+<td>411</td>
+<td>需要有效长度</td>
+<td>服务器不接受不含有效内容长度标头字段的请求。</td>
+</tr>
+<tr>
+<td>412</td>
+<td>未满足前提条件</td>
+<td>服务器未满足请求者在请求中设置的其中一个前提条件。</td>
+</tr>
+<tr>
+<td>413</td>
+<td>请求实体过大</td>
+<td>服务器无法处理请求，因为请求实体过大，超出服务器的处理能力。</td>
+</tr>
+<tr>
+<td>414</td>
+<td>请求的URI过长</td>
+<td>请求的URI（通常为网址）过长，服务器无法处理。</td>
+</tr>
+<tr>
+<td>415</td>
+<td>不支持的媒体类型</td>
+<td>请求的格式不受请求页面的支持。</td>
+</tr>
+<tr>
+<td>416</td>
+<td>请求范围不符合要求</td>
+<td>如果页面无法提供请求的范围，则服务器会返回此状态代码。</td>
+</tr>
+<tr>
+<td>417</td>
+<td>未满足期望值</td>
+<td>服务器未满足”期望”请求标头字段的要求。</td>
+</tr>
+</tbody></table>
+<p>5xx这些状态代码表示服务器在尝试处理请求时发生内部错误。这些错误可能是服务器本身的错误，而不是请求出错。</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>500</td>
+<td>服务器内部错误</td>
+<td>服务器遇到错误，无法完成请求。</td>
+</tr>
+<tr>
+<td>501</td>
+<td>尚未实施</td>
+<td>服务器不具备完成请求的功能。例如，服务器无法识别请求方法时可能会返回此代码。</td>
+</tr>
+<tr>
+<td>502</td>
+<td>错误网关</td>
+<td>服务器作为网关或代理，从上游服务器收到无效响应。</td>
+</tr>
+<tr>
+<td>503</td>
+<td>服务不可用</td>
+<td>服务器目前无法使用（由于超载或停机维护）。通常，这只是暂时状态。</td>
+</tr>
+<tr>
+<td>504</td>
+<td>网关超时</td>
+<td>服务器作为网关或代理，但是没有及时从上游服务器收到请求。</td>
+</tr>
+<tr>
+<td>505</td>
+<td>HTTP版本不受支持</td>
+<td>服务器不支持请求中所用的HTTP协议版本。</td>
+</tr>
+</tbody></table>
+<h5 id="2-首部行-1"><a href="#2-首部行-1" class="headerlink" title="2.首部行"></a>2.首部行</h5><p>包含发送日期、服务器类型、上一次修改请求资源的时间、内容的类型等内容。</p>
+<p>Accept-Ranges：表明服务器是否支持指定范围请求及哪种类型的分段请求Accept-Ranges:bytes</p>
+<p><strong>Access-Control-Allow-Origin：</strong>配置有权限访问资源的域Access-Control-Allow-Origin:|*</p>
+<p>Age：从原始服务器到代理缓存形成的估算时间（以秒计，非负）Age:12</p>
+<p>Allow：对某网络资源的有效的请求行为，不允许则返回405Allow:GET,HEAD</p>
+<p>Cache-Control：告诉所有的缓存机制是否可以缓存及哪种类型Cache-Control:no-cache</p>
+<p>Content-Encoding：web服务器支持的返回内容压缩编码类型。Content-Encoding:gzip</p>
+<p>Content-Language：响应体的语言Content-Language:en,zh</p>
+<p>Content-Length：响应体的长度Content-Length:348</p>
+<p>Content-Location：请求资源可替代的备用的另一地址Content-Location:&#x2F;index.htm</p>
+<p>Content-MD5：返回资源的MD5校验值Content-MD5:Q2hlY2sgSW50ZWdyaXR5IQ&#x3D;&#x3D;</p>
+<p>Content-Range：在整个返回体中本部分的字节位置Content-Range:bytes21010-47021&#x2F;47022</p>
+<p>Content-Type：返回内容的MIME类型Content-Type:text&#x2F;html;charset&#x3D;utf-8</p>
+<p>Date：原始服务器消息发出的时间Date:Tue,15Nov201008:12:31GMT</p>
+<p>ETag：请求变量的实体标签的当前值ETag:”737060cd8c284d8af7ad3082f209582d”</p>
+<p>Expires：响应过期的日期和时间Expires:Thu,01Dec201016:00:00GMT</p>
+<p>Last-Modified：请求资源的最后修改时间Last-Modified:Tue,15Nov201012:45:26GMT</p>
+<p>Location：用来重定向接收方到非请求URL的位置来完成请求或标识新的资源Location:<a target="_blank" rel="noopener" href="http://www.zcmhi.com/archives/94.html">http://www.zcmhi.com/archives/94.html</a></p>
+<p>Pragma：包括实现特定的指令，它可应用到响应链上的任何接收方Pragma:no-cache</p>
+<p>Proxy-Authenticate：它指出认证方案和可应用到代理的该URL上的参数Proxy-Authenticate:Basic</p>
+<p>Refresh：应用于重定向或一个新的资源被创造，在5秒之后重定向（由网景提出，被大部分浏览器支持）Refresh:5;url&#x3D;<a target="_blank" rel="noopener" href="http://www.zcmhi.com/archives/94.html">http://www.zcmhi.com/archives/94.html</a></p>
+<p>Retry-After：如果实体暂时不可取，通知客户端在指定时间之后再次尝试Retry-After:120</p>
+<p>Server：web服务器软件名称Server:Apache&#x2F;1.3.27(Unix)(Red-Hat&#x2F;Linux)</p>
+<p><strong>Set-Cookie：</strong>设置HttpCookieSet-Cookie:UserID&#x3D;JohnDoe;Max-Age&#x3D;3600;Version&#x3D;1</p>
+<p><strong>Strict-Transport-Security：</strong>设置浏览器强制使用HTTPS访问</p>
+<p>max-age:x秒的时间内访问对应域名都使用HTTPS请求</p>
+<p>includeSubDomains:网站的子域名也启用规则</p>
+<p>Strict-Transport-Security:max-age&#x3D;1000;includeSubDomains</p>
+<p>Trailer：指出头域在分块传输编码的尾部存在Trailer:Max-Forwards</p>
+<p>Transfer-Encoding：文件传输编码Transfer-Encoding:chunked</p>
+<p>Vary：告诉下游代理是使用缓存响应还是从原始服务器请求Vary:*</p>
+<p>Via：告知代理客户端响应是通过哪里发送的Via:1.0fred,1.1nowhere.com(Apache&#x2F;1.1)</p>
+<p>Warning：警告实体可能存在的问题Warning:199Miscellaneouswarning</p>
+<p>WWW-Authenticate：表明客户端请求实体应该使用的授权方案WWW-Authenticate:Basic</p>
+<p><strong>X-Content-Type-Options：</strong>配置禁止MIME类型嗅探X-Content-Type-Options:nosniff</p>
+<p>X-Frame-Options：配置页面是否能出现在</p>
+<h5 id="3-响应实体"><a href="#3-响应实体" class="headerlink" title="3.响应实体"></a>3.响应实体</h5><p>实体体包含请求对象本身。</p>
+<h4 id="3-1-4-Cookie"><a href="#3-1-4-Cookie" class="headerlink" title="3.1.4 Cookie"></a>3.1.4 Cookie</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps5.jpg" alt="img"></td>
+</tr>
+</tbody></table>
+<p>HTTP是无状态协议，但是Web站点为了识别用户身份或者限制用户访问的时间或者将用户访问的内容同用户身份相关联，Web站点可以使用Cookie技术；</p>
+<p>Cookie技术包含4个组件</p>
+<ol>
+<li><p>HTTP请求报文里增加一个关于Cookie的首部行；</p>
+</li>
+<li><p>HTTP响应报文里增加一个关于Cookie的首部行；</p>
+</li>
+<li><p>用户端系统保留一个Cookie文件，由浏览器保存维护；</p>
+</li>
+<li><p>服务端建立Cookie和用户身份的关联；</p>
+</li>
+</ol>
+<p>虽然，Cookie的使用方便了用户也方便了服务端，但是它的使用存在争议，因为使用Cookie被认为是对用户隐私的一种侵犯，因为Web站点可以通过Cookie得到很多用户的信息，并有可能将这部分信息卖给第三方等</p>
+<h4 id="3-1-5-Web缓存器（代理服务器）"><a href="#3-1-5-Web缓存器（代理服务器）" class="headerlink" title="3.1.5 Web缓存器（代理服务器）"></a>3.1.5 Web缓存器（代理服务器）</h4><ul>
+<li>Web缓存器也被称为代理服务器，它代表初始web服务器来满足HTTP请求。它有自己的存储空间，并在存储空间里保持有最近请求过的对象的副本；可以通过配置浏览器，将所有指向初始服务器的请求首先指向代理服务器。</li>
+<li>当代理服务器收到一个HTTP请求后，它将检查本地是否缓存过该对象，如果缓存过该对象，将检查是否过期，如果没有过期，则直接将该对象返回给浏览器；如果本地不存在或者存在已过期，则代理服务器将根据请求报文里的Host首部行以及请求行里的URL字段向初始服务器发出请求，然后将响应对象返回给浏览器并缓存在本地。</li>
+<li>通常，代理服务器与客户端的通信速度要快于初始服务器与客户端的连接速度；Web代理服务器可以大起大减少对客户请求的响应时间；而且，缓存器能从整体上大大降低因特网上的web流量，从而有助于提高所有应用程序的性能；</li>
+<li>通过使用内容分发网络（CDN），Web缓存器正在因特网中发挥越来越重要的作用</li>
+<li>Web缓存器即是客户又是服务器</li>
+<li>条件GET方法：高速缓存器的使用，带来很多好处，但是有一个问题就是代理服务器对缓存对象的管理：如何确保所请求的对象是最新的？其实HTTP提供了一种机制，允许缓存器证实其使用的对象是最新的，这种机制就是条件GET方法。使用条件GET方法只需在使用GET方法的时候，增加一个If-Modified-Since首部行，其对应的内容是一个时间，如果所请求的资源在指定日期后被修改了，那么服务器将返回新的对象，否则服务器将返回一个包含空实体体的报文。这样代理服务器就可以确认缓存是否过期了。</li>
+</ul>
+<h3 id="3-2-文件传输"><a href="#3-2-文件传输" class="headerlink" title="3.2 文件传输"></a>3.2 文件传输</h3><ul>
+<li>在一个典型的FTP应用中，用户通过FTP代理和FTP交互。用户首先提供远程主机的主机名，使得FTP用户代理建立一个到远程主机的TCP连接，之后需要用户提供用户名和密码，它们作为FTP命令的一部分在TCP连接上传输；一旦服务器授权，用户便可以和服务器进行文件传输了。</li>
+<li>HTTP和FTP都是应用层协议，它们都运行在TCP协议之上，但是它们之间也有一些重要区别，其中一个就是<strong>FTP使用两个并行的TCP连接来传输数据，一个TCP被称为控制连接，用来传输FTP命令；一个TCP连接被称为数据连接，用于传输文件数据；</strong>因为FTP协议内，控制信息是通过一个<strong>独立的TCP连接传输</strong>，所以我们称FTP的<strong>控制信息是带外传送</strong>的；如果控制信息和数据信息通过<strong>同一个TCP传输，则称为带内传送</strong>。<strong>TCP控制连接端口21，数据连接端口20。</strong></li>
+<li>FTP中控制连接贯穿整个会话，但是数据连接会在一个文件开始传输的时候建立，在传输结束后关闭；所以每次传输一个新的文件时，都会新建一个数据连接；</li>
+<li>FTP需要在整个会话期间，保留用户的状态，也就是将控制连接同用户账户关联起来，同时记录用户在远程目录树上的操作，这就限制了FTP可以同时维持的会话总数。</li>
+<li>FTP命令和回答：从客户到服务器的命令和从服务器到客户的回答，都是以7比特ASCII格式在控制连接上传递的</li>
+</ul>
+<p>常见的命令如下：</p>
+<table>
+<thead>
+<tr>
+<th>RETR <filename></th>
+<th>从服务器上找回（复制）文件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>STOR <filename></td>
+<td>储存（复制）文件到服务器上</td>
+</tr>
+<tr>
+<td>USER <username>&gt;</td>
+<td>系统登录的用户名</td>
+</tr>
+<tr>
+<td>PASS <password></td>
+<td>系统登录密码</td>
+</tr>
+</tbody></table>
+<p>常见的回答如下：</p>
+<table>
+<thead>
+<tr>
+<th>125</th>
+<th>打开数据连接，开始传输</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>331</td>
+<td>要求密码</td>
+</tr>
+<tr>
+<td>452</td>
+<td>磁盘空间不足，写错误</td>
+</tr>
+<tr>
+<td>425</td>
+<td>无法打开数据连接</td>
+</tr>
+</tbody></table>
+<h3 id="3-3-电子邮件"><a href="#3-3-电子邮件" class="headerlink" title="3.3 电子邮件"></a>3.3 电子邮件</h3><ol>
+<li>三个核心组件：用户代理、邮件服务器、SMTP（简单邮件传输协议，SimpleMailTransferProtocol）。</li>
+<li>SMTP是<strong>邮件服务器之间</strong>发送邮件报文的协议，并不是用户通过代理和邮件服务器之间通信的协议。用户代理使用邮件访问协议来从邮件服务器上获取邮件信息；</li>
+<li>目前常用的邮件访问协议有POP3（PostOfficeProtocol-Version3）、因特网邮件访问协议（IMAP，InternetMailAccessprotocol）和HTTP。</li>
+</ol>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps6.jpg" alt="img"> </p>
+<p>SMTP是因特网中电子邮件的主要应用层协议，它使用TCP可靠数据传输从发送方的邮件服务器向接收方的邮件服务器发送邮件；在每台邮件服务器上<strong>同时运行SMTP服务器和SMTP客户端</strong>。当邮件服务器接收其他邮件服务器的邮件时，它表现为SMTP服务器，当邮件服务器向其他邮件服务器发送邮件时，表现为SMTP客户端。</p>
+<h4 id="3-3-1-邮件发送协议SMTP"><a href="#3-3-1-邮件发送协议SMTP" class="headerlink" title="3.3.1 邮件发送协议SMTP"></a>3.3.1 邮件发送协议SMTP</h4><p>传输的三个阶段：<strong>握手、传输、关闭连接</strong>。</p>
+<p>SMTP25号端口。SMTP是持续连接的。对每一报文，客户使用一个新的MAILFROM：crepes.fr开始。当所有报文发送完后才发送QUIT，断开连接。SMTP出现在因特网之前，尽管它有着很不错的特性，但是它具有的某种陈旧的特征表明它仍然是一种继承的技术，比如，它限制邮件报文的所有部分只能使用7比特的ASCII表示，这就导致二进制多媒体文件需要编码为ASCII，而且在发送方需要编码，接收方则需要解码。</p>
+<p>值得注意的是，SMTP报文一般不使用中间邮件服务器发送报文，也就是邮件不会在中间某个邮件服务器保留；在SMTP握手阶段，SMTP客户端将介绍发送方和接收方的邮箱地址；一旦介绍完毕后，SMTP客户端将开始发送报文</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps7.jpg" alt="img"> </p>
+<p>与HTTP对比：HTTP和SMTP都是用TCP协议；持续的HTTP和SMTP都是用持续连接；但是两者也有区别。首先HTTP被设计为一个Pull协议而SMTP被设计为一个Push协议。即用户通过HTTP主动向服务器请求内容，而SMTP则是客户将内容推向服务器端；第二个区别就是HTTP传输的数据不一定是用ASCII字符，但是SMTP则只能使用ASCII字符；第三个重要区别就是，HTTP将每个对象封装在自己的响应报文里，而SMTP则将所有的报文对象放到一个报文之中；</p>
+<p>邮件报文格式和MIME：报文由两部分组成：一个包含环境信息的首部和一个包含邮件内容的报文体；首部和报文体之间使用空行分开；首部行的格式为关键字：及其值；每个首部必须包含一个From和To首部行。首部也可以包含其它信息，比如Subject等。这与SMTP命令不同，那节中的命令是握手协议的一部分；本节中研究的内容是邮件报文自身的一部分</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps8.jpg" alt="img"> </p>
+<h4 id="3-3-2-邮件访问协议POP3、IMAP、HTTP"><a href="#3-3-2-邮件访问协议POP3、IMAP、HTTP" class="headerlink" title="3.3.2 邮件访问协议POP3、IMAP、HTTP"></a>3.3.2 邮件访问协议POP3、IMAP、HTTP</h4><p>POP3：POP3是一个非常简单的协议，因为简单，所以功能有限；POP3使用端口110来建立TCP连接（SMTP使用端口25）；POP3按照三个阶段进行工作：特许、事务处理和更新；在特许阶段，用户代理发送密码和用户名，进行身份鉴别；第二阶段，用户代理取回报文，同时还可以做删除、取消删除等标记或者统计邮件信息；第三个阶段是在用户退出后，POP3结束会话，删除被标记的邮件；一个需要注意的是，POP3用户代理可以使用两种事务处理模式：一种是下载并删除，另一种是下载保留；POP3代理发出的命令和其工作模式相关；下载并删除的方法存在的问题是，如果用户在一台设备上查看了邮件（下载了邮件）后，邮件将被删除，那么在其他设备上将无法查看邮件；这给用户带来一定的不便。使用下载保存方式，则用户下载邮件后，邮件还在服务器上。在用户代理与邮箱服务器之间的POP3会话期间，该POP3服务器保留了一些状态信息，特别是标记了哪些用户报文被标记为删除了。但是POP3服务器并不在POP3绘画过程中携带状态信息，大大简化了POP3的服务。</p>
+<p>IMAP：POP3协议无法为用户提供邮件分类管理的功能，虽然用户可以通过将邮件下载到本地，然后由用户代理程序做分类管理，但是处理的结果是无法同步到其他查看设备上的。为了解决这一问题，IMAP诞生了。IMAP是一个邮件访问协议，比POP3要复杂的多，当然也就有更多的特色了。（远程）IMAP将每一份邮件和一个一个文件夹联系起来，当报文第一次到达服务器时，它与收件人的INBOX相关联。收件人可以将邮件移到新创建的文件夹，阅读邮件，删除邮件等。IMAP允许用户在不同文件夹里移动邮件并且查询邮件。值得注意的是，IMAP服务器维护了IMAP会话的用户状态信息，但是POP3并不；IMAP协议还允许用户代理获取报文组件而不是报文整体。</p>
+<p>基于Web的电子邮件：这种方式主要是指，用户使用HTTP协议和邮件服务器通信。用户代理就是普通的浏览器，但是，邮件服务器之间还是使用SMTP协议的</p>
+<h3 id="3-4-因特网目录服务"><a href="#3-4-因特网目录服务" class="headerlink" title="3.4 因特网目录服务"></a>3.4 因特网目录服务</h3><h4 id="3-4-1-1DNS提供的服务"><a href="#3-4-1-1DNS提供的服务" class="headerlink" title="3.4.1 1DNS提供的服务"></a>3.4.1 1DNS提供的服务</h4><p>首先，需要注意的是，在计算机网络里，我们通过IP地址来标记某一时刻网络中唯一的主机。IP地址（IPV4）由4个字节组成，有着严格的层次结果，每个字节使用点号分隔。同时，为了方便记忆，我们也通过为主机提供一个便于记忆的主机名来标志主机，这样主机之间的通信就变得方便了。但是，同时也就引入一个问题：主机名和IP地址的转换问题；因为在信息的发送者一端，通常使用主机名来标识主机，但是在计算机网络里是使用IP地址来标机主机。</p>
+<p>计算机网络里有一种应用专门提供这样的服务，它就是DNS（DomainNameSystem）域名系统。DNS是一个由分层的DNS服务器组成的分布式数据库和一个使得主机可以查询分布式数据库的应用层协议组成；</p>
+<p>用户主机上应该运行着DNS客户端。DNS通常被其他应用层协议使用，比如：HTTP、SMTP和FTP等。这些协议在正式工作以前，首先利用DNS提供的服务，将主机名转换为IP地址，可以发现的是，DNS为用户带来方便的同时，也为网络应用带来额外的时延——查询DNS服务器的时延。需要注意的是，缓存作为一种提高性能，特别是查询性能的手段，在DNS中同样适用。</p>
+<p>DNS运行在UDP之上，使用53号端口</p>
+<p>除了提供主机名到IP地址的转换外，DNS还提供以下重要服务：****主机别名*<em><strong>：虽然，主机名比起IP地址好记多了，但是有时候我们的主机名仍然很长，很不好记忆，所以我们需要为主机名再起一个名字，这就是主机别名，DNS不但提供主机名到IP地址的转换服务，还提供主机名与主机别名的转换；此时主机名被称为规范主机名；</strong></em>*邮件服务器别名*<em><strong>：DNS同样也提供邮件服务器主机名和别名的转换服务，实际上，公司的邮件服务器和Web服务器可以使用相同的主机别名；MX记录允许一个公司的邮件服务器和Web服务器使用相同的主机名。</strong></em>*负载分配****：DNS也被用在冗余的服务器之间分配负载。每个服务器有着不同的IP地址，但是它们都和同一个主机名相关联，也就是一个IP地址集合同一个规范主机名相联系；当某个DNS服务器收到DNS请求时，该服务器奖使用IP地址的整个集合作为相应，但是在每个应答中，循环这些地址的次序。因为客户端通常都是使用IP地址集合的首个元素，所以DNS就在冗余的Web服务器之间分配了负载。同理，多个邮件服务器可以具有相同的别名。</p>
+<h4 id="2-7-2DNS工作机理概述"><a href="#2-7-2DNS工作机理概述" class="headerlink" title="2.7.2DNS工作机理概述"></a>2.7.2DNS工作机理概述</h4><p>当主机上的DNS客户端收到一个转换请求时，客户端将向网络发送一个DNS查询报文，然后客户端将收到一个包含相关信息的DNS回答报文，这个报文里有客户端想要的内容，之后DNS客户端将IP地址返回给请求的提出者即可。从使用DNS服务的请求者来看，DNS就像一个简单的提供直接转换服务的黑盒子，实际上这个黑盒子非常复杂，由分布在全球的大量DNS服务器以及定义DNS服务器和查询主机之间如何通信的应用层协议组成；DNS采用分布式的设计方案，实际上，DNS是一个在因特网实现分布式数据库的精彩范例！而之所以这样做，是因为，单一的DNS服务器无法解决单点故障、无法保证通信容量以及无法临近所有的查询主机和维护困难等问题</p>
+<p>分布式层次的数据库:为了处理扩展性问题，DNS服务器采用层次式组织，并且分布在全世界范围内；大致来说，存在三种DNS服务器：根DNS服务器、顶级域DNS服务器和权威DNS服务器；举例说明，其工作的普遍流程：一个DNS客户端，希望获得<a target="_blank" rel="noopener" href="http://www.baidu.com的ip地址,粗略的说,dns客户端首先和根dns服务器取得联系,它将返回负责解析顶级域名com的服务器的ip地址(或者其集合),客户将同这些服务器之一取得联系,然后顶级域dns服务器建返回baidu.com的权威服务器的ip集合,客户端通过与这些服务器之一取得联系,获得www.baidu.com的ip地址./">www.baidu.com的IP地址，粗略的说，DNS客户端首先和根DNS服务器取得联系，它将返回负责解析顶级域名com的服务器的IP地址（或者其集合），客户将同这些服务器之一取得联系，然后顶级域DNS服务器建返回baidu.com的权威服务器的IP集合，客户端通过与这些服务器之一取得联系，获得www.baidu.com的IP地址。</a></p>
+<p>n 根DNS服务器：因特网上有13个根DNS服务器，大部分分布在北美洲，尽管我们可以将这13个根DNS服务器视为单个的服务器，但是每台服务器实际上是一个冗余的计算机网络以提供安全性和可靠性；</p>
+<p>n 顶级域DNS服务器：负责顶级域名，如com，org，net，edu，gov以及各个国家的顶级域名的转换。</p>
+<p>n 权威DNS服务器：因特网上，具有公共可访问主机的每个组织机构必须公共可访问的DNS记录，这些记录将主机名映射为IP地址。一个组织的权威DNS服务器收藏了这些DNS记录，多数大学和大公司实现和维护它们自己的基本和辅助（备份）权威DNS服务器；当然，也可以通过付费的方式，将相关的信息插入到其它权威服务器中；</p>
+<p>n 本地DNS服务器：除了上面三种DNS服务器，还有一种不在DNS层次结构之中，但是很重要的DNS，是本地DNS服务器。****本地DNS服务器通常邻近其所在网络的其他主机****。当主机发出DNS请求时，该请求被发往本地DNS服务器，它起着代理的作用，并将请求转发到DNS服务器层次结构中。</p>
+<p>DNS查询有两种，一种是递归查询一种是迭代查询；实践中，查询通常满足这样的模式：从请求主机到本地DNS服务器的查询是递归的，其余查询是迭代的。所谓迭代就是，如果请求的接收者不知道所请求的内容，那么接收者将扮演请求者，发出有关请求，直到获得所需要的内容，然后将内容返回给最初的请求者。也就是说，在递归查询中，一定要给请求者想要的答案；迭代查询则是指，如果接收者没有请求者所需要的准确内容，接收者将告诉请求者，如何去获得，但是自己并不去发出请求。</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps9.jpg" alt="img"><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps10.jpg" alt="img"> </p>
+<p>DNS缓存：DNS缓存实际上是为了盖上时延性能并且减少在因特网上传输的DNS报文数量而引入的。DNS缓存原理十分简单，每当DNS服务器发出请求后收到回答时，就将回答的内容缓存在它自己的主机空间上。这样，如果有相同的请求到达时，就不需要再去发出请求，直接使用缓存即可；因为有了缓存，本地DNS就可以直接提供一些经常被访问的主机名所对应的IP地址，而不需要询问根DNS服务器了。需要注意的是，缓存不可避免的一个问题：有效时间。如果缓存过时而未得到更新，那么就会导致一些请求失败。</p>
+<h4 id="2-7-3DNS记录和报文"><a href="#2-7-3DNS记录和报文" class="headerlink" title="2.7.3DNS记录和报文"></a>2.7.3DNS记录和报文</h4><p>共同实现分布式数据库的所有DNS服务器存储了资源记录(ResourceRecord)。而RR提供了主机名到IP地址的映射信息；一条RR是具有一下字段的4元组：（name,value,type,TTL）;其中TTL是指该记录的生存时间，它决定了该条记录何时被删除。首先看看type，type有4种取值，包括：A、NS、CNAME、MX等：</p>
+<p>n type&#x3D;A：则name为主机名，value为对应的IP地址；</p>
+<p>n type&#x3D;NS：则name为域，value为如何获得该域下主机IP地址的权威DNS服务器的主机名；</p>
+<p>n type&#x3D;CNAME：则value为name（本身为主机别名）所对应的主机的规范主机名；</p>
+<p>n type&#x3D;MX：则value为那么所对应的邮件服务器的规范主机名；</p>
+<p>如果为了获得邮件服务器的规范主机名，请求一条MX记录；为了获得其它服务器的规范主机名，请求一条CNAME记录。所以如果一条记录为type&#x3D;A，则它直接包含了需要的信息；如果是NS，需要进一步得到权威DNS服务器的IP地址（同时返回一条NS记录，并返回一条以该NS记录的value值为name的A记录）希望得到一条A记录；而type&#x3D;CNAME和MX的记录则实现了主机别名到主机规范名的转换，可以通过该规范名继续构建查询链条，直到获得希望的IP地址；</p>
+<p>DNS报文：DNS报文有两种，即查询报文和回答报文，并且两种报文有着相同的结构：</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps11.jpg" alt="img"> </p>
+<p>前12字节为首部区域。标识符是一个用来标记该查询的16比特数。该标志符会被复制到相应的回答报文里，以便匹配请求和回答；</p>
+<p>n 标志字段有若干标志，用来指出报文的类型（请求还是响应）、查询类型（递归还是迭代）、是否是所请求名字的权威DNS服务器、以及4个有关数量的字段，用来指示4类数据区域出现的数量；</p>
+<p>n 问题区域包含了正在进行的查询信息，包括名字字段、查询类型；</p>
+<p>n 回答区域包含了对最初请求的名字的资源记录，回答报文的回答区域可以包含多条RR，因此一个主机名能有多个IP地址；</p>
+<p>n 权威区域包含了其他权威服务器的信息；</p>
+<p>n 附加区域包含了其它有帮助的记录，比如在对于一个MX类型的请求回答报文里，回答区域里指出了邮件服务器的规范主机名，而附加区域里就有可能包含一个类型为A的关于该规范主机名的的IP地址；</p>
+<p>向DNS数据库中插入数据</p>
+<p>需要在注册登记机构完成这一任务，当你注册一个域名时，需要向该机构提供你的基本和辅助DNS服务器的名字和IP地址；该注册机构将确保一个类型为NS和类型为A的记录输入对应的顶级域名服务器；这样就完成了插入数据</p>
+<h3 id="2-8P2P应用"><a href="#2-8P2P应用" class="headerlink" title="*2.8P2P应用*"></a><em><strong>*2.8P2P应用*</strong></em></h3><p>对总是打开的基础设施服务器没有依赖，成对间歇连接的主机之间相互通信。有两种典型因特网应用十分适合P2P体系结构，一种是文件分发（BitTorrent)，另一种是大型对等方社区中的数据库；我们将探讨分布式散列表的概念。P2P体系结构有着良好的自扩展性。这种扩展性的直接成因是：对等方除了比特的消费者之外还是他们的重新分发者</p>
+<h4 id="2-8-1文件分发（BitTorrent）"><a href="#2-8-1文件分发（BitTorrent）" class="headerlink" title="2.8.1文件分发（BitTorrent）"></a>2.8.1文件分发（BitTorrent）</h4><p>BitTorrent是一种用于文件分发的流行P2P协议；用BitTorrent的术语来说，参与一个特定文件分发的所有对等方的集合被称为一个洪流；在一个洪流中的对等方彼此下载等长度的文件块；当一个对等方下载文件块的时候，也向其他对等方发送了多个块；一旦某对等方获得了完整文件，就可以自私地离开洪流或者大公无私地留下来继续向其他对等方发送文件.</p>
+<p>n P2P文件共享协议，参与一个特定文件分发的所有对等方结合被称为一个洪流（torrent），在一个洪流的对等方彼此下载等长度的文件块，可以随时离开洪流，也可继续向其他对等方上载。每个洪流都有一个追踪器。</p>
+<p>n Alice加入某洪流时，会在追踪器里进行注册，周期性通知追踪器它仍在洪流中。我们称所有与ALICE成功的创建了一个TCP链接的对等方成为邻近对等方。</p>
+<p>n 洪流随机从参与对等方的结合中选择一个子集，将他们的IP地址发给Alice，Alice维护这张对等方列表，试图与所有对等方建立并行的TCP连接。</p>
+<p>n Alice周期询问每个邻近对等方（连上的）他们有的文件块列表，她随时知道邻居有哪些文件块</p>
+<p>n Alice使用最稀缺优先技术，首先请求那些邻居们副本数量最少的块，使该文件块迅速分发，以均衡每个块在洪流中的副本数量</p>
+<p>n BitTorrent使用一种算法，Alice优先从像她传时速度最快的邻居（4个，每10s修改一次）那里获取文件块。</p>
+<p>n 每过30s，Alice也要随机选择另外一个对等方Bob，向他发送块。若Alice是Bob最快的前四快，Bob也是Alice的前4快，则Bob和Alice互相发送数据。</p>
+<p>n 每过30s换一个新的对象，互相交换数据（一报还一报），为了使对等方能够找到彼此协调的速率上传</p>
+<h4 id="2-8-2分布式散列表（DHT）"><a href="#2-8-2分布式散列表（DHT）" class="headerlink" title="2.8.2分布式散列表（DHT）"></a>2.8.2分布式散列表（DHT）</h4><p>分布式、P2P版本的key-value数据库，在大量对等方上存储key-value值（键值对）。分布式数据库用来定位拥有某key-value的对等方，然后向查询方返回该键值对。使用散列函数把每个键映射为[0,-1]之间的一个整数。把（键，值）对存储在最邻近对等方那里。比如有8个对等方，标识符为1，3，4，5，8，10，12和15。因此将（11，“wangwenxuan”)存储在12上。环形DHT。（就是环形）。为了防止放松的报文太多了，还可以可以增加捷径，使每个对等方不仅仅联系直接前驱和直接后继。对等方扰动。对等方可能忽然离开或到来。为了处理对等方扰动。我们要求每个对等方联系第一个和第二个后继。周期性的证实他们俩是活着的。</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps12.jpg" alt="img"> </p>
+<h3 id="2-9套接字编程"><a href="#2-9套接字编程" class="headerlink" title="*2.9套接字编程*"></a><em><strong>*2.9套接字编程*</strong></em></h3><p>当发送进程能够将数据分组退出套接字之门之前，当使用UDP时，必须将目的地址（IP+端口号）附着在分组上。在分组传给发送方的套接字后，因特网将使用目的地址通过因特网为该分组选路到接受进程的套接字。发送方的源地址也是由IP和端口号组成。然而，将源地址附着在分组上通常是由底层操作系统自动完成的。</p>
+<h2 id="3-传输层"><a href="#3-传输层" class="headerlink" title="3.传输层"></a>3.传输层</h2><p>输层位于应用层和网络层之间，是分层的网络体系结构中重要的部分，该层为运行在不同主机上的应用进程提供直接的通信服务起着至关重要的作用。在这里我们将讨论两个大的问题：将网络层在不同端系统之间的通信服务扩充到运行在两个端系统上不同的应用层进程之间的通信服务（如何实现进城之间通信的可靠传输）和控制传输层实体的传输速度以避免网络拥塞或者从网络拥塞中恢复过来，这里需要考虑的有拥塞的后果和原因以及常见的拥塞控制手段，特别的，我们将了解TCP协议中的拥塞控制。</p>
+<h3 id="3-1概述和运输层服务"><a href="#3-1概述和运输层服务" class="headerlink" title="*3.1概述和运输层服务*"></a><em><strong>*3.1概述和运输层服务*</strong></em></h3><p>传输层协议为运行在不同端系统上的应用进程之间提供逻辑通信功能；应用层进程使用传输层提供的逻辑通信功能而无需考虑实现通信的物理基础设施的细节；</p>
+<p>值得注意的是，传输层协议是在端系统中实现的而不是在路由器中实现的。传输层接收来自应用层的报文并通过添加传输层首部以生成传输层报文段。在生成过程中可能会对来自应用层的报文加以分割；然后在发送端系统中，运输层会将这些报文段交给网络层；网络层将其封装成网络层分组，也被称为数据报，然后向目的地发送。路由器不会检查封装在数据报中的传输层报文段的字段；在接收端，网络层从数据报中抽取传输层报文段，并将其交给传输层，传输层接收到报文段后，使该报文段中的数据被接收进程所使用。</p>
+<p>网络应用可以使用多种传输层协议，因特网有两种传输层协议，即TCP和UDP，不同的传输层协议提供不同的运输层服务</p>
+<table>
+<thead>
+<tr>
+<th>应用</th>
+<th>应用层协议</th>
+<th>运输层协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>电子邮件</td>
+<td>SMTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>远程终端访问</td>
+<td>Telnet</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>Web</td>
+<td>HTTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>文件传输</td>
+<td>FTP</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>远程文件服务器</td>
+<td>NFS</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>流式多媒体</td>
+<td>通常专用</td>
+<td>UDP或TCP</td>
+</tr>
+<tr>
+<td>因特网电话</td>
+<td>通常专用</td>
+<td>UDP或TCP</td>
+</tr>
+<tr>
+<td>网络管理</td>
+<td>SNMP</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>路由选择协议</td>
+<td>RIP</td>
+<td>UDP</td>
+</tr>
+<tr>
+<td>名字转换</td>
+<td>DNS</td>
+<td>UDP</td>
+</tr>
+</tbody></table>
+<h4 id="3-1-1传输层和网络层的关系"><a href="#3-1-1传输层和网络层的关系" class="headerlink" title="3.1.1传输层和网络层的关系"></a>3.1.1传输层和网络层的关系</h4><p>值得注意的是，网络层提供主机之间的逻辑通信而传输层为运行在不同主机上的应用进程提供逻辑通信；运输层协议只工作在端系统中。在端系统中，传输层协议将来自应用进程的报文移动到网络边缘即网络层，反过来也从网络层接收这些报文段；传输层对报文段如何在网络核心传输并不做干涉；事实上中间路由器既不处理也不识别传输层加载应用层报文上的任何信息</p>
+<p>运输层协议能提供的服务常常受制于底层网络层协议的服务类型，如果网络层协议无法为主机之间的通信提供时延和带宽保证的话，运输层协议也就无法为进程之间发送的应用程序报文提供时延或者带宽保证.</p>
+<p>然而即使底层网络协议不能在网络层提供响应的服务，运输层协议也能提供某些服务。例如，即使底层网络协议是不可靠的，运输协议也能为应用程序提供可抗的数据传输服务。</p>
+<h4 id="3-1-2因特网传输概述"><a href="#3-1-2因特网传输概述" class="headerlink" title="3.1.2因特网传输概述"></a>3.1.2因特网传输概述</h4><p>因特网为应用层提供了截然不同的两种传输层协议：UDP（用户数据报协议）它提供一种不可靠、无连接的服务；另一种是TCP，它提供可靠的，面向连接的服务；运输层分组也被称为报文段；</p>
+<p>简单了解一下因特网的网络层，网络层协议有一个名字即IP，即网际协议。IP为主机间提供逻辑通信，IP的服务模型为尽力而为交付服务（best-effortdeliveryservice）这意味着IP尽最大的努力在主机间交付报文段，但是不做任何保证。它不保证报文段的交付、不保证报文段按序交付、不保证报文段中数据的完整性；即IP提供一种不可靠的服务；每台主机都需要有一个网络层地址，即IP地址。</p>
+<p>UDP和TCP最基本的责任就是将IP提供的主机间交付服务扩展到不同端系统上两个个进程之间的服务。这也被称为传输层的多路分解和多路复用；UDP和TCP通过在传输层首部添加差错检查字段来提供完整性检查。进程到进程之间的数据交付和差错检查是最低限度的两种传输层服务，也是UDP可以提供的仅有的两种服务。UDP和IP一样，也是不可靠服务；</p>
+<p>TCP提供额外的服务，首先它是一种可靠数据服务，这意味着TCP协议保证数据的按序、完整地从发送端应用进程发送到接收端应用进程；TCP通过序号、确认、定时器以及流量控制来将IP的不可靠数据传输转换为可靠数据传输；其次，TCP提供拥塞控制，拥塞控制与其说是一种提供给应用程序的服务，不如说是一种提供给整个网络的服务，因为整个网络都将因为拥塞控制而受益；不太严格地说，拥塞控制力求为每一个经过一条拥塞网络的连接提供平等的共享网络链路带宽，从而避免一条TCP连接用过多的流量来淹没通信主机之间的链路和设备；拥塞控制是通过调节发送进网络的的流量速率来做得到；UDP不提供拥塞控制，使用UDP传输的应用程序可以根据需要以任意的速率发送数据。</p>
+<h3 id="3-2多路复用和多路分解"><a href="#3-2多路复用和多路分解" class="headerlink" title="*3.2多路复用和多路分解*"></a><em><strong>*3.2多路复用和多路分解*</strong></em></h3><p>有前面的介绍，我们可以知道，传输层将网络层提供的面向主机的逻辑通信扩充为面向不同应用进程的逻辑通信，并且这一过程称为多路复用和多路分解；值得注意的是，多路复用和多路分解是每个计算机网络都需要的</p>
+<p>实际上，传输层和应用程序进程之间通过Socket（套接字）关联，这样通过Socket就可以区别同一主机上的不同应用进程，从而传输层提供服务变为可能；传输层从同一台主机上的不同Socket接收数据的过程称为多路复用；传输层向同一台主机上的不同Socket传输数据的过程称为多路分解；为了实现多路复用和多路分解，我们需要标志套接字，并将相关信息添加到报文段中。</p>
+<p>实际上，每个套接字都有一个唯一的ID，被称为端口号；而在传输层接收到来自应用程序的分组并通过添加传输层首部而形成报文段的过程中，该端口号被写入；端口号大小在0-65535之间，其中0-1023属于周知端口号，它们为特定的Socket而拥有。</p>
+<p>无连接的多路复用与多路分解</p>
+<p>需要注意的是，在创建Socket的时候，是由传输层为之分配端口号；一个UDP套接字是由一个目的IP地址和目的端口号即二元组来标志的；如果两个UDP报文段有不同的源IP地址或者源端口号，但是有相同的目的IP和目的端口号的话，它们将通过同一个Socket到达同一个应用程序</p>
+<p>面向连接的多路复用与多路连接</p>
+<p>TCP协议中的Socket是通过一个四元组来标记的：（源IP地址，源端口号，目的IP地址，目的端口号）；两个具有不同源IP地址或者源端口号，但有相同的目的IP地址和目的端口号的TCP报文段将通过两个不同的Socket进入同一应用进程；这也表示，一个应用进程可以关联多个Socket，而一个Socket将只关联一个应用进程；常常，这样的对应关系是通过线程来实现的：一个进程有多个线程，而每个线程关联了一个Socket；这样做可以提高服务器性能嘛</p>
+<h3 id="3-3无连接运输：UDP"><a href="#3-3无连接运输：UDP" class="headerlink" title="*3.3无连接运输：UDP*"></a><em><strong>*3.3无连接运输：UDP*</strong></em></h3><p>一个不提供不必要服务的传输层协议是什么样的呢？什么都不做？那是不行的，我们必须做一些什么！前面提到过，差错检查和进程到进程的数据交付是传输层协议必须提供的功能，事实上，UDP的确做到了这些，并且。。只做了这些。它几乎没有对IP增强别的东西；因为在发送报文段之前，发送方和接收方的传输层实体之间没有握手，所以UDP也被称为无连接的；</p>
+<p>DNS是一个使用UDP的应用层协议例子；UDP在接收到来自Socket的数据时，UDP为该报文添加首部字段（源和目的端口号，以及其他两个小字段），然后将报文段交给网络层，网络层通过IP协议尽力地将该报文段交付，至于结果，尽力就好；当DNS客户端等待不到对该查询的响应时（有可能网络层将其丢失了）则会向其他NameServer发送查询请求，要么就通知应用程序，做不到</p>
+<p>既然TCP提供了可靠数据传输，并且提供了拥塞控制，为什么人们还需UDP呢？事实上，有些应用很适合UDP（因为没有连接过程啊，因为不会受拥塞控制的调节啊，更自由）；UDP有以下好处：</p>
+<p>关于何时、发送什么数据的应用层控制更为精细：这是因为一旦应用程序将数据交给UDP，UDP就会打包将其发送给网络层，不会受到传输层的调节，这在一些实时应用中比较实用；当然，应用程序还可以通过UDP+自主开发一些功能的模式来扩展UDP。</p>
+<p>无需建立连接：所以就不会引入额外的时延。这也可能是DNS使用UDP而不是TCP的主要原因，如果使用TCP的话，DNS服务将会慢很多；HTTP使用TCP的主要原因是对TCP的可靠性的依赖超过对速度的要求；</p>
+<p>无需维护连接状态：TCP为了实现可靠数据传输和拥塞控制需要在端系统中维护一些参数，这些参数包括：接收和发送的缓存、拥塞控制参数、确认号和序号；这些参数信息都是必须的；而UDP因为不建立连接，所以自然也就不需要维护这些状态，这就减少了时空开销；</p>
+<p>分组首部更小：TCP有20字节的首部开销，而UDP只有8字节；</p>
+<p>这些应用程序使用了TCP作为其传输层协议：电子邮件、远程终端访问、Web、文件传输；这些应用通常使用UDP作为其传输层协议：远程文件服务器、网络管理（因为这里应用即便在网络处于拥塞的情况下仍要工作，所以UDP更为合适）、路由选择协议和名称转换（DNS）；这些应用两个都有使用：流式多媒体、因特网电话等多媒体应用；这些应用对实时性的要求较高同时对可靠性的要求又不是很高，所以既可以使用UDP也可以使用TCP协议。</p>
+<p>不过在UDP之上运行多媒体应用是有争议的，因为UDP没有拥塞控制协议，所以其对网络有很大的威胁性：大量的UDP流量将使网络过度拥塞而造成TCP连接几乎无法传输数据，并且因为网络拥塞，所以应用又有着较高的丢包率，而因为丢包率UDP很有可能继续发送数据，由此使得网络效率低下。也有研究人员提出一些新的机制，使得所有数据源，包括UDP源执行自适应的拥塞控制来解决这一问题；</p>
+<p>需要注意的是，使用UDP仍然可以实现可靠数据传输，只不过这一部分功能需要在应用程序中自主开发；将可靠性直接构建于应用程序中，将使其既可以可靠地传输数据又可以避免受制于TCP的拥塞控制（传输速率的控制）</p>
+<h4 id="3-3-1UDP报文结构"><a href="#3-3-1UDP报文结构" class="headerlink" title="3.3.1UDP报文结构"></a>3.3.1UDP报文结构</h4><p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps13.jpg" alt="img"> </p>
+<p>UDP首部只有4个字段，每个字段占用两个字节，分别是：源端口号、目的端口号、长度和校验和；其中，长度表示包含首部在内的UDP报文段长度，以字节为单位；校验和字段用来计算报文段在传输的过程中是否出现了差错；一种常见的校验和的计算方法是：发送方将前三个字段做按位加运算，然后将其取反作为校验和；然后接收方对所有四个字段（每个字段16位）进行求和，如果没有出现差错，则最后的结果全是1，否则就表明出现了错误；出现错误的原因可能有：传输链路上数据受到干扰、数据存储在中间路由器的时候，出现了错误</p>
+<p>UDP作为传输层协议，提供的差错检测功能很有可能和底层协议提供的相似功能产生冗余；但是，这是必须的，因为由于不能保证源和目的地之间所有链路都提供差错检测功能，即便数据在链路上正确传输，也无法保证其在中间路由器的内存中不发生错误；所以要实现端到端的差错检测，就必须在传输层协议中实现该功能；这一原则在系统设计中被称为端到端原则：“因为某一功能必须在端到端实现，与在较高层次提供这些功能的代价相比，在较低层次上设置的功能可能是冗余的，或者根本是没有用的”</p>
+<p>IP作为网络层协议，可以运行在任何第二层协议上，所以运输层提供差错检测也是必须的；UDP可以检测差错，但是无法恢复差错，能做的除了将其丢弃外，便是将其交给应用程序然后给出警告.</p>
+<h3 id="3-4可靠数据传输原理"><a href="#3-4可靠数据传输原理" class="headerlink" title="*3.4可靠数据传输原理*"></a><em><strong>*3.4可靠数据传输原理*</strong></em></h3><h4 id="3-4-1构造可靠信道的可靠数据传输"><a href="#3-4-1构造可靠信道的可靠数据传输" class="headerlink" title="3.4.1构造可靠信道的可靠数据传输"></a>3.4.1构造可靠信道的可靠数据传输</h4><p>一个可靠数据传输协议，将要面对以下问题：分组丢失、分组损坏到达、分组乱序到达</p>
+<p>总结可靠传输需要的技术：检验和、序号、定时器、肯定和否定确认分组。</p>
+<p>（1）经完全可靠信道的可靠数据传输：rdt1.0</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps14.jpg" alt="img"> </p>
+<p>最简答的情况，底层信号完全可靠，然而这在实际中不能实现</p>
+<p>（2）经具有比特差错信道的可靠数据传输：rdt2.0</p>
+<p>假设所有发送的分组都可以按其发送顺序被接收。基于重传机制的可靠数据传输协议称为自动重传请求协议（ARQ）。增加了ACK和NCK</p>
+<p>ARQ协议中还需要另外三种协议功能来处理存在比特差错的情况：差错检测，接收方反馈，重传。</p>
+<p>rdt2.0的发送端每发送一个分组需要等待接收端的确认信号，这种协议被称为停等协议。</p>
+<p>(3)rdt2.1</p>
+<p>rdt2.0中有一个致命的缺陷，就是没有考虑到ACK和NAK分组受损的可能性。</p>
+<p>考虑ACK和NAK受损的个两可能性：</p>
+<p>增加足够的校验和比特</p>
+<p>当接受到模糊不清的ACK和NAK分组时，只需要重传当前数据分组。这引入了冗余分组</p>
+<p>冗余分组的根本困难在于接收方不知道它上次所发送的ACK和NAK是否被发送方正确接收到。因此它无法事先知道接收到的分组是新的还是一次重传。</p>
+<p>解决这个新问题的一个简单的方法就是在数据分组中添加一个字段，让发送方对其数据分组编号，即将发送数据分组的序号放在该字段。于是，接收方只需要检查序号即可确定收到的分组是否一次重传。对于停等协议这种简单的情况，1比特的序号就足够了。</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps15.jpg" alt="img"> </p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps16.jpg" alt="img"> </p>
+<p>(4)rdt2.2</p>
+<p>如果不发送NAK，而是对上次正确接收的分组发送一个ACK，我们也能实现同样的效果。</p>
+<p>发送方接收到对一个分组的两个ACK（冗余ACK）后，就知道接收方没有正确接收到跟在确认两次的分组后面的分组。</p>
+<p>rdt2.2是在有比特差错信道上实现的一个无NAK的可靠数据传输协议。</p>
+<p>rdt2.1和rdt2.2的区别在于，接收方此时必须包括由一个ACK报文所确认的分组序号</p>
+<h2 id="4网络层：数据平面"><a href="#4网络层：数据平面" class="headerlink" title="4网络层：数据平面"></a>4网络层：数据平面</h2><p>网络层的作用：将分组从一台发送主机移动到一台接收主机。需要两种功能转发和路由选择：</p>
+<p>n 数据平面：决定路由器收到的数据包选择如何转发到特定的输出链路，此平面的唯一功能是转发（传统的IP转发、通用的转发）</p>
+<p>n 控制平面：协调本地的每个路由器转发动作，使得数据包沿着源目的主机之间的路由器路径最终进行端到端的传送。（传统的路由器控制、SDN控制）</p>
+<h3 id="4-1概述"><a href="#4-1概述" class="headerlink" title="*4**.1概述*"></a><em><strong>*4*</strong></em><em><strong>*.1概述*</strong></em></h3><p>转发表：每台路由都有一张转发表。路由器检查分组首部字段值（可能是目的地址或所属连接，看网络层协议）来转发分组，使用该值在转发表索引查询。该值指出了该分组将被转发的路由器输出链路接口。</p>
+<p>控制平面：传统的方法中每台路由器都包含转发和路由选择两种功能，相当于数据平面和控制平面都在路由器中。SDN的方法中，控制平面路路由选择功能与物理的路由器是分离的，路由器仅仅执行转发，远程控制器计算并分发转发表。</p>
+<p>路由选择算法：决定了插入路由器转发表中的值。路由器接收路由选择协议报文，来配置转发表。有两种算法：集中式、分布式。</p>
+<p>分组交换机：不包括传输层，指一台通用分组交换设备，根据分组首部字段值从输入链路接口转移分组到输出链路接口。</p>
+<p>链路层交换机：基于链路层字段中的值做转发决定。</p>
+<p>路由器：包含传输层，基于网络层字段值做转发决定。</p>
+<p>连接建立：某些网络结构（ATM、帧中继、MPLS）除了转发和路由选择功能，还有连接建立功能。要求从源到目的地沿着所选择路径彼此握手，建立连接。</p>
+<p>网络服务模型定义了分组在发送与接收端系统之间的端到端运输特性网络层可以提供的服务（注意IP并没有这些服务！）：</p>
+<p>u 确保交付</p>
+<p>u 具有时延上界的确保交付</p>
+<p>u 有序分组交付</p>
+<p>u 确保最小带宽：模仿发送方和接收方之间一条特定比特率传输链路的行为。发送速率低于该速率，分组不会丢失，且会在预定时延内到达</p>
+<p>u 确保最大时延抖动：确保发送方两个相继分组之间的时间&#x3D;目的地接收到它们之间的时间</p>
+<p>u 安全性服务：使用仅由源和目的地主机知晓的密钥，加密数据报，源加密，目的主机解密。此外还有数据完整性和源鉴别服务</p>
+<p>路由器工作原理</p>
+<p>n 输入端口：查询转发表决定到达的分组通过路由器的交换结构转发到输出端口。</p>
+<p>n 交换结构：将路由器的输入端口连接到它的输出端口。</p>
+<p>n 输出端口：存储从交换结构接收的分组，并通过执行必要的链路层和物理层功能在输出链路上传输这些分组。</p>
+<p>n 路由选择处理器：传统的路由器中，它执行路由选择协议，维护路由表与关联链路状态信息，并为该路由器计算转发表。在SDN路由器中，负责与远程控制器通信，接收由远程控制器计算的转发表项，并在路由器的输入端口安装这些表项。</p>
+<h3 id="4-2IPv4"><a href="#4-2IPv4" class="headerlink" title="*4.2IPv4*"></a><em><strong>*4.2IPv4*</strong></em></h3><h4 id="4-2-1IPv4数据包格式"><a href="#4-2-1IPv4数据包格式" class="headerlink" title="4.2.1IPv4数据包格式"></a>4.2.1IPv4数据包格式</h4><p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps17.jpg" alt="img"> </p>
+<p>版本号：规定IP协议版本，通过查看版本号，路由器能确定如何解释IP数据报的剩余部分。</p>
+<p>首部长度（HLEN）：IPv4数据报的首部中可能包含一些可变数量的选项，需要用这4比特来确定数据报中载荷实际开始的地方。大多数IP数据报不包含这个选项，所以一般的IP数据报具有20字节的首部。</p>
+<p>服务类型：使不同的数据报能相互区分，例如有些要求低时延、高吞吐或可靠性。也在首部中。</p>
+<p>数据报长度：标志了数据报的总长度（数据加首部），16位理论上是65535字节，但很少有超过1500字节的，此长度使得IP数据报能容纳最大长度以太网帧的载荷字段。</p>
+<p>标识、标志、片偏移：与IP分片有关。IPv6不允许在路由器上对分组分片。</p>
+<p>寿命（TTL）：确保数据报不会永远在网络中循环，每当一台路由器处理数据报时，该字段的值减1，当为0时丢弃。</p>
+<p>协议：该字段通常当IP数据报到达最终目的地时才有用，此字段指示了IP数据报的数据部分应交给哪一个特定的运输层协议。值为6表示要交给TCP，值为17表示要交给UDP。协议号将网络层和运输层绑定到一起，端口号将应用层和运输层绑定到一起。</p>
+<p>首部检验和：用于帮助路由器检测收到的IP数据报首部中的比特错误，有错丢弃。注意IP层只是对首部计算了检验和，而TCP&#x2F;UDP检验和是对整个TCP&#x2F;UDP报文段进行的。</p>
+<p>源和目的IP地址：通常源主机通过DNS查找即域名和IP地址的转换，来决定目的地址。</p>
+<p>选项：此字段允许IP首部被扩展。很少使用，IPv6首部中已经去掉了。</p>
+<p>数据（有效载荷）：IP数据报包含要交付给目的地的运输层报文段（TCP或UDP），或者ICMP报文段。</p>
+<p>IP数据报长度为20字节的首部（无选项字段），如果数据报承载一个TCP报文段，则每一个数据报共承载了总长40字节的首部（20字节的IP20字节的TCP首部）和应用层报文。</p>
+<h4 id="4-2-2IPv4数据报分片"><a href="#4-2-2IPv4数据报分片" class="headerlink" title="4.2.2IPv4数据报分片"></a>4.2.2IPv4数据报分片</h4><p>最大传输单元（MTU）：，以太网的链路层协议中帧能承载不超过1500字节的数据，某些广域网可承载不超过576字节的数据，链路层帧能承载的最大数据量叫做最大传送单元。</p>
+<p>数据报分片：每条链路上运行具有不同MTU的链路层协议，当该条链路的MTU比该IP数据报的长度小时，将分片成两个或者多个较小的IP数据报。这些较小的数据报称为片（fragment）</p>
+<p>数据报组装：发送主机生成一个数据报时，会在数据报设置标识号，，通常将发送的每个数据报的标识号加1。当某个路由器需要对一个数据报分片时，会对每个片添加标志，最后一片标志为1，其余都为0，同时为了让目的主机确定片的顺序，会添加片偏移字段指定此片在初始IP数据报中的位置。</p>
+<h4 id="4-2-3IPv4编址"><a href="#4-2-3IPv4编址" class="headerlink" title="4.2.3IPv4编址"></a>4.2.3IPv4编址</h4><p>主机和路由器入网：主机通常只有一条链路连接到网络，通过这条链路接收和发送数据报。主机与物理链路之间的边界叫接口。路由器的与其他任意一条链路的边界也叫接口，每个接口有其链路。IP要求每一台主机和路由器接口拥有自己的IP地址。所以从技术层面讲，IP地址与接口绑定，而不是与主机和路由器。</p>
+<p>IPv4地址：长度为32比特，也就是4字节，大约40亿个。这些地址通常使用点分十进制法。如：193.32.216.9，193是第一个8比特的十进制等价数，以此类推。还有二进制记法。因特网中的每一台主机和路由器上的每一个接口都必须有一个全球唯一的IP地址（NAT后面的接口除外），而这个IP地址由其连接的子网决定。</p>
+<p>子网和子网掩码：多个主机通过以太网LAN接口（交换机互联）互联并和1个路由器接口相连，互联的多个主机接口和1个路由器接口形成一个子网。IP编址为这个子网分配一个地址，例如为233.1.1.0&#x2F;24，此种记法也称为子网掩码，其中24表示32比特的子网地址中，最左侧的24比特定义了子网地址，在此子网内的多个主机接口和1个路由器接口的前24位是相同的。</p>
+<p>无类别域间路由选择（CIDR）：因特网的地址分配策略，当使用子网寻址时，32比特的IP地址被划分为两部分，a,b,c,d&#x2F;x，x指示了地址的第一部分中的比特数。前x比特位经常称为该地址的前缀或网络前缀。</p>
+<p>路由聚合：又称地址聚合、路由摘要，指单个网络前缀通告多个网络的能力。</p>
+<p>分类编址:这是因为具有8、16、24比特子网地址的子网分别被称为A、B、C类网络。一个IP地址正好为1、2、3字节。</p>
+<p>IP地址的获取：当某组织获取一块地址之后，系统管理员通常通过远程网络管理工具手工配置路由器中的IP地址，主机地址也能手工配置但更多的是使用动态主机配置协议（DHCP）。</p>
+<p>DHCP协议简介：网络管理源可以配置DHCP，可以使某个特定主机每次与网络连接时能得到一个相同的IP地址，也能使某个特定主机被分配到一个临时的IP地址（每次与网络连接时该地址是不同的）。同时DHCP还允许一台主机得到它的子网掩码、它的第一跳路由器地址（常被称为默认网关）、它的本地DNS服务器的地址。由于DHCP自动分配IP地址的能力，又被称为即插即用协议或零配置协议。</p>
+<p>DHCP服务器：是一个客户-服务器协议，客户通常是新到达的主机，它要获得自身使用的IP地址和网络配置信息。服务器是DHCP服务器，简单情况下每个子网有一个DHCP服务器，如果没有则需要DHCP中继代理（通常是一个路由器），这个代理知道用于该网络的DHCP服务器的地址。</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps18.jpg" alt="img">DHCP协议过程：有四个步骤</p>
+<p>n DHCP服务器发现：主机连接到子网会首先发送一个DHCP发现报文，通过UDP分组向67端口发送该报文，并将UDP分组封装在一个IP数据报中，此数据报中目的IP地址为255.255.255.255（广播），源IP地址为0.0.0.0，DHCP客户讲此数据报传递到链路层，链路层将该帧广播到所有与该子网连接的节点。</p>
+<p>n DHCP服务提供：DHCP服务器收到主机发送的发现报文后，发送DHCP提供报文，此报文向该子网的所有节点广播即目的IP地址仍然为255.255.255.255，子网中可能存在多个DHCP服务器，主机可以在几个DHCP服务器提供的IP地址之间择优选择。提供报文包括，发现报文的事务ID、向客户推荐额IP地址、网络掩码和IP地址租用期（IP地址有效的时间量通常为几个小时或者几天）</p>
+<p>n DHCP请求：客户机从多个或者一个DHCP服务器提供中选择一个，并向选中的DHCP服务器发送DHCP请求报文进行响应，回传配置的参数。</p>
+<p>n DHCPACK：服务器用DHCPACK报文对DHCP请求报文进行响应，正式所要求的参数。</p>
+<p>客户主机收到DHCPACK后，交互结束。当客户超出租用期之后还希望使用这个地址，DHCP提供一种机制更新IP地址的租用。DHCP的缺陷在于，每个当节点连接到一个新子网，要从DHCP服务器获得一个新的IP地址，当一个节点在子网之间移动时，不能维持与远程应用之间的TCP连接。</p>
+<p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps19.jpg" alt="img"> </p>
+<h4 id="4-2-4网络地址转换NAT"><a href="#4-2-4网络地址转换NAT" class="headerlink" title="4.2.4网络地址转换NAT"></a>4.2.4网络地址转换NAT</h4><p>NAT使能路由器:NAT使能的路由器有一个接口，该接口是图25中右侧所示家庭网络的一部分。在NAT路由器对外界的行为就如同一个具有单一IP地址的单一设备。在图25中，所有离开家庭路由器流向更大因特网的报文都拥有个源IP地址138.76.29.7,且所有进入家庭的报文都拥有同一个目的IP地址138.76.29。</p>
+<p>NAT转换表：假设个用户坐在家庭网络主机10.0.0.1后，请求IP地址128.119.40.186某台Web服务器（端口80)上的页面，主机10.0.0.1为其指派了（任意）源端口号3345并将该数据报发送到LAN中。NAT路由器收到该数据报、为该数据报生成个新的源端口号5001,将源IP替代为其广域网侧接口的IP：138.76.29.7。当生成个新的源端口号时NAT由器可选择任意个当前未在NAT转换表中的源端口号,端口号字段为16比特，NAT协议可支持超过60000个并行使用路由器广域网侧单个lP地址的连接！web服务器不知道收到HTTP请求的数据报已被NAT路由器进行了改装．它会发回个响应报文，其目的地址是NAT路由器的lP地址、其目的端口5001,当该报文到达NAT路由器时、路由器从NAT转换表中检索出10.0.0.1和目的端口号(3345)于是，路由器重写该数据报的目的IP地址与目的端口号，并向家庭网络转发该数据报。</p>
+<h3 id="4-3IPv6"><a href="#4-3IPv6" class="headerlink" title="*4.3IPv6*"></a><em><strong>*4.3IPv6*</strong></em></h3><h4 id="4-3-1-1Pv6-数据报格式"><a href="#4-3-1-1Pv6-数据报格式" class="headerlink" title="4.3.1 1Pv6 数据报格式"></a>4.3.1 1Pv6 数据报格式</h4><p><img src="file:///C:\Users\17429\AppData\Local\Temp\ksohtml29668\wps20.jpg" alt="img"> </p>
+<p>32 比特的 IP 地址空间即将用尽 为了应对这种对大 IP 地址</p>
+<p>间的需求，开发了一种新的 IP 协议，即 IPv6</p>
+<p>防火墙：防火墙存在于网络和因特网之间，今天大多数接入路由器具有防火墙能力，防火墙检查数据报和报文段首部宇段，拒绝可疑的数据报进入内部网络。</p>
+<p>入侵检测系统（IDS）：IDS通常位于网络的边界，执行“深度分组检查，不仅检查数据报（包括应用层数据）中的首部字段，而且检查其有效栽荷IDS具有一个分组特征数据库，这些特征是已知攻击的一部分随着新攻击的发现该数据库自动更新特征当分组通过IDS时，IDS试图将分组的首部字段和有效栽荷与其特中的特征相匹配如果发现了这样的一种匹配，就产生一个告警。</p>
+<p>入侵防止系统（IPS）：与IDS类似，只是除了产生告警外还实际阻挡分组。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">J-Guardian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">http://example.com/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">网络安全学习</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/02/20/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></a><a class="pagination-related  no-desc" href="/2025/02/21/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/" title="web漏洞类型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">web漏洞类型</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">J-Guardian</div><div class="author-info-description">计算机网络、web安全、组件漏洞、SRC</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91"><span class="toc-number">1.1.</span> <span class="toc-text">1.计算机网络和因特网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BA%94%E5%B1%82%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">2.五层分类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.网络应用程序体系结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="toc-number">2.1.</span> <span class="toc-text">2.进程通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.2.</span> <span class="toc-text">3. 应用层协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Web"><span class="toc-number">2.2.1.</span> <span class="toc-text">3.1 Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-HTTP%E7%AE%80%E4%BB%8B"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">3.1.1 HTTP简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">3.1.2 请求报文</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E8%AF%B7%E6%B1%82%E8%A1%8C"><span class="toc-number">2.2.1.2.1.</span> <span class="toc-text">1.请求行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E9%A6%96%E9%83%A8%E8%A1%8C"><span class="toc-number">2.2.1.2.2.</span> <span class="toc-text">2.首部行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%AF%B7%E6%B1%82%E5%AE%9E%E4%BD%93"><span class="toc-number">2.2.1.2.3.</span> <span class="toc-text">3.请求实体</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-3-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">3.1.3 响应报文</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E7%8A%B6%E6%80%81%E8%A1%8C"><span class="toc-number">2.2.1.3.1.</span> <span class="toc-text">1.状态行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E9%A6%96%E9%83%A8%E8%A1%8C-1"><span class="toc-number">2.2.1.3.2.</span> <span class="toc-text">2.首部行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%93%8D%E5%BA%94%E5%AE%9E%E4%BD%93"><span class="toc-number">2.2.1.3.3.</span> <span class="toc-text">3.响应实体</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-4-Cookie"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">3.1.4 Cookie</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-5-Web%E7%BC%93%E5%AD%98%E5%99%A8%EF%BC%88%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%89"><span class="toc-number">2.2.1.5.</span> <span class="toc-text">3.1.5 Web缓存器（代理服务器）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-number">2.2.2.</span> <span class="toc-text">3.2 文件传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="toc-number">2.2.3.</span> <span class="toc-text">3.3 电子邮件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81%E5%8D%8F%E8%AE%AESMTP"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">3.3.1 邮件发送协议SMTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E9%82%AE%E4%BB%B6%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AEPOP3%E3%80%81IMAP%E3%80%81HTTP"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">3.3.2 邮件访问协议POP3、IMAP、HTTP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%9B%A0%E7%89%B9%E7%BD%91%E7%9B%AE%E5%BD%95%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.2.4.</span> <span class="toc-text">3.4 因特网目录服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-1DNS%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">3.4.1 1DNS提供的服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7-2DNS%E5%B7%A5%E4%BD%9C%E6%9C%BA%E7%90%86%E6%A6%82%E8%BF%B0"><span class="toc-number">2.2.4.2.</span> <span class="toc-text">2.7.2DNS工作机理概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7-3DNS%E8%AE%B0%E5%BD%95%E5%92%8C%E6%8A%A5%E6%96%87"><span class="toc-number">2.2.4.3.</span> <span class="toc-text">2.7.3DNS记录和报文</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8P2P%E5%BA%94%E7%94%A8"><span class="toc-number">2.2.5.</span> <span class="toc-text">*2.8P2P应用*</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-1%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91%EF%BC%88BitTorrent%EF%BC%89"><span class="toc-number">2.2.5.1.</span> <span class="toc-text">2.8.1文件分发（BitTorrent）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-2%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%A3%E5%88%97%E8%A1%A8%EF%BC%88DHT%EF%BC%89"><span class="toc-number">2.2.5.2.</span> <span class="toc-text">2.8.2分布式散列表（DHT）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B"><span class="toc-number">2.2.6.</span> <span class="toc-text">*2.9套接字编程*</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">2.3.</span> <span class="toc-text">3.传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E6%A6%82%E8%BF%B0%E5%92%8C%E8%BF%90%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.3.1.</span> <span class="toc-text">*3.1概述和运输层服务*</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1%E4%BC%A0%E8%BE%93%E5%B1%82%E5%92%8C%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">3.1.1传输层和网络层的关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2%E5%9B%A0%E7%89%B9%E7%BD%91%E4%BC%A0%E8%BE%93%E6%A6%82%E8%BF%B0"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">3.1.2因特网传输概述</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%92%8C%E5%A4%9A%E8%B7%AF%E5%88%86%E8%A7%A3"><span class="toc-number">2.3.2.</span> <span class="toc-text">*3.2多路复用和多路分解*</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E6%97%A0%E8%BF%9E%E6%8E%A5%E8%BF%90%E8%BE%93%EF%BC%9AUDP"><span class="toc-number">2.3.3.</span> <span class="toc-text">*3.3无连接运输：UDP*</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1UDP%E6%8A%A5%E6%96%87%E7%BB%93%E6%9E%84"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">3.3.1UDP报文结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.4.</span> <span class="toc-text">*3.4可靠数据传输原理*</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1%E6%9E%84%E9%80%A0%E5%8F%AF%E9%9D%A0%E4%BF%A1%E9%81%93%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="toc-number">2.3.4.1.</span> <span class="toc-text">3.4.1构造可靠信道的可靠数据传输</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E7%BD%91%E7%BB%9C%E5%B1%82%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2"><span class="toc-number">2.4.</span> <span class="toc-text">4网络层：数据平面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E6%A6%82%E8%BF%B0"><span class="toc-number">2.4.1.</span> <span class="toc-text">*4**.1概述*</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2IPv4"><span class="toc-number">2.4.2.</span> <span class="toc-text">*4.2IPv4*</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1IPv4%E6%95%B0%E6%8D%AE%E5%8C%85%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">4.2.1IPv4数据包格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2IPv4%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%88%86%E7%89%87"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">4.2.2IPv4数据报分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-3IPv4%E7%BC%96%E5%9D%80"><span class="toc-number">2.4.2.3.</span> <span class="toc-text">4.2.3IPv4编址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-4%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2NAT"><span class="toc-number">2.4.2.4.</span> <span class="toc-text">4.2.4网络地址转换NAT</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3IPv6"><span class="toc-number">2.4.3.</span> <span class="toc-text">*4.3IPv6*</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-1-1Pv6-%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.4.3.1.</span> <span class="toc-text">4.3.1 1Pv6 数据报格式</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/21/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/" title="web漏洞类型">web漏洞类型</a><time datetime="2025-02-21T07:25:55.000Z" title="发表于 2025-02-21 15:25:55">2025-02-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">计算机网络</a><time datetime="2025-02-20T09:23:41.000Z" title="发表于 2025-02-20 17:23:41">2025-02-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/20/hello-world/" title="Hello World">Hello World</a><time datetime="2025-02-20T03:31:58.482Z" title="发表于 2025-02-20 11:31:58">2025-02-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By J-Guardian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
