@@ -1,0 +1,647 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>操作系统安全 | 网络安全学习</title><meta name="author" content="J-Guardian"><meta name="copyright" content="J-Guardian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Windows 基础知识   操作系统基础：了解Windows的基本架构、进程管理、内存管理、文件系统等。 网络基础：掌握TCP&#x2F;IP、DNS、HTTP等网络协议。   安全概念   安全模型：学习Windows的安全模型，如用户账户控制（UAC）、访问控制列表（ACL）等。 加密技术：了解对称加密、非对称加密、哈希函数等。   工具使用   安全工具：熟悉常用的安全工具，如Window">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统安全">
+<meta property="og:url" content="http://example.com/2025/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="网络安全学习">
+<meta property="og:description" content="Windows 基础知识   操作系统基础：了解Windows的基本架构、进程管理、内存管理、文件系统等。 网络基础：掌握TCP&#x2F;IP、DNS、HTTP等网络协议。   安全概念   安全模型：学习Windows的安全模型，如用户账户控制（UAC）、访问控制列表（ACL）等。 加密技术：了解对称加密、非对称加密、哈希函数等。   工具使用   安全工具：熟悉常用的安全工具，如Window">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2025-02-23T08:08:55.000Z">
+<meta property="article:modified_time" content="2025-02-24T10:27:59.698Z">
+<meta property="article:author" content="J-Guardian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "操作系统安全",
+  "url": "http://example.com/2025/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/",
+  "image": "https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png",
+  "datePublished": "2025-02-23T08:08:55.000Z",
+  "dateModified": "2025-02-24T10:27:59.698Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "J-Guardian",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '操作系统安全',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">网络安全学习</span></a><a class="nav-page-title" href="/"><span class="site-name">操作系统安全</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">操作系统安全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-23T08:08:55.000Z" title="发表于 2025-02-23 16:08:55">2025-02-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-24T10:27:59.698Z" title="更新于 2025-02-24 18:27:59">2025-02-24</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><ol>
+<li>基础知识</li>
+</ol>
+<ul>
+<li>操作系统基础：了解Windows的基本架构、进程管理、内存管理、文件系统等。</li>
+<li>网络基础：掌握TCP&#x2F;IP、DNS、HTTP等网络协议。</li>
+</ul>
+<ol start="2">
+<li>安全概念</li>
+</ol>
+<ul>
+<li>安全模型：学习Windows的安全模型，如用户账户控制（UAC）、访问控制列表（ACL）等。</li>
+<li>加密技术：了解对称加密、非对称加密、哈希函数等。</li>
+</ul>
+<ol start="3">
+<li>工具使用</li>
+</ol>
+<ul>
+<li>安全工具：熟悉常用的安全工具，如Windows Defender、Sysinternals工具集（如Process Explorer、Autoruns等）。</li>
+<li>渗透测试工具：学习使用Metasploit、Nmap、Wireshark等。</li>
+</ul>
+<ol start="4">
+<li>实践操作</li>
+</ol>
+<ul>
+<li>虚拟机环境：搭建虚拟机环境进行实验，避免影响主机系统。</li>
+<li>漏洞利用：通过合法的漏洞利用练习，了解常见漏洞及其防御方法。</li>
+</ul>
+<ol start="5">
+<li>学习资源</li>
+</ol>
+<ul>
+<li>书籍：阅读《Windows Internals》、《Windows安全指南》等书籍。</li>
+<li>在线课程：参加Coursera、Udemy等平台的相关课程。</li>
+<li>社区和论坛：加入安全社区，如Stack Overflow、Reddit的r&#x2F;netsec等。</li>
+</ul>
+<ol start="6">
+<li>认证考试</li>
+</ol>
+<ul>
+<li>微软认证：考虑获取微软认证，如Microsoft Certified: Security, Compliance, and Identity Fundamentals。</li>
+<li>其他认证：如CompTIA Security+、CISSP等。</li>
+</ul>
+<ol start="7">
+<li>持续学习</li>
+</ol>
+<ul>
+<li>关注安全新闻：定期阅读安全新闻和博客，了解最新的安全威胁和防御技术。</li>
+<li>参加安全会议：如Black Hat、DEF CON等。</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="文本处理命令"><a href="#文本处理命令" class="headerlink" title="文本处理命令"></a>文本处理命令</h3><ul>
+<li>type用于显示文本文件内容</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c:\Windows\System32&gt;type d:\3.txt</span><br><span class="line">username:woniuxy</span><br><span class="line">password:woniu123</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重定向”&gt;”</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:\Windows\System32&gt;ipconfig &gt; c:\ip.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>直接管道符”|”：将前面命令执行的结果做为后面命令的操作对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c:\Windows\System32&gt;netstat -aon|findstr &quot;9050&quot;</span><br><span class="line">c:\Windows\System32&gt;ping 127.0.0.1|net user</span><br><span class="line">//也可以ping 127.0.0.1|net user绕过，进行命令执行</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>条件管道（||）：这种管道符用于错误处理，当管道前的命令执行失败时，会执行管道后的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping 2||whoami</span><br><span class="line">//在ping命令失败时会执行whoami。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>并行执行（&amp;）：一般而言，&amp;表示两条命令或语句同时执行的意思。如 echo a&amp;echo b，将在屏幕上同时显示a和b字符。当几条语句含义近似或作用相同且没有先后的顺序之别时，启用&amp;符号连接这些语句将会增加程序的可读性；</p>
+</li>
+<li><p>条件性并行（&amp;&amp;）：表示如果它之前的语句成功执行，将执行它之后的语句</p>
+</li>
+<li><p>findstr:查找文件内容(查找的某个字符串的内容）</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:\Windows\System32&gt;findstr 192 c:\ip.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络相关命令"><a href="#网络相关命令" class="headerlink" title="网络相关命令"></a>网络相关命令</h3><h4 id="1、netsh配置TCP-IP参数"><a href="#1、netsh配置TCP-IP参数" class="headerlink" title="1、netsh配置TCP&#x2F;IP参数"></a>1、netsh配置TCP&#x2F;IP参数</h4><p>TCP&#x2F;IP参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#静态配置IP地址、子网掩码、默认网关</span><br><span class="line">c:\&gt;netsh interface ip set address &quot;Ethernet0&quot; static 192.168.100.100 255.255.255.0 192.168.100.254</span><br><span class="line">#自动获取TCP/IP参数</span><br><span class="line">c:\&gt;netsh interface ip set address &quot;Etherneto&quot; dhcp</span><br><span class="line">#静态配置DNS服务器</span><br><span class="line">c:&gt;netsh interface ip set dnsserver &quot;Ethernet0&quot; static 12.12.12.12</span><br><span class="line">#添加备用DNS服务器</span><br><span class="line">c:\&gt;netsh interface ip add dnsserver &quot;Ethernet0&quot; 222.66.66.66 index=2</span><br><span class="line">//index=2是索引,表示备用DNs</span><br><span class="line">#自动获取DNS服务器</span><br><span class="line">c:\&gt;netsh interface ip set dnsserver &quot;Ethernet0&quot; dhcp</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、ipconfig显示TCP-IP配置信息"><a href="#2、ipconfig显示TCP-IP配置信息" class="headerlink" title="2、ipconfig显示TCP&#x2F;IP配置信息"></a>2、ipconfig显示TCP&#x2F;IP配置信息</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#查看所有网卡的TCP/IP参数(IP地址、子网掩码、默认网关)，蓝牙网络连接</span><br><span class="line">ipconfig</span><br><span class="line">#查看所有网卡的TCP/IP参数(IP地址、子网掩码、默认网关、mac地址、dhcp地址、dns地址、主机名)</span><br><span class="line">ipconfig /all</span><br><span class="line">#释放TCP/IP参数</span><br><span class="line">ipconfig /release</span><br><span class="line">#重新获取TCP/IP参数</span><br><span class="line">ipconfig /renew</span><br><span class="line">#刷新dns缓存</span><br><span class="line">ipconfig /flushdns</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、ping命令检查网络连接或者服务是否正常通信"><a href="#3、ping命令检查网络连接或者服务是否正常通信" class="headerlink" title="3、ping命令检查网络连接或者服务是否正常通信"></a>3、ping命令检查网络连接或者服务是否正常通信</h4><p>用于测试TCP&#x2F;IP配置是否正确</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ping -n 10 -l 1000 -t -a 192.168.31.131</span><br><span class="line">#-n 10发送10个报文</span><br><span class="line">#-l 1000单个报文10000字节</span><br><span class="line">#-t 一直不停的ping</span><br><span class="line">#-a 返回IP的主机名</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、tracert跟踪网络跳转路径"><a href="#4、tracert跟踪网络跳转路径" class="headerlink" title="4、tracert跟踪网络跳转路径"></a>4、tracert跟踪网络跳转路径</h4><p>用法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">c:&gt;tracert 39.156.66.14</span><br><span class="line">    -d                 不将地址解析成主机名。</span><br><span class="line">    -h maximum_hops    搜索目标的最大跃点数。</span><br><span class="line">    -j host-list       与主机列表一起的松散源路由(仅适用于 IPv4)。</span><br><span class="line">    -w timeout         等待每个回复的超时时间(以毫秒为单位)。</span><br><span class="line">    -R                 跟踪往返行程路径(仅适用于 IPv6)。</span><br><span class="line">    -S srcaddr         要使用的源地址(仅适用于 IPv6)。</span><br><span class="line">    -4                 强制使用 IPv4。</span><br><span class="line">    -6                 强制使用 IPv6。</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、route显示-修改路由表"><a href="#5、route显示-修改路由表" class="headerlink" title="5、route显示&#x2F;修改路由表"></a>5、route显示&#x2F;修改路由表</h4><p>用来操作网络路由表.0.0.0.0代表的任意网络</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#打印路由表</span><br><span class="line">route -4 print</span><br><span class="line">#添加路由条目(112.53.42.52目标地址或网络/32代表子网掩码或者112.53.42.0目标网络,/24代表子网掩码,192.168.33.代表网关地址)</span><br><span class="line">route add 112.53.42.52/32 192.168.33.1</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、netstat查看网络监听状况"><a href="#6、netstat查看网络监听状况" class="headerlink" title="6、netstat查看网络监听状况"></a>6、netstat查看网络监听状况</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#查看所有的TCP链接,包括进程,以数字形式显示</span><br><span class="line">netstat -anop tcp</span><br><span class="line">#查看路由表</span><br><span class="line">netstat -r  等同于 route print</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、systeminfo：查看系统信息"><a href="#7、systeminfo：查看系统信息" class="headerlink" title="7、systeminfo：查看系统信息"></a>7、systeminfo：查看系统信息</h4><h2 id="Windows用户管理"><a href="#Windows用户管理" class="headerlink" title="Windows用户管理"></a>Windows用户管理</h2><h3 id="用户账户：本地、全局"><a href="#用户账户：本地、全局" class="headerlink" title="用户账户：本地、全局"></a>用户账户：本地、全局</h3><ul>
+<li><p>什么是用户账户</p>
+<ul>
+<li>不同用户有不同的权限</li>
+<li>每个用户包含了一个名称（用户名和全名【本地账户没有“全名”】）和一个密码。</li>
+<li>每个用户账户具有唯一的安全标识符（SID）</li>
+<li>查看系统中的用户 : <code>net user</code></li>
+</ul>
+</li>
+<li><p>用户账户分为两种类型：本地用户账号、全局用户账号(域用户账号)</p>
+<ul>
+<li>本地用户账号：创建于本地计算机（它的作用范围：仅仅限于创建它的计算机，控制用户对本地计算机上的资源访问）。</li>
+<li>全局用户账号：创建域服务器，可以在网络中的任意计算机上加入域后使用，使用范围是整个域网络。</li>
+</ul>
+</li>
+<li><p>安全标识符(SID)</p>
+<ul>
+<li>查看当前用户的SID：<code>whoami /user</code></li>
+<li>使用注册表进行查看SID，打开注册表命令regedit：<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\Currentversion\ProfileList</code></li>
+<li>在Windows系统中管理员的SID是结尾从500开始,普通用户的SID结尾是从1000开始</li>
+</ul>
+</li>
+</ul>
+<h3 id="用户管理：默认、组件"><a href="#用户管理：默认、组件" class="headerlink" title="用户管理：默认、组件"></a>用户管理：默认、组件</h3><ul>
+<li><p>创建用户</p>
+<ul>
+<li>用户名:系统的显示名</li>
+<li>全名:用户登录时的显示名</li>
+<li>密码:Windows服务器默认需要符合复杂性要求</li>
+<li>账户已锁定:如果开启了账户锁定阈值,输错密码多次后将被锁定</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#创建用户不指定密码</span><br><span class="line">net user zhangsan /add</span><br><span class="line">#创建用户指定明文密码</span><br><span class="line">net user lisi p-Op-0 /add</span><br><span class="line">#创建用户手动输入密码</span><br><span class="line">net user wangwu /add *</span><br><span class="line">#删除用户</span><br><span class="line">net user zhangsan /del</span><br><span class="line">#修改用户的密码</span><br><span class="line">net user lisi p-Op-Op-0</span><br><span class="line">net user lisi * </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Windows的默认用户（账户用于特殊用途，一般不用更修改其权限。）</p>
+<ul>
+<li>管理员administrator:在使用者中具有最高的权限,如果没有其他管理员的情况,不建议禁用（默认禁用）</li>
+<li>默认账户DefaultAccount：系统管理的用户帐户（默认禁用）</li>
+<li>默认用户defaultuser0：（默认禁用）</li>
+<li>普通用户users:具有一般的读取权限,权限较低</li>
+<li>来宾用户Guest:一般是提供给访客使用,在使用者中,权限最低,默认是禁用</li>
+<li><strong>Windows Defender用户</strong>WDAGUtilityAccount：系统为 Windows Defender 应用程序防护方案管理和使用的用户帐户（默认禁用）</li>
+</ul>
+</li>
+<li><p>与Windows<strong>组件</strong>关联的用户账户</p>
+<ul>
+<li>system本地系统：拥有最高权限，为windows的核心组件访问文件等资源提供权限</li>
+<li>local service本地服务：它的权限相对于普通用户组users会低一点</li>
+<li>networkservice网络服务：它的权限和普通用户组users一样</li>
+</ul>
+</li>
+</ul>
+<img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image.png" alt="img" style="zoom:33%;" />
+
+
+
+<ul>
+<li>拥有的权限大小：System &gt; Administrator &gt; User &gt; Guest</li>
+</ul>
+<h3 id="用户组管理：人为、动态"><a href="#用户组管理：人为、动态" class="headerlink" title="用户组管理：人为、动态"></a>用户组管理：人为、动态</h3><ul>
+<li>概念：一组用户的集合,组中所有的用户具备所组的权限</li>
+<li>管理组：创建、删除、将用户加入组、将用户从组种删除</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#创建组</span><br><span class="line">C:\Users\Administrator&gt;net 1ocal group 技术部 /add</span><br><span class="line">#删除组</span><br><span class="line">C:\Users\Administrator&gt;net 1ocal group 技术部 /del</span><br><span class="line">#创建并将用户加入组</span><br><span class="line">C:\Users\Administrator&gt;net 1ocal group 技术部 zhangsan /add</span><br><span class="line">#将用户从组中删除</span><br><span class="line">C:\Users\Administrator&gt;net 1ocal group 技术部 zhangsan /del</span><br></pre></td></tr></table></figure>
+
+<h4 id="内置组账户"><a href="#内置组账户" class="headerlink" title="内置组账户"></a>内置组账户</h4><p>1、需要人为添加的</p>
+<ul>
+<li>administrators:管理员组</li>
+<li>guests:来宾用户组</li>
+<li>power users:向下兼容的组,现在一般没有使用</li>
+<li>users:标准用户组,创建用户后默认处于此组中</li>
+</ul>
+<p>2、动态包含成员的组（不可修改）</p>
+<p>由Windows程序“自动添加” ，常见于 Windows Server 环境，Windows会根据用户的状态（例如，基于用户的地理位置、部门或角色）来决定用户所属的组 ，组内的成员也随之动态变化，无法修改。通过动态访问控制（Active Directory）中的<strong>安全组</strong>、<strong>访问控制列表</strong>（ACLs）等功能来实现。</p>
+<ul>
+<li>interactive:动态包含在本地登录的用户</li>
+<li>authenticated users:动态包含通过验证的用户，任何一个利用有效的用户帐户连接的用户都属于这个组；建议在设置权限时，尽量针对Authenticated Users组进行设置，而不要针对Everone进行设置。</li>
+<li>everyone:何一个用户都属于这个组。注意，如果Guest帐号被启用时，则给Everone这个组指派权限时必须小心，因为当一个没有帐户的用户连接计算机时，他被允许自动利用Guest帐户连接，但是因为Guest也是属于Everone组，所以他将具备Everyone所拥有的权限。</li>
+</ul>
+<h4 id="隐藏用户"><a href="#隐藏用户" class="headerlink" title="隐藏用户"></a>隐藏用户</h4><ul>
+<li>隐藏用户在用户名的后面加上了**$**符号，windows操作系统中攻击者可以通过创建隐藏账户来实现权限维持的目的，由于创建的隐藏账户无法通过命令行或者图形化界面的方式被检索到，所以此类权限维持的方式极为隐蔽</li>
+<li>windows账户管理：Windows的用户帐户是对计算机用户身份的识别，且本地用户帐户和密码信息是存储在本地计算机上的。详细地：<ul>
+<li>账户管理器管理：安全账户管理器【Security Accounts Manager】负责SAM（Security Accounts Manager）数据库的控制和维护；</li>
+<li>SAM数据库则是位于注册表的【计算机\HKEY_LOCAL_MACHINE\SAM\SAM】下，受到ACL保护），SAM文件在【C:\Windows\System32\config】路径下。SAM对应的进程：lsass.exe （Local Security Authority Process）。通过本地用户和组，可以为用户和组分配权利和权限，从而限制用户和组执行某些操作的能力。 不同的用户身份拥有不同的权限，每个用户包含一个名称和一个密码，用户帐户拥有唯一的安全标识符(Security Identifier，<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=SID&spm=1001.2101.3001.7020">SID</a>)。</li>
+</ul>
+</li>
+</ul>
+<p>1.使用管理员权限运行命令行并建立一个用户名为“al1ex”，密码为“abc123!”的隐藏账户，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user al1ex$ abc123!/add</span><br><span class="line">#此时我们在CMD命令行使用&quot;net user&quot;,看不到&quot;al1ex\$&quot;这个账号，但是可以在控制面板和本地用户和组是可以查看到此隐藏账户</span><br></pre></td></tr></table></figure>
+
+<p>2.添加隐藏账户至管理员组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net localgroup administrators al1ex$ /add</span><br></pre></td></tr></table></figure>
+
+<p>3.克隆账户</p>
+<p>将SAM注册表权限为administrator可以完全控制以及读取：在window中点击”开始”-输入”regedit32”后进入到注册表，随后找到”HKEY_LOCAL_MACHINE\SAM\SAM”，单击右建权限把名叫”administrator”的用户给予”完全控制以及读取”的权限</p>
+<p>4.重启注册表，随后来到注册表编辑器的”HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\Names”处，点击al1ex$用户，得到在右边显示的键值中的”类型”一项显示为”000003E9”，在Names的同级目录下找到与类型同名的文件。</p>
+<p>随后找到administrator所对应的”类型”项为”000001F4”，将Names的同级目录下”000001F4”的F值复制到”000003E9”的F值中，保存。</p>
+<p>分别将al1ex和”0000003E9”导出到桌面。</p>
+<p>5.然后删除al1ex$用户：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net user al1ex$ /del</span><br></pre></td></tr></table></figure>
+
+<p>6.随后将刚才导出的两个后缀为.reg的注册表项导入注册表中，这样所谓的隐藏账户就创建好了。此时不管你是在命令提示符下输入net user或者在系统用户管理界面都是看不到al1ex$这个账户：</p>
+<p>7.在外部window中使用远程连接的方式连接操作系统，并使用隐藏账户进行登录操作。在删除用户之前注意要启用administrator账户（删除之后再禁用无影响），并允许隐藏账户进行远程连接，</p>
+<p>检测方法:</p>
+<p>​	1：查看注册表中系统账号，检索以”$”结尾的用户</p>
+<p>​	reg query HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\Names</p>
+<p>​	2：使用D盾查杀工具进行检测可以检测出隐藏的账户、克隆账户</p>
+<h3 id="访问控制（ACL、ACE）"><a href="#访问控制（ACL、ACE）" class="headerlink" title="访问控制（ACL、ACE）"></a>访问控制（ACL、ACE）</h3><p>Windows的访问控制列表(Access Control List)：访问权限决定着某个用户可以访问的文件和目录 对于每一个文件和文件夹，安全描述符(SID)规定了安全数据并决定安全设置是否对当前目录有效，或者它可以被传递给其他文件和目录。</p>
+<p>当一个用户试图访问一个文件或者文件夹的时候：</p>
+<ul>
+<li>NTFS 文件系统会检查用户使用的帐户或者账户所属的组是否在此文件或文件夹的访问控制列表（ACL）中。</li>
+<li>如果存在，则进一步检查访问控制项 ACE，然后根据控制项中的权限来判断用户最终的权限。</li>
+</ul>
+<img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/AdbJiVboCtBgky6t8CJdLD.png" alt="img" style="zoom:50%;" />
+
+<table>
+<thead>
+<tr>
+<th>访问控制名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Access Control List访问控制列表(ACL)</td>
+<td>访问权限决定着<em>*<em>*</em>*某个用户可以访问的文件和目录****</em>* 对于每一个文件和文件夹，由**<em>*</em>*安全描述符(SID)******规定了安全数据 安全描述符决定安全设置是否对当前目录有效，或者它可以被传递给其他文件和目录</td>
+</tr>
+<tr>
+<td>Access Control environment访问控制环境（ACE）</td>
+<td>访问控制项ACE，是指访问控制实体，用于指定特定**<em>*</em>*用户&#x2F;组的访问权限******，是权限控制的最小单位。①完全控制：对文件或者文件夹可执行所有操作；②修改：可以修改、删除文件或文件夹；③读取和执行：可以读取内容，并且可以执行应用程序；④列出文件夹目录：可以列出文件夹内容，此权限只针对文件夹存在，文件无此权限；⑤读取：可以读取文件或者文件夹的内容；⑥写入：可以创建文件或者文件夹；⑦特别的权限：其他不常用的权限，比如删除权限的权限；</td>
+</tr>
+<tr>
+<td>New Technology File System文件系统（NTFS）</td>
+<td>文件夹的NTFS权限 (文件夹内的文件或文件夹会默认继承上一级目录的权限)。①完全控制：对文件或者文件夹可执行所有操作②修改：可以修改、删除文件或文件夹③读取和执行：可以读取内容，并且可以执行应用程序④读取：可以读取文件的内容⑤写入：可以修改文件的内容⑥特殊权限：其他不常用的权限，比如删除权限的权限</td>
+</tr>
+<tr>
+<td>Security Identifiers安全标识符（SID）</td>
+<td><em>*<em>*</em>*SID的说明：****</em>*    安全标识符是标识用户、组和计算机帐户的唯一的号码。在第一次创建该帐户时，将给网络上的每一个帐户发布一个唯一的 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=SID&spm=1001.2101.3001.7020">SID</a>。Windows 2000 中的内部进程将引用帐户的 SID 而不是帐户的用户或组名。如果创建帐户，再删除帐户，然后使用相同的用户名创建另一个帐户，则新帐户将不具有授权给前一个帐户的权力或权限，原因是该帐户具有不同的 SID 号。安全标识符也被称为安全 ID 或 SID。<em>*<em>*</em>*SID的作用：****</em>*    用户通过验证后，登陆进程会给用户一个访问令牌，该令牌相当于用户访问系统资源的票证，当用户试图访问系统资源时，将访问令牌提供给 Windows NT，然后 Windows NT 检查用户试图访问对象上的访问控制列表。如果用户被允许访问该对象，Windows NT将会分配给用户适当的访问权限。 <em>*<em>*</em>*访问令牌是用户在通过验证的时候有登陆进程所提供的，所以改变用户的权限需要注销后重新登陆，重新获取访问令牌。****</em>*</td>
+</tr>
+</tbody></table>
+<h3 id="用户账户控制（UAC）"><a href="#用户账户控制（UAC）" class="headerlink" title="用户账户控制（UAC）"></a>用户账户控制（UAC）</h3><p>用户帐户控制（User Account Control)：微软公司在其Windows Vista及更高版本操作系统中采用的一种控制机制。原理是：****通知用户是否对应用程序使用硬盘驱动器和系统文件授权，以达到帮助阻止恶意程序（有时也称为“恶意软件”）损坏系统的效果****。 UAC要求用户在执行可能影响计算机运行的操作或执行更改影响其他用户的设置的操作之前，提供一个确认的对话框窗口，使用户可以在执行之前对其进行验证，UAC可以帮助防止恶意软件和间谍软件在未经许可的情况下在计算机上进行安装或对计算机进行更改</p>
+<img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/rHe6zvKUiqPw7h7ixDaJCj.png" alt="img" style="zoom: 50%;" />
+
+
+
+<h2 id="NTFS权限"><a href="#NTFS权限" class="headerlink" title="NTFS权限"></a>NTFS权限</h2><h3 id="文件系统简介"><a href="#文件系统简介" class="headerlink" title="文件系统简介"></a>文件系统简介</h3><ul>
+<li><p>Windows:早期Windows上使用FAT16或FAT32。目前的Windows操作系统基本使用的是NTFS文件系统</p>
+<ul>
+<li>ACL(访问控制列表,设置权限)</li>
+<li>EFS(加密文件系统,使用BitLocker进行磁盘加密)</li>
+<li>压缩及磁盘配额</li>
+<li>ReFS文件系统</li>
+</ul>
+</li>
+<li><p>Linux</p>
+<ul>
+<li>sWp:交换文件系统,主要将磁盘的一部分空间划分给内存使用</li>
+<li>ext4:</li>
+</ul>
+</li>
+<li><p>文件系统转换</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;convert h:/fs:ntfs     //h表示的是需要转换的盘符</span><br></pre></td></tr></table></figure>
+
+<p>早期的FAT文件系统不支持单个大文件(大于4GB）</p>
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>文件权限：读取数据、写入数据、附加数据、删除、执行文件</p>
+<h3 id="文件夹权限"><a href="#文件夹权限" class="headerlink" title="文件夹权限"></a>文件夹权限</h3><p>文件夹权限：列出文件夹、创建文件夹、创建文件、删除、删除子文件夹和文件</p>
+<h3 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h3><ul>
+<li>完全控制</li>
+</ul>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740384289541.png" alt="img"></p>
+<ul>
+<li>修改</li>
+</ul>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740384298280.png" alt="img"></p>
+<ul>
+<li>读取</li>
+<li>写入</li>
+<li>特殊权限</li>
+</ul>
+<h3 id="NTFS权限规则"><a href="#NTFS权限规则" class="headerlink" title="NTFS权限规则"></a>NTFS权限规则</h3><ul>
+<li><p>权限的累加：用户分配的有效权限是分配给用户所有权限的累加，假设一个设置了读取权限,给用户所属<strong>组</strong>分配了修改权限,用户最终的权限就等于读取和修改。</p>
+</li>
+<li><p>拒绝权限：拒绝的权限大于一切(在访问控制列表中,拒绝的权限优先级最高)当出现权限冲突的时候,拒绝的权限优先级最高(举例:用户所属组读取权限,用户拒绝读取,最终用户没有读取权限)</p>
+</li>
+<li><p>继承权限：文件或文件夹的访问控制列表默认情况下会继承上级文件夹的权限</p>
+</li>
+<li><p>特殊权限(特别的权限)</p>
+<ul>
+<li>读取权限(和读取文件或文件夹的内容没有任何关系)<ul>
+<li>读取文件或文件夹的访问控制列表</li>
+<li>针对于用户想要访问某个文件的内容,此权限必须勾选</li>
+</ul>
+</li>
+<li>更改权限(和修改文件或文件夹的内容没有任何关系)<ul>
+<li>用户是否可以修改文件或文件夹的访问控制列表,由于此权限是可以为用户添加或删除权限,会造成很多不安全因素,此权限一般不会给</li>
+<li>要想更改,前提是必须能读取</li>
+</ul>
+</li>
+<li>取得所有权<ul>
+<li>能够修改文件或文件夹的所有者</li>
+<li>前提必须得读取和修改</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="本地安全策略"><a href="#本地安全策略" class="headerlink" title="本地安全策略"></a>本地安全策略</h2><h3 id="本地安全策略基本内容"><a href="#本地安全策略基本内容" class="headerlink" title="本地安全策略基本内容"></a>本地安全策略基本内容</h3><ul>
+<li>概念：主要是对登录到计算机的账户进行一些安全设置主要影响是本地计算机安全设置</li>
+<li>打开方式：<ul>
+<li>开始菜单&gt;管理工具&gt;本地安全策略</li>
+<li>使用命令：<code>secpol.msc</code></li>
+<li>从本地组策略进去，使用命令 gpedit.msc</li>
+</ul>
+</li>
+</ul>
+<h3 id="账户策略"><a href="#账户策略" class="headerlink" title="账户策略"></a>账户策略</h3><ul>
+<li><p>密码策略：密码必须符合复杂性要求：默认情况下,Windows server操作系统是开启的</p>
+<ul>
+<li>不能包含用户的帐户名,不能包含用户姓名中超过两个连续字符的部分</li>
+<li>至少有六个字符长</li>
+<li>包含以下四类字符中的三类字符:</li>
+<li>英文大写字母(A到Z)</li>
+<li>英文小写字母(a到z)</li>
+<li>10个基本数字(0到9)</li>
+<li>非字母字符(例如!、$、#、%)</li>
+</ul>
+</li>
+<li><p>账户锁定策略</p>
+<ul>
+<li>账户锁定时间30分钟</li>
+<li>账户锁定阈值3次</li>
+<li>重置账户锁定计数器时间60分钟</li>
+</ul>
+</li>
+</ul>
+<h2 id="windows文件共享"><a href="#windows文件共享" class="headerlink" title="windows文件共享"></a>windows文件共享</h2><h3 id="共享要求"><a href="#共享要求" class="headerlink" title="共享要求"></a>共享要求</h3><p>一般是局域网内使用</p>
+<ul>
+<li><p>物理上处于同一局域网(两台虚拟机都设置的是NAT)</p>
+<ul>
+<li>同一公司的网络</li>
+<li>同一家庭的网络</li>
+<li>在同一个手机热点下</li>
+</ul>
+</li>
+<li><p>逻辑上处于同一局域网(使用的同一网络的IP地址)</p>
+<ul>
+<li>直接可以ping对方主机(能够直接访问到)</li>
+</ul>
+</li>
+</ul>
+<h3 id="共享权限"><a href="#共享权限" class="headerlink" title="共享权限"></a>共享权限</h3><ul>
+<li><p>共享权限</p>
+<ul>
+<li>一般设置为everyone完全控制</li>
+</ul>
+</li>
+<li><p>NTFS权限</p>
+</li>
+<li><p>用户从网络访问服务器的最终权限</p>
+<ul>
+<li><p>由共享权限和NTFS权限的交集部分</p>
+</li>
+<li><p>举例:张三的共享权限是读取,NTFS权限是读取和写入,张三从网络访问共享最终的权限是读取</p>
+</li>
+<li><p>经常设置办法：共享权限设置最大,NTFS权限进行精细化设置</p>
+<ul>
+<li>举例:张三共享权限设置完全控,NTFS权限设置读取,张三从网络访问共享最终的权限是读取</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="访问共享"><a href="#访问共享" class="headerlink" title="访问共享"></a>访问共享</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\\192.168.188.131  #192.168.188.131服务器的IP地址</span><br><span class="line">\\WIN-6JFV2DR59EJ  #wIN-6JFV2DR59E服务器的主机名</span><br></pre></td></tr></table></figure>
+
+<img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740385211240.png" alt="img" style="zoom:67%;" />
+
+<h2 id="组策略的应用"><a href="#组策略的应用" class="headerlink" title="组策略的应用"></a>组策略的应用</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li><p>组策略(英语:Group Policy)是微软Windows NT家族操作系统的一个特性,它可以控制用户帐户和计算机帐户的工作环境组策略提供了操作系统、应用程序和活动目录中用户设置的集中化管理和配置组策略的其中一个版本名为本地组策略(缩写”LGPQ”或”LocalGPO”),这可以在独立且非域的计算机上管理组策略对象是一组策略的集合</p>
+</li>
+<li><p>打开方式：<code>gpedit.msc</code></p>
+</li>
+<li><p>刷新组策略：<code>gpupdate /force</code></p>
+</li>
+<li><p>模块</p>
+<ul>
+<li>计算机配置：针对于本地计算机生效</li>
+<li>用户配置：针对于用户生效</li>
+</ul>
+</li>
+</ul>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><ul>
+<li><p>隐藏桌面的系统图标：用户配置—》管理模板</p>
+</li>
+<li><p>保护“任务栏“和开始菜单：用户配置—》开始菜单和任务栏</p>
+</li>
+<li><p>保护个人文档隐私（历史使用文件）：用户配置</p>
+</li>
+<li><p>禁用在浏览器上新窗口中打开</p>
+</li>
+<li><p>禁用控制面板</p>
+<ul>
+<li>打开控制面板命令<code>control.exe</code></li>
+</ul>
+</li>
+<li><p>关闭自动播放功能</p>
+</li>
+<li><p>配置自动更新</p>
+</li>
+</ul>
+<h2 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h2><p>1&#x3D;在Windows操作系统中,注册表保存了所有系统所有的内容,完好的注册表设置能不但能让系统提升性能,更能保障系统的安全性。windows 注册表的位置：C:\Windows\System32\config </p>
+<h3 id="注册表基础"><a href="#注册表基础" class="headerlink" title="注册表基础"></a>注册表基础</h3><ul>
+<li><p>概述：</p>
+<ul>
+<li>注册表是Windows操作系统、硬件设备以及客户应用程序得以正常运行和保存设置的核心”数据库”,也可以说是一个非常巨大的<strong>树状分层结构的数据库系统</strong>。</li>
+<li>注册表记录了用户安装在计算机上的软件和每个程序的相互关联信息,它包括了计算机的硬件配置,包括自动配置的即插即用的设备和已有的各种设备说明、状态属性以及各种状态信息和数据利用一个功能强大的注册表数据库来统一集中地管理系统硬件设施、软件配置等信息,从而方便了管理,增强了系统的稳定性。</li>
+</ul>
+</li>
+<li><p>早期注册表是ini为扩展名的配置文件，windows95之后，注册表数据库由多个文件组成。windows提供了注册表编辑器在运行处输入命令：<code>regedit</code>，打开注册表编辑器</p>
+</li>
+<li><p>注册表编辑器子树：</p>
+<ul>
+<li><p><em><strong>*HKEY_LOCAL_MACHINE*</strong></em>:记录关于本地计算机系统的信息,包括硬件和操作系统数据</p>
+</li>
+<li><p><em><strong>*HKEY_CURRENT_CONFIG*</strong></em>:HKEY_LOCAL_MACHINE子树,指向HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Hardware Profiles\Currentf包含在启动时由本地计算机系统使用的硬件配置文件的相关信息加载的设备驱动程序、显示时要使用的分辨率</p>
+</li>
+<li><p><em><strong>*HKEY_USERS*</strong></em>:记录关于动态加载的用户配置文件和默认配置文件的信息</p>
+</li>
+<li><p><em><strong>*HKEY_CURRENT_USER*</strong></em>:HKEY_USERS子树,它指向”HKEY_USERS\当前用户的安全ID”包含当前以交互方式登录的用户的用户配置文件</p>
+</li>
+<li><p><em><strong>*HKEY_CLASSES_ROOT*</strong></em>:HKEY_CURRENT_USER子树包含用于各种OLE技术和文件类关联数据的信息</p>
+<img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389410895.png" alt="img" style="zoom: 33%;" /></li>
+</ul>
+</li>
+<li><p>注册表项</p>
+<ul>
+<li>可以简单的理解文件夹,项中可以包含项和值</li>
+</ul>
+</li>
+<li><p>注册表值</p>
+<ul>
+<li>每个注册表项或子项都可以包含称为值的数据</li>
+<li>部分值应用于某个用户的信息</li>
+<li>部分值应用于计算机所有用户的信息</li>
+<li>值由三部分组成：名称、类型、数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="注册表基本操作"><a href="#注册表基本操作" class="headerlink" title="注册表基本操作"></a>注册表基本操作</h3><img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389485592.png" alt="img" style="zoom:50%;" />
+
+<ul>
+<li><p>创建项</p>
+</li>
+<li><p>创建值(有六种类型的值)</p>
+<ul>
+<li>字符串值（REG_SZ）:固定长度的文本字符串</li>
+<li>二进制值（REG_BINARY）:多数硬件组件信息都以二进制数据存储</li>
+<li>32位值（4个字节）（REG_DWORD）:设备驱动程序和服务的很多参数都是这种类型</li>
+<li>64位值（5个字节）（REG_QWORD）:</li>
+<li>多字符串值（REG_MULTI_SZ）:包含列表或多值的值通常为该类型</li>
+<li>可扩充字符串值（REG_EXPAND_SZ）:在程序或服务使用该数据时解析的变量</li>
+</ul>
+</li>
+<li><p>修改、删除和重命名值</p>
+</li>
+</ul>
+<h3 id="注册表应用"><a href="#注册表应用" class="headerlink" title="注册表应用"></a>注册表应用</h3><p>修改注册表实现，应用程序开机自启动</p>
+<p>实现原理：windows 提供了专门的开机自启动注册表。每次开启时，它都会在这个注册表键下遍历键值，获取到键值中的程序路径，并创建进程启动程序。因此只需要将需要设置自启动的程序的路径添加到这个注册表中，便可以实现程序开启自启动功能。</p>
+<p>常见的开机自启动注册表路径：</p>
+<p>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</p>
+<p>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</p>
+<p>注意：要修改 HKEY_LOCAL_MACHINE 主键的注册表需要管理员权限</p>
+<p><em><strong>*①、打开注册表编辑器，并复制上述的路径，回车后，跳转到自启动注册表*</strong></em></p>
+<p><em><strong>*②、新建 键值类型为 REG_SZ的键值，修改名称为 calc*</strong></em></p>
+<p><em><strong>*③、选中 “calc” 键值右键修改键值数据为   计算器程序“clac.exe”的 绝对路径，并点击确定。*</strong></em></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389578236.png" alt="img"></p>
+<h2 id="AD域"><a href="#AD域" class="headerlink" title="AD域"></a>AD域</h2><p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685280.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685317.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685314.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685433.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685469.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685520.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685600.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685535.png" alt="img"></p>
+<h2 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h2><p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685712.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685647.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685902.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685758.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685848.png" alt="img"></p>
+<h3 id="图形化设置防火墙"><a href="#图形化设置防火墙" class="headerlink" title="图形化设置防火墙"></a>图形化设置防火墙</h3><p>高级设置</p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685985.png" alt="img"></p>
+<p><img src="/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8.assets/image-1740389685854.png" alt="img"></p>
+<h3 id="命令行设置防火墙"><a href="#命令行设置防火墙" class="headerlink" title="命令行设置防火墙"></a>命令行设置防火墙</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall firewall add/delete/dump/set/show</span><br><span class="line">netsh advfirewall firewall show rule name=permitICMP</span><br><span class="line">#关闭防火墙</span><br><span class="line">netsh advfirewall set allprofiles state off</span><br><span class="line">#打开防火墙</span><br><span class="line">netsh advfirewall set allprofiles state on</span><br><span class="line">#重置</span><br><span class="line">netsh advfirewall reset</span><br><span class="line">#设置防火墙日志</span><br><span class="line">netsh advfirewall set currentprofile logging filename &quot;c://&quot;</span><br><span class="line">#添加策略(放通入栈ICMP)</span><br><span class="line">netsh advfirewall firewall add rule name=&quot;peritICMP(in)&quot; dir=in remoteip=192.168.23.1 protocol=icmpv4 action=allow</span><br><span class="line">#添加策略(阻止入栈访问80)</span><br><span class="line">netsh advfirewall firewall add rule name=&quot;deny233.1(in80)&quot; dir=in remoteip=192.168.23.1 protocol=tcp localport=80 action=block</span><br><span class="line">#更新策略(远程桌面)</span><br><span class="line">netsh advfirewall firewall set rule name=“远程桌面-用户模式(TCP-In)&quot; newenable=yes</span><br><span class="line">#启动远程桌面服务(或者使用页面方式开启)</span><br><span class="line">net start &quot;remote desktop services&quot;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">J-Guardian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/">http://example.com/2025/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">网络安全学习</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/02/23/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" title="学习计划"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">学习计划</div></div><div class="info-2"><div class="info-item-1">共计：7.5hour笔记整理：之前笔记整理：0.5hour 网络安全学习笔记整理：1hour CISSP学习书籍阅读：1.5hour 做题：0.5hour SRC视频和笔记2hour 个人兴趣：2hour </div></div></div></a><a class="pagination-related" href="/2025/02/25/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/" title="二进制安全"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">二进制安全</div></div><div class="info-2"><div class="info-item-1">   分析小程序  </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">J-Guardian</div><div class="author-info-description">计算机网络、web安全、组件漏洞、SRC</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows"><span class="toc-number">1.</span> <span class="toc-text">Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.1.</span> <span class="toc-text">文本处理命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.2.</span> <span class="toc-text">网络相关命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81netsh%E9%85%8D%E7%BD%AETCP-IP%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1、netsh配置TCP&#x2F;IP参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81ipconfig%E6%98%BE%E7%A4%BATCP-IP%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2、ipconfig显示TCP&#x2F;IP配置信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81ping%E5%91%BD%E4%BB%A4%E6%A3%80%E6%9F%A5%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E6%88%96%E8%80%85%E6%9C%8D%E5%8A%A1%E6%98%AF%E5%90%A6%E6%AD%A3%E5%B8%B8%E9%80%9A%E4%BF%A1"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">3、ping命令检查网络连接或者服务是否正常通信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81tracert%E8%B7%9F%E8%B8%AA%E7%BD%91%E7%BB%9C%E8%B7%B3%E8%BD%AC%E8%B7%AF%E5%BE%84"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">4、tracert跟踪网络跳转路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81route%E6%98%BE%E7%A4%BA-%E4%BF%AE%E6%94%B9%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">5、route显示&#x2F;修改路由表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81netstat%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E7%9B%91%E5%90%AC%E7%8A%B6%E5%86%B5"><span class="toc-number">1.1.2.6.</span> <span class="toc-text">6、netstat查看网络监听状况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81systeminfo%EF%BC%9A%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.2.7.</span> <span class="toc-text">7、systeminfo：查看系统信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">Windows用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%B4%A6%E6%88%B7%EF%BC%9A%E6%9C%AC%E5%9C%B0%E3%80%81%E5%85%A8%E5%B1%80"><span class="toc-number">1.2.1.</span> <span class="toc-text">用户账户：本地、全局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%EF%BC%9A%E9%BB%98%E8%AE%A4%E3%80%81%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">用户管理：默认、组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BA%BA%E4%B8%BA%E3%80%81%E5%8A%A8%E6%80%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">用户组管理：人为、动态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E7%BB%84%E8%B4%A6%E6%88%B7"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">内置组账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">隐藏用户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%88ACL%E3%80%81ACE%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">访问控制（ACL、ACE）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%B4%A6%E6%88%B7%E6%8E%A7%E5%88%B6%EF%BC%88UAC%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">用户账户控制（UAC）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NTFS%E6%9D%83%E9%99%90"><span class="toc-number">1.3.</span> <span class="toc-text">NTFS权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">文件系统简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="toc-number">1.3.2.</span> <span class="toc-text">文件权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9D%83%E9%99%90"><span class="toc-number">1.3.3.</span> <span class="toc-text">文件夹权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E5%88%86%E7%B1%BB"><span class="toc-number">1.3.4.</span> <span class="toc-text">权限分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NTFS%E6%9D%83%E9%99%90%E8%A7%84%E5%88%99"><span class="toc-number">1.3.5.</span> <span class="toc-text">NTFS权限规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5"><span class="toc-number">1.4.</span> <span class="toc-text">本地安全策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="toc-number">1.4.1.</span> <span class="toc-text">本地安全策略基本内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E7%AD%96%E7%95%A5"><span class="toc-number">1.4.2.</span> <span class="toc-text">账户策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB"><span class="toc-number">1.5.</span> <span class="toc-text">windows文件共享</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E8%A6%81%E6%B1%82"><span class="toc-number">1.5.1.</span> <span class="toc-text">共享要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E6%9D%83%E9%99%90"><span class="toc-number">1.5.2.</span> <span class="toc-text">共享权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E5%85%B1%E4%BA%AB"><span class="toc-number">1.5.3.</span> <span class="toc-text">访问共享</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E7%AD%96%E7%95%A5%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.6.</span> <span class="toc-text">组策略的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.6.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-number">1.6.2.</span> <span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="toc-number">1.7.</span> <span class="toc-text">注册表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E8%A1%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">1.7.1.</span> <span class="toc-text">注册表基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E8%A1%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.7.2.</span> <span class="toc-text">注册表基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E8%A1%A8%E5%BA%94%E7%94%A8"><span class="toc-number">1.7.3.</span> <span class="toc-text">注册表应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AD%E5%9F%9F"><span class="toc-number">1.8.</span> <span class="toc-text">AD域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.9.</span> <span class="toc-text">防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.9.1.</span> <span class="toc-text">图形化设置防火墙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.9.2.</span> <span class="toc-text">命令行设置防火墙</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/25/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/" title="二进制安全">二进制安全</a><time datetime="2025-02-24T23:44:26.000Z" title="发表于 2025-02-25 07:44:26">2025-02-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" title="操作系统安全">操作系统安全</a><time datetime="2025-02-23T08:08:55.000Z" title="发表于 2025-02-23 16:08:55">2025-02-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/23/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" title="学习计划">学习计划</a><time datetime="2025-02-23T06:36:25.000Z" title="发表于 2025-02-23 14:36:25">2025-02-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/21/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/" title="web漏洞类型">web漏洞类型</a><time datetime="2025-02-21T07:25:55.000Z" title="发表于 2025-02-21 15:25:55">2025-02-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">计算机网络</a><time datetime="2025-02-20T09:23:41.000Z" title="发表于 2025-02-20 17:23:41">2025-02-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By J-Guardian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
