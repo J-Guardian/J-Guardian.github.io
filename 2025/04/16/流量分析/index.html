@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>流量分析 | 网络安全学习</title><meta name="author" content="J-Guardian"><meta name="copyright" content="J-Guardian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介 网卡：wireshark是对主机网卡上的数据流是进行抓取  网卡模式   混杂模式:不管目的是否是自己,都接收 非混杂模式:默认情况下,主机的网卡处于此模式,不会接收目的非自己的数据       两种过滤器   捕获过滤器:在抓包之前先进行过滤(只抓某种类型的包或者不抓某些类型的包) 显示过滤器:抓包前后抓包后都可以进行过滤,但是不会影响抓取的包(会抓取所有的包,只不过在查看的时候只显示某些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流量分析">
+<meta property="og:url" content="http://example.com/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="网络安全学习">
+<meta property="og:description" content="简介 网卡：wireshark是对主机网卡上的数据流是进行抓取  网卡模式   混杂模式:不管目的是否是自己,都接收 非混杂模式:默认情况下,主机的网卡处于此模式,不会接收目的非自己的数据       两种过滤器   捕获过滤器:在抓包之前先进行过滤(只抓某种类型的包或者不抓某些类型的包) 显示过滤器:抓包前后抓包后都可以进行过滤,但是不会影响抓取的包(会抓取所有的包,只不过在查看的时候只显示某些">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2025-04-16T08:22:12.000Z">
+<meta property="article:modified_time" content="2025-04-22T07:51:39.288Z">
+<meta property="article:author" content="J-Guardian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "流量分析",
+  "url": "http://example.com/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/",
+  "image": "https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png",
+  "datePublished": "2025-04-16T08:22:12.000Z",
+  "dateModified": "2025-04-22T07:51:39.288Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "J-Guardian",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '流量分析',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">网络安全学习</span></a><a class="nav-page-title" href="/"><span class="site-name">流量分析</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">流量分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-16T08:22:12.000Z" title="发表于 2025-04-16 16:22:12">2025-04-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-22T07:51:39.288Z" title="更新于 2025-04-22 15:51:39">2025-04-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li><p>网卡：wireshark是对主机网卡上的数据流是进行抓取</p>
+</li>
+<li><p>网卡模式</p>
+</li>
+<li><ul>
+<li>混杂模式:不管目的是否是自己,都接收</li>
+<li>非混杂模式:默认情况下,主机的网卡处于此模式,不会接收目的非自己的数据</li>
+</ul>
+</li>
+</ul>
+<img src="/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/image.png" class title="img">
+
+<ul>
+<li><p>两种过滤器</p>
+</li>
+<li><ul>
+<li>捕获过滤器:在抓包之前先进行过滤(只抓某种类型的包或者不抓某些类型的包)</li>
+<li>显示过滤器:抓包前后抓包后都可以进行过滤,但是不会影响抓取的包(会抓取所有的包,只不过在查看的时候只显示某些包</li>
+</ul>
+</li>
+<li><p>捕获过滤器</p>
+</li>
+<li><ul>
+<li><p>语法</p>
+</li>
+<li><ul>
+<li>类型:host net port</li>
+<li>方向:src dst</li>
+<li>协议:ether ip tcp udp http…</li>
+<li>逻辑运算符:&amp;&amp;与  ||或 !非</li>
+</ul>
+</li>
+<li><p>举例</p>
+</li>
+<li><ul>
+<li>抓取源IP为192.168.18.14并且目标端口为80的报文<code>src host 192.168.18.14 &amp;&amp; dst port 80</code></li>
+<li>抓取IP为192.168.18.14或者IP地址为192.168.18.1 <code>host 192.168.18.14 || host 192.168.18.1</code></li>
+<li>不抓取广播包 <code>! broadcast</code></li>
+<li>抓取源IP为192.168.18.14或者源192.168.18.0&#x2F;24,目的TCP端口号在200到1000之间,并且目的位于129.0.0.0&#x2F;8 <code>(src host 192.168.18.14 || src net 192.168.18.0/24)&amp;&amp;(dst port range 200-10000 &amp;&amp; dst net 129.0.0.0/8)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="层次分析"><a href="#层次分析" class="headerlink" title="层次分析"></a>层次分析</h1><h2 id="1-Frame（帧）"><a href="#1-Frame（帧）" class="headerlink" title="1. Frame（帧）"></a>1. <strong>Frame（帧）</strong></h2><ul>
+<li><p><strong>所属层次</strong>：物理层&#x2F;数据链路层（OSI L1&#x2F;L2）。</p>
+</li>
+<li><p><strong>作用</strong>：表示捕获的原始数据帧，包含实际传输的二进制数据。</p>
+<p>关键字段</p>
+<ul>
+<li><code>Frame Number</code>：数据包在捕获文件中的序号。</li>
+<li><code>Time</code>：捕获时间戳（相对&#x2F;绝对时间）。</li>
+<li><code>Length</code>：帧的总长度（字节）。</li>
+<li><code>Protocols</code>：帧内封装的协议类型（如 Ethernet、IP、TCP等）。</li>
+</ul>
+<p>示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Frame 61668: 74 bytes on wire (592 bits), 74 bytes captured (592 bits)</span><br><span class="line">#该数据包在捕获文件中的序号为61668。物理线路上实际传输的字节数,实际捕获的字节数（未截断）</span><br><span class="line">    Encapsulation type: Ethernet (1)</span><br><span class="line">    #数据链路层封装类型</span><br><span class="line">    </span><br><span class="line">    Arrival Time: Apr 16, 2025 11:59:29.515588000 中国标准时间</span><br><span class="line">    #捕获时间</span><br><span class="line">    UTC Arrival Time: Apr 16, 2025 03:59:29.515588000 UTC</span><br><span class="line">    #捕获时间的UTC时间（比中国标准时间早8个小时）</span><br><span class="line">    Epoch Arrival Time: 1744775969.515588000</span><br><span class="line">    #unix时间戳（自1970-01-01 00：00：00 UTC以来的秒数+纳秒）</span><br><span class="line">    [Time shift for this packet: 0.000000000 seconds]</span><br><span class="line">    #该数据包的时间偏移量为 0 秒（未调整时间）。</span><br><span class="line">    [Time delta from previous captured frame: 0.001079000 seconds]</span><br><span class="line">    #与前一个捕获的数据包的时间差是1.079 毫秒。</span><br><span class="line">    [Time delta from previous displayed frame: 0.000000000 seconds]</span><br><span class="line">    #与前一个显示的数据包的时间差是0 秒（可能因为过滤导致未显示前一个包）。</span><br><span class="line">    [Time since reference or first frame: 89.372950000 seconds]</span><br><span class="line">    #自捕获文件的第一个数据包以来已经过去89.373 秒。</span><br><span class="line">    </span><br><span class="line">    Frame Number: 61668</span><br><span class="line">    Frame Length: 74 bytes (592 bits)</span><br><span class="line">    Capture Length: 74 bytes (592 bits)</span><br><span class="line">    [Frame is marked: False]</span><br><span class="line">    #该数据包未被手动标记（Wireshark 允许用户标记重要数据包）</span><br><span class="line">    [Frame is ignored: False]</span><br><span class="line">    #该数据包未被忽略（未被过滤或丢弃）</span><br><span class="line">    </span><br><span class="line">    [Protocols in frame: eth:ethertype:ip:tcp]</span><br><span class="line">    #数据包封装层次：eth以太网、ethertype上层协议标识ipv4、ip网络层IP协议、tcp传输层TCP协议。</span><br><span class="line">    [Coloring Rule Name: TCP SYN/FIN]</span><br><span class="line">    #Coloring Rule Name：Wireshark 使用&quot;TCP SYN/FIN&quot;颜色规则高亮显示该数据包。</span><br><span class="line">    [Coloring Rule String: tcp.flags &amp; 0x02 || tcp.flags.fin == 1]</span><br><span class="line">    #Coloring Rule String：该规则匹配 TCP SYN（0x02）或 FIN（0x01）标志位。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="2-Ethernet（以太网头部）"><a href="#2-Ethernet（以太网头部）" class="headerlink" title="2. Ethernet（以太网头部）"></a>2. <strong>Ethernet（以太网头部）</strong></h2><ul>
+<li><p><strong>所属层次</strong>：数据链路层（OSI L2）。</p>
+</li>
+<li><p><strong>作用</strong>：负责本地网络（如 LAN）内的设备间数据传输。</p>
+<p>关键字段</p>
+<ul>
+<li><code>Source MAC</code>：发送方的物理地址（如 <code>00:1a:2b:3c:4d:5e</code>）。</li>
+<li><code>Destination MAC</code>：接收方的物理地址（如广播地址 <code>ff:ff:ff:ff:ff:ff</code>）。</li>
+<li><code>Type</code>：上层协议类型（如 <code>0x0800</code> 表示 IPv4，<code>0x86DD</code> 表示 IPv6）。</li>
+</ul>
+<p>示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Ethernet II, Src: HuaweiTechno_c9:6f:06 (cc:05:77:c9:6f:06), Dst: 92:56:29:31:12:11 (92:56:29:31:12:11)</span><br><span class="line">#标准以太网帧（EthernetII格式），源MAC地址，目的MAC地址</span><br><span class="line">    Destination: 92:56:29:31:12:11 (92:56:29:31:12:11)</span><br><span class="line">        Address: 92:56:29:31:12:11 (92:56:29:31:12:11)</span><br><span class="line">        .... ..1. .... .... .... .... = LG bit: Locally administered address (this is NOT the factory default)</span><br><span class="line">        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)</span><br><span class="line">    Source: HuaweiTechno_c9:6f:06 (cc:05:77:c9:6f:06)</span><br><span class="line">        Address: HuaweiTechno_c9:6f:06 (cc:05:77:c9:6f:06)</span><br><span class="line">        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)</span><br><span class="line">        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)</span><br><span class="line">    Type: IPv4 (0x0800)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="3-Internet-Protocol（IP-头部）"><a href="#3-Internet-Protocol（IP-头部）" class="headerlink" title="3. Internet Protocol（IP 头部）"></a>3. <strong>Internet Protocol（IP 头部）</strong></h2><ul>
+<li><p><strong>所属层次</strong>：网络层（OSI L3）。</p>
+</li>
+<li><p><strong>作用</strong>：实现跨网络的逻辑寻址和路由。</p>
+<p>关键字段</p>
+<ul>
+<li><code>Source IP</code>：发送方 IP 地址（如 <code>192.168.1.1</code>）。</li>
+<li><code>Destination IP</code>：接收方 IP 地址（如 <code>10.205.125.1</code>）。</li>
+<li><code>Protocol</code>：上层协议（如 <code>6</code> 表示 TCP，<code>17</code> 表示 UDP）。</li>
+<li><code>TTL</code>：生存时间（防止数据包无限循环）。</li>
+</ul>
+<p>示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Internet Protocol Version 4, Src: 10.205.125.1, Dst: 10.174.37.56</span><br><span class="line">#IPv4数据包，源目IP地址</span><br><span class="line">    0100 .... = Version: 4</span><br><span class="line">    #IPv4协议</span><br><span class="line">    .... 0101 = Header Length: 20 bytes (5)</span><br><span class="line">    #数值 5 表示头部长度是5 × 4 = 20 字节（因字段以 4 字节为单位）</span><br><span class="line">    Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)</span><br><span class="line">    #区分服务字段：默认服务等级（无优先级），不支持显式拥塞通知。</span><br><span class="line">    Total Length: 60</span><br><span class="line">    #整个 IP 数据包（头部+数据）的总长度为 60 字节。</span><br><span class="line">    Identification: 0xb54e (46414)</span><br><span class="line">    #用于标识数据包的分片（此包未分片）</span><br><span class="line">    010. .... = Flags: 0x2, Don&#x27;t fragment</span><br><span class="line">    #表示不允许分片（路由器若需分片则会丢弃包并返回 ICMP 错误）</span><br><span class="line">    ...0 0000 0000 0000 = Fragment Offset: 0</span><br><span class="line">    #分片偏移量为 0（表示这是完整数据包或第一个分片</span><br><span class="line">    Time to Live: 53</span><br><span class="line">    #生存时间，表示数据包最多可经过53 跳（路由器）。每经过一跳，TTL 减 1，到 0 时丢弃</span><br><span class="line">    Protocol: TCP (6)</span><br><span class="line">    #上层协议是TCP（端口号需查看传输层头部）</span><br><span class="line">    Header Checksum: 0xd8b9 [validation disabled]</span><br><span class="line">    #IP 头部的校验和（用于检测传输错误）</span><br><span class="line">    [Header checksum status: Unverified]</span><br><span class="line">    #Wireshark 未验证此校验和（通常由网卡硬件校验）</span><br><span class="line">    Source Address: 10.205.125.1</span><br><span class="line">    Destination Address: 10.174.37.56</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="4-Transmission（传输层协议，如-TCP-UDP）"><a href="#4-Transmission（传输层协议，如-TCP-UDP）" class="headerlink" title="4. Transmission（传输层协议，如 TCP&#x2F;UDP）"></a>4. <strong>Transmission（传输层协议，如 TCP&#x2F;UDP）</strong></h2><ul>
+<li><p><strong>所属层次</strong>：传输层（OSI L4）。</p>
+</li>
+<li><p><strong>作用</strong>：管理端到端的通信（可靠性、流量控制等）。</p>
+<p>常见协议及字段</p>
+<p>TCP（传输控制协议）</p>
+<ul>
+<li><code>Source Port</code> &#x2F; <code>Destination Port</code>：应用程序端口（如 <code>80</code> 为 HTTP）。</li>
+<li><code>Sequence/Acknowledgement Number</code>：保证数据有序和可靠传输。</li>
+<li><code>Flags</code>：控制字段（如 <code>SYN</code>、<code>ACK</code>、<code>FIN</code>）。</li>
+</ul>
+<p>UDP（用户数据报协议）</p>
+<ul>
+<li>更简单，无连接，仅有端口号和校验和。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">Transmission Control Protocol, Src Port: 10255, Dst Port: 44920, Seq: 0, Ack: 1, Len: 0</span><br><span class="line">#TCP，源目端口。序列号（相对）、确认号、数据长度（为0说明无应用层数据）</span><br><span class="line">    Source Port: 10255</span><br><span class="line">    Destination Port: 44920</span><br><span class="line">    [Stream index: 30580]</span><br><span class="line">    #Wireshark 分配的会话唯一标识符。</span><br><span class="line">    [Conversation completeness: Complete, NO_DATA (39)]</span><br><span class="line">    #对话完整性：会话标记为“完成”，但未传输实际数据（可能因 RST 中断）。</span><br><span class="line">        ..1. .... = RST: Present    #连接被强制重置</span><br><span class="line">        ...0 .... = FIN: Absent		#未请求正常关闭</span><br><span class="line">        .... 0... = Data: Absent    #无应用层数据</span><br><span class="line">        .... .1.. = ACK: Present	 # 确认号有效</span><br><span class="line">        .... ..1. = SYN-ACK: Present</span><br><span class="line">        #这是一个 SYN-ACK 报文，表示服务端响应客户端的连接请求（三次握手的第二步）</span><br><span class="line">        .... ...1 = SYN: Present   # 同步序列号</span><br><span class="line">        [Completeness Flags: R··ASS] ## 标志位组合：RST + ACK + SYN</span><br><span class="line">    [TCP Segment Len: 0]</span><br><span class="line">    Sequence Number: 0    (relative sequence number)</span><br><span class="line">    Sequence Number (raw): 699734421 </span><br><span class="line">    #服务端原始序列号</span><br><span class="line"></span><br><span class="line">    [Next Sequence Number: 1    (relative sequence number)]</span><br><span class="line">    # 预期下一个序列号</span><br><span class="line">    Acknowledgment Number: 1    (relative ack number)</span><br><span class="line">    Acknowledgment number (raw): 1065356763</span><br><span class="line">    # 客户端原始序列号 +1</span><br><span class="line">    1010 .... = Header Length: 40 bytes (10)</span><br><span class="line">    # 标准头部20字节 + 选项20字节</span><br><span class="line">    Flags: 0x012 (SYN, ACK)</span><br><span class="line">        000. .... .... = Reserved: Not set   # 保留位</span><br><span class="line">        ...0 .... .... = Accurate ECN: Not set# 未启用精确拥塞通知</span><br><span class="line">        .... 0... .... = Congestion Window Reduced: Not set</span><br><span class="line">        .... .0.. .... = ECN-Echo: Not set # 无ECN反馈</span><br><span class="line">        .... ..0. .... = Urgent: Not set# 无紧急数据</span><br><span class="line">        .... ...1 .... = Acknowledgment: Set  # ACK=1</span><br><span class="line">        .... .... 0... = Push: Not set# 无PSH标志</span><br><span class="line">        .... .... .0.. = Reset: Not set# RST标志实际为1，此处显示矛盾（Wireshark解析差异）</span><br><span class="line">        .... .... ..1. = Syn: Set # SYN=1</span><br><span class="line">            [Expert Info (Chat/Sequence): Connection establish acknowledge (SYN+ACK): server port 10255]</span><br><span class="line">        .... .... ...0 = Fin: Not set</span><br><span class="line">        [TCP Flags: ·······A··S·]</span><br><span class="line">    Window: 43440</span><br><span class="line">    # 初始接收窗口大小</span><br><span class="line">    [Calculated window size: 43440]</span><br><span class="line">     # 实际窗口 = 43440 × 窗口缩放因子</span><br><span class="line">    Checksum: 0x02da [unverified]</span><br><span class="line">    [Checksum Status: Unverified] #校验和未验证</span><br><span class="line">    Urgent Pointer: 0 # 无紧急数据</span><br><span class="line">    Options: (20 bytes), Maximum segment size, No-Operation (NOP), No-Operation (NOP), Timestamps, No-Operation (NOP), Window scale</span><br><span class="line">        TCP Option - Maximum segment size: 1460 bytes # 标准MSS（MTU 1500 - 40头部）</span><br><span class="line">        TCP Option - No-Operation (NOP) 填充对齐</span><br><span class="line">        TCP Option - No-Operation (NOP)</span><br><span class="line">        TCP Option - Timestamps# 时间戳（计算RTT）</span><br><span class="line">        TCP Option - No-Operation (NOP)</span><br><span class="line">        TCP Option - Window scale: 12 (multiply by 4096)# 窗口缩放因子</span><br><span class="line">        [Expert Info (Note/Protocol): The SYN packet does not contain a SACK PERM option]</span><br><span class="line">    [Timestamps]</span><br><span class="line">    #反映客户端到服务端的网络延迟</span><br><span class="line">        [Time since first frame in this TCP stream: 0.024561000 seconds]</span><br><span class="line">        [Time since previous frame in this TCP stream: 0.024561000 seconds]</span><br><span class="line">    [SEQ/ACK analysis]</span><br><span class="line">        [This is an ACK to the segment in frame: 61668]</span><br><span class="line">        #此报文是对 Frame 61668（客户端 SYN）的响应</span><br><span class="line">        [The RTT to ACK the segment was: 0.024561000 seconds]</span><br><span class="line">        [iRTT: 0.024602000 seconds]</span><br><span class="line">        #反映客户端到服务端的网络延迟。</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p>协议栈的完整关系（自上而下）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用层（HTTP/FTP等） → 传输层（TCP/UDP） → 网络层（IP） → 数据链路层（Ethernet） → 物理层（Frame）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Frame</strong> 是原始数据，<strong>Ethernet</strong> 解决“下一跳给谁”，<strong>IP</strong> 解决“最终发给谁”，<strong>TCP&#x2F;UDP</strong> 解决“哪个应用处理”。</li>
+<li>在 Wireshark 中，可以通过展开每个层查看详细字段，或使用过滤表达式（如 <code>tcp.port == 443</code>）定位特定流量。</li>
+</ul>
+<h2 id="SNMP协议报文"><a href="#SNMP协议报文" class="headerlink" title="SNMP协议报文"></a>SNMP协议报文</h2><p>SNMPv1 <strong>遍历请求</strong>，用于逐步获取设备的管理信息（MIB）。</p>
+<img src="/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/image-20250417104517255.png" class title="image-20250417104517255">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Simple Network Management Protocol</span><br><span class="line">    version: version-1 (0)</span><br><span class="line">    #SNMPv1（版本号 0），是最早的SNMP版本，使用明文社区字符串（Community String）进行认证，安全性较低。</span><br><span class="line">    community: public</span><br><span class="line">    #默认只读社区字符串</span><br><span class="line">    data: get-next-request (1)</span><br><span class="line">    #用于请求下一个OID的值，常用于遍历MIB树</span><br><span class="line">        get-next-request</span><br><span class="line">            request-id: 0</span><br><span class="line">            error-status: noError (0)</span><br><span class="line">            error-index: 0</span><br><span class="line">            variable-bindings: 1 item</span><br><span class="line">                0.0: Value (Null)</span><br><span class="line">                #这是一个特殊的OID，通常表示请求从MIB树的起点开始遍历.</span><br></pre></td></tr></table></figure>
+
+<p>响应包</p>
+<img src="/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/image-20250417104547066.png" class title="image-20250417104547066">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Internet Control Message Protocol</span><br><span class="line">    Type: 3 (Destination unreachable)</span><br><span class="line">    Code: 3 (Port unreachable)</span><br><span class="line">    Checksum: 0xb4eb [correct]#ICMP 校验和（校验通过）</span><br><span class="line">    [Checksum Status: Good]</span><br><span class="line">    Unused: 00000000#保留字段（未使用）</span><br><span class="line">    Internet Protocol Version 4, Src: 10.174.37.56, Dst: 10.205.125.1</span><br><span class="line">        0100 .... = Version: 4</span><br><span class="line">        .... 0101 = Header Length: 20 bytes (5)</span><br><span class="line">        Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)</span><br><span class="line">        Total Length: 61</span><br><span class="line">        Identification: 0x8dbf (36287)</span><br><span class="line">        000. .... = Flags: 0x0</span><br><span class="line">        ...0 0000 0000 0000 = Fragment Offset: 0</span><br><span class="line">        Time to Live: 32</span><br><span class="line">        Protocol: UDP (17)</span><br><span class="line">        Header Checksum: 0x553d [validation disabled]</span><br><span class="line">        [Header checksum status: Unverified]</span><br><span class="line">        Source Address: 10.174.37.56</span><br><span class="line">        Destination Address: 10.205.125.1</span><br><span class="line">    User Datagram Protocol, Src Port: 46811, Dst Port: 161</span><br><span class="line">        Source Port: 46811</span><br><span class="line">        Destination Port: 161</span><br><span class="line">        Length: 41</span><br><span class="line">        Checksum: 0x9652 [unverified]</span><br><span class="line">        [Checksum Status: Unverified]</span><br><span class="line">        [Stream index: 17]</span><br><span class="line">        UDP payload (33 bytes)xxxxxxxxxx37 1Internet Control Message Protocol2    Type: 3 (Destination unreachable)3    Code: 3 (Port unreachable)4    Checksum: 0xb4eb [correct]5    [Checksum Status: Good]6    Unused: 000000007    Internet Protocol Version 4, Src: 10.174.37.56, Dst: 10.205.125.18        0100 .... = Version: 49        .... 0101 = Header Length: 20 bytes (5)10        Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)11        Total Length: 6112        Identification: 0x8dbf (36287)13        000. .... = Flags: 0x014        ...0 0000 0000 0000 = Fragment Offset: 015        Time to Live: 3216        Protocol: UDP (17)17        Header Checksum: 0x553d [validation disabled]18        [Header checksum status: Unverified]19        Source Address: 10.174.37.5620        Destination Address: 10.205.125.121    User Datagram Protocol, Src Port: 46811, Dst Port: 16122        Source Port: 4681123        Destination Port: 16124        Length: 4125        Checksum: 0x9652 [unverified]26        [Checksum Status: Unverified]27        [Stream index: 17]28        UDP payload (33 bytes)Simple Network Management Protocol29    version: version-1 (0)30    community: public31    data: get-next-request (1)32        get-next-request33            request-id: 034            error-status: noError (0)35            error-index: 036            variable-bindings: 1 item37                0.0: Value (Null)</span><br></pre></td></tr></table></figure>
+
+<h2 id="NTP协议报文"><a href="#NTP协议报文" class="headerlink" title="NTP协议报文"></a>NTP协议报文</h2><p>NTP（Network Time Protocol，网络时间协议）用于在计算机网络中同步各设备的系统时间，基于 <strong>UDP 123 端口</strong> 工作。主要功能</p>
+<ul>
+<li><p>提供高精度的时间同步（理论上可达毫秒级甚至更高）。</p>
+</li>
+<li><p>采用分层（Stratum）架构，防止时间同步环路。</p>
+</li>
+<li><p>支持多种时间源（如 GPS、原子钟、其他 NTP 服务器）。</p>
+</li>
+</ul>
+<p>NTP 支持多种工作模式，常见的有：</p>
+<p>客户端-服务器模式（Client-Server）</p>
+<ul>
+<li>客户端（Mode&#x3D;1）向服务器（Mode&#x3D;2）请求时间同步。</li>
+<li>服务器返回时间戳（<code>Origin/Receive/Transmit Timestamp</code>）。</li>
+</ul>
+<p>对等模式（Peer-to-Peer）</p>
+<ul>
+<li>两个 NTP 服务器互相校准时间（Mode&#x3D;4）。</li>
+</ul>
+<p>广播&#x2F;多播模式（Broadcast&#x2F;Multicast）</p>
+<ul>
+<li>服务器（Mode&#x3D;3）周期性广播时间，客户端被动接收。</li>
+</ul>
+<h2 id="ARP协议报文"><a href="#ARP协议报文" class="headerlink" title="ARP协议报文"></a>ARP协议报文</h2><p><strong>作用</strong>：通过 ​<strong>​IP地址​</strong>​ 查询对应的 ​<strong>​MAC地址​</strong>​，实现局域网（LAN）内设备通信。</p>
+<p><strong>核心特点</strong>：</p>
+<ol>
+<li><strong>工作层级</strong>：工作在 <strong>数据链路层（L2）</strong>，但为 <strong>网络层（L3）</strong> 服务。</li>
+<li><strong>广播请求</strong>：ARP请求以广播形式发送（目标MAC &#x3D; <code>FF:FF:FF:FF:FF:FF</code>）。</li>
+<li><strong>单播响应</strong>：只有目标主机回复ARP响应，携带自己的MAC地址。</li>
+<li><strong>缓存机制</strong>：设备会缓存ARP表（<code>arp -a</code> 可查看），减少重复查询。</li>
+</ol>
+<p><strong>典型场景</strong>：</p>
+<ul>
+<li>主机A（IP1）想和主机B（IP2）通信，但不知道B的MAC地址，于是发送ARP请求。</li>
+<li>主机B收到后，回复ARP响应，告知自己的MAC地址。</li>
+</ul>
+<p><strong>安全问题</strong>：</p>
+<ul>
+<li><strong>ARP欺骗（ARP Spoofing）</strong>：攻击者伪造ARP响应，劫持流量（需防范）。</li>
+</ul>
+<p>请求报文</p>
+<img src="/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/image-20250422155130816.png" class title="image-20250422155130816">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Address Resolution Protocol (request)</span><br><span class="line">    Hardware type: Ethernet (1)  #硬件类型为以太网（Ethernet），标准值 1</span><br><span class="line">    Protocol type: IPv4 (0x0800)   #上层协议</span><br><span class="line">    Hardware size: 6    #mac地址长度</span><br><span class="line">    Protocol size: 4    #ipv4长度</span><br><span class="line">    Opcode: request (1) #表明是arp请求</span><br><span class="line">    Sender MAC address: VMware_3d:e7:e0 (00:0c:29:3d:e7:e0)</span><br><span class="line">    Sender IP address: 192.168.162.188</span><br><span class="line">    Target MAC address: Xerox_00:00:00 (00:00:00:00:00:00)  #ARP 请求时未知，全填充为0</span><br><span class="line">    Target IP address: 192.168.162.180   #要查询的目标IPv4地址</span><br></pre></td></tr></table></figure>
+
+<p>响应报文</p>
+<h1 id="典型流量分析"><a href="#典型流量分析" class="headerlink" title="典型流量分析"></a>典型流量分析</h1><h2 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h2><img src="/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/image-20250416162748589.png" class title="image-20250416162748589">
+
+<p>SYN</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Transmission Control Protocol, Src Port: 44920, Dst Port: 10255, Seq: 0, Len: 0</span><br><span class="line">    Source Port: 44920</span><br><span class="line">    Destination Port: 10255</span><br><span class="line">    [Stream index: 30580]</span><br><span class="line">    [Conversation completeness: Complete, NO_DATA (39)]</span><br><span class="line">    [TCP Segment Len: 0]</span><br><span class="line">    Sequence Number: 0    (relative sequence number)</span><br><span class="line">    Sequence Number (raw): 1065356762</span><br><span class="line">    [Next Sequence Number: 1    (relative sequence number)]</span><br><span class="line">    Acknowledgment Number: 0</span><br><span class="line">    Acknowledgment number (raw): 0</span><br><span class="line">    1010 .... = Header Length: 40 bytes (10)</span><br><span class="line">    Flags: 0x002 (SYN)</span><br><span class="line">    Window: 29200</span><br><span class="line">    [Calculated window size: 29200]</span><br><span class="line">    Checksum: 0xb7e2 [unverified]</span><br><span class="line">    [Checksum Status: Unverified]</span><br><span class="line">    Urgent Pointer: 0</span><br><span class="line">    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale</span><br><span class="line">    [Timestamps]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">J-Guardian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">http://example.com/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">网络安全学习</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/04/03/%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" title="漏洞学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">漏洞学习</div></div><div class="info-2"><div class="info-item-1">未授权访问   虚拟机管理程序Libvirt 存在未授权访问漏洞 【原理扫描】    kubelet API 未授权访问漏洞【原理扫描】   Swagger API 未授权访问漏洞【原理扫描】   Spring Boot Actuator未授权访问漏洞 【原理扫描】   etcd 未授权访问漏洞【原理扫描】   Java JMX 未授权访问漏洞【原理扫描】   etcd API 未授权访问漏洞【原理扫描】   Elasticsearch 未授权访问【原理扫描】   Prometheus 存在未授权访问漏洞 【原理扫描】   Prometheus Pushgateway推送网关 存在未授权访问漏洞 【原理扫描】   Spring Eureka 未授权访问漏洞【原理扫描】   Apache Hadoop Hdfs 未授权访问漏洞【原理扫描】   Consul未授权访问漏洞【原理扫描】   nacos cluster&#x2F;nodes 未授权访问漏洞【原理扫描】   Mongodb未授权访问漏洞【原理扫描】   Spring Cloud...</div></div></div></a><a class="pagination-related  no-desc" href="/2025/04/25/docker%E5%AD%A6%E4%B9%A0/" title="docker学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">docker学习</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">J-Guardian</div><div class="author-info-description">计算机网络、web安全、组件漏洞、SRC</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">层次分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Frame%EF%BC%88%E5%B8%A7%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">1. Frame（帧）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Ethernet%EF%BC%88%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%A4%B4%E9%83%A8%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2. Ethernet（以太网头部）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Internet-Protocol%EF%BC%88IP-%E5%A4%B4%E9%83%A8%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3. Internet Protocol（IP 头部）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Transmission%EF%BC%88%E4%BC%A0%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%EF%BC%8C%E5%A6%82-TCP-UDP%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">4. Transmission（传输层协议，如 TCP&#x2F;UDP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SNMP%E5%8D%8F%E8%AE%AE%E6%8A%A5%E6%96%87"><span class="toc-number">2.5.</span> <span class="toc-text">SNMP协议报文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NTP%E5%8D%8F%E8%AE%AE%E6%8A%A5%E6%96%87"><span class="toc-number">2.6.</span> <span class="toc-text">NTP协议报文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARP%E5%8D%8F%E8%AE%AE%E6%8A%A5%E6%96%87"><span class="toc-number">2.7.</span> <span class="toc-text">ARP协议报文</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">典型流量分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">3.1.</span> <span class="toc-text">TCP三次握手</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/25/docker%E5%AD%A6%E4%B9%A0/" title="docker学习">docker学习</a><time datetime="2025-04-25T06:43:02.000Z" title="发表于 2025-04-25 14:43:02">2025-04-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/16/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/" title="流量分析">流量分析</a><time datetime="2025-04-16T08:22:12.000Z" title="发表于 2025-04-16 16:22:12">2025-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/03/%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" title="漏洞学习">漏洞学习</a><time datetime="2025-04-03T08:14:26.000Z" title="发表于 2025-04-03 16:14:26">2025-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/20/%E9%A2%98%E7%9B%AE%E8%A7%A3%E6%9E%90/" title="无标题">无标题</a><time datetime="2025-03-20T09:05:07.854Z" title="发表于 2025-03-20 17:05:07">2025-03-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/04/CISSP/" title="CISSP">CISSP</a><time datetime="2025-03-04T02:10:04.000Z" title="发表于 2025-03-04 10:10:04">2025-03-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By J-Guardian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
